@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/earth.png">
+  <link rel="icon" href="/img/earth.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pengwen Zhang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在Linux环境中转换tif文件为二进制文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Geotiff to binary file">
+<meta property="og:url" content="http://example.com/2025/09/23/geotiff%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="Palwe-Code">
+<meta property="og:description" content="在Linux环境中转换tif文件为二进制文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/Linux.jpg">
+<meta property="article:published_time" content="2025-09-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-23T16:17:22.710Z">
+<meta property="article:author" content="Pengwen Zhang">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="geotiff">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/Linux.jpg">
+  
+  
+  
+  <title>Geotiff to binary file -Palwe-Code</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HOME</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Geotiff to binary file"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-23 00:00" pubdate>
+          2025年9月23日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Geotiff to binary file</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>WRF里需要将tif文件转换为二进制文件，因此需要使用convert_geotiff库</p>
+<h3 id="convert-tiff库的安装和相关依赖库的安装"><a href="#convert-tiff库的安装和相关依赖库的安装" class="headerlink" title="convert_tiff库的安装和相关依赖库的安装"></a>convert_tiff库的安装和相关依赖库的安装</h3><p><img src="/img/geotiff.png" srcset="/img/loading.gif" lazyload alt="相关依赖"></p>
+<p>convert_geotiff的相关依赖关系如图所示</p>
+<p>依次安装以上库，其中libtiff、sqlite、curl用make命令安装（较新版本可能是cmake命令安装）</p>
+<h4 id="make命令安装"><a href="#make命令安装" class="headerlink" title="make命令安装"></a>make命令安装</h4><p><strong>这里以libtiff为例（make命令），下载路径为 <a target="_blank" rel="noopener" href="http://download.osgeo.org/libtiff/">http://download.osgeo.org/libtiff/</a></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -xvf tiff-4.3.0.tar.gz<br><span class="hljs-built_in">cd</span> tiff-4.3.0/<br>./configure --prefix=your_install_dir/tiff<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<p>其中tar即为解压tar.gz压缩包的方法，.&#x2F;confiugure是建立安装配置，–prefix后面接上自己的安装目录，还可添加其他配置，按需要可添加 </p>
+<p>其他包亦可按此步骤安装（下载链接：<a target="_blank" rel="noopener" href="https://www.sqlite.org/download.html">sqlite</a>,<a target="_blank" rel="noopener" href="https://curl.se/download.html">curl</a>,<a target="_blank" rel="noopener" href="http://download.osgeo.org/proj/">proj</a>）</p>
+<h4 id="cmake命令安装"><a href="#cmake命令安装" class="headerlink" title="cmake命令安装"></a>cmake命令安装</h4><p><strong>对于需要cmake命令安装的库，以proj为例</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -xvf proj-9.0.0.tar.gz <br><span class="hljs-built_in">cd</span> proj-9.0.0/<br><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-built_in">cd</span> build<br>cmake .. -DCMAKE_INSTALL_PREFIX=your_install_dir/proj \<br>-DSQLITE3_INCLUDE_DIR=<span class="hljs-variable">$SQLITE3_HOME</span>/include \<br>-DSQLITE3_LIBRARY=<span class="hljs-variable">$SQLITE3_HOME</span>/lib/libsqlite3.so \<br>-DTIFF_INCLUDE_DIR=<span class="hljs-variable">$TIFF_HOME</span>/include \<br>-DTIFF_LIBRARY_RELEASE=<span class="hljs-variable">$TIFF_HOME</span>/lib/libtiff.so.5 \<br>-DCURL_INCLUDE_DIR=<span class="hljs-variable">$CURL_HOME</span>/lib \<br>-DCURL_INCLUDE_DIR=<span class="hljs-variable">$CURL_HOME</span>/lib \<br>-DBUILD_TESTING=OFF \<br><br>make<br>make install<br></code></pre></td></tr></table></figure>
+<p>cmake可以直接安装通过以下命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install cmake<br></code></pre></td></tr></table></figure>
+<p>cmake安装先要创建一个build文件夹，再在build文件夹中执行安装命令，其中..代表回到上级目录，这是因为makefile会生成在原目录中</p>
+<p>$TIFF_HOME$等代表环境变量，在.bashrc文件中配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> TIFF_HOME=/home/palwe/app/tiff<br></code></pre></td></tr></table></figure>
+<p>按这种形式分别将上面安装的库添加到环境变量</p>
+<p>之后仍然需要make命令生成库的，lib，bin文件夹</p>
+<h4 id="geotiff安装"><a href="#geotiff安装" class="headerlink" title="geotiff安装"></a>geotiff安装</h4><p><strong>安装geotiff库（下载地址：<a target="_blank" rel="noopener" href="http://download.osgeo.org/geotiff/libgeotiff/%EF%BC%89">http://download.osgeo.org/geotiff/libgeotiff/）</a></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -xvf libgeotiff-1.7.1.tar.gz <br><span class="hljs-built_in">cd</span> libgeotiff-1.7.1/<br>./configure --prefix=your_install_dir/geotiff \<br>--with-libtiff=your_install_dir/tiff \<br>--with-proj=your_install_dir/proj \<br>--with-zlib --with-jpeg<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<h4 id="convert-geotiff安装"><a href="#convert-geotiff安装" class="headerlink" title="convert_geotiff安装"></a>convert_geotiff安装</h4><p><strong>安装convert_geotiff库（下载链接：<a target="_blank" rel="noopener" href="https://github.com/openwfm/convert_geotiff%EF%BC%89">https://github.com/openwfm/convert_geotiff）</a></strong><br>安装命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CPPFLAGS=<span class="hljs-string">&quot;-I/your_install_dir/tiff/include -I/your_install_dir/geotiff/include&quot;</span><br><span class="hljs-built_in">export</span> LDFLAGS=<span class="hljs-string">&quot;-L/your_install_dir/tiff/lib -L/your_install_dir/geotiff/lib&quot;</span><br>./configure --prefix=your_install_dir/convert_geotiff<br>make<br>make isntall<br></code></pre></td></tr></table></figure>
+<p>也可以直接将环境变量配置到.bashrc文件中</p>
+<p>configure时出现的错误可以尝试加上lib的环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LIBS=<span class="hljs-string">&quot;-lgeotiff -ltiff -lproj -lz -ljpeg -lm&quot;</span><br></code></pre></td></tr></table></figure>
+<p>make时出现的问题可以直接修改Makefile解决<br>出现报错：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/usr/</span>bin<span class="hljs-regexp">/ld: geogrid_tiles.o: undefined reference to symbol &#x27;ceil@@GLIBC_2.2.5&#x27; /u</span>sr<span class="hljs-regexp">/bin/</span>ld: <span class="hljs-regexp">/lib/</span>x86_64-linux-gnu/libm.so.<span class="hljs-number">6</span>: error adding symbols: DSO missing from command line collect2: error: ld returned <span class="hljs-number">1</span> <span class="hljs-keyword">exit</span> status make: *** [Makefile:<span class="hljs-number">357</span>: convert_geotiff] Error <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p>缺少数学库-lm的链接，可以执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&#x27;s/-lgeotiff -ltiff/-lgeotiff -ltiff -lproj -lz -ljpeg -lm/&#x27;</span> Makefile<br>make -j1 V=1<br></code></pre></td></tr></table></figure>
+<p>解决问题</p>
+<p>安装成功可以运行.&#x2F;bin&#x2F;convert_geotiff 测试，出现<br><img src="/img/cvt_tiff.png" srcset="/img/loading.gif" lazyload alt="结果"><br>即可说明安装成功</p>
+<p>可将convert_geotiff加入环境变量，以便随时调用</p>
+<h3 id="Modis数据的下载、拼接和转换"><a href="#Modis数据的下载、拼接和转换" class="headerlink" title="Modis数据的下载、拼接和转换"></a>Modis数据的下载、拼接和转换</h3><h4 id="1、下载数据"><a href="#1、下载数据" class="headerlink" title="1、下载数据"></a><strong>1、下载数据</strong></h4><p>注册NASA Earthdata并下载Modis数据（<a target="_blank" rel="noopener" href="https://lpdaac.usgs.gov/products/mcd12q1v006/%EF%BC%89">https://lpdaac.usgs.gov/products/mcd12q1v006/）</a></p>
+<p>按照网络上的教程选取需要的数据并获取下载.sh脚本，在Linux系统中运行下载hdf影像</p>
+<p>接下来进行影像格式的转换和拼接</p>
+<h4 id="2、转换并拼接数据"><a href="#2、转换并拼接数据" class="headerlink" title="2、转换并拼接数据"></a><strong>2、转换并拼接数据</strong></h4><p>hdf数据常用NASA提供的MRT工具处理，然而NASA官网已于2019年下架MRT。不过官网提供了多种工具处理影像，其中Heg工具即可满足我们的要求</p>
+<p><strong>安装Heg（<a target="_blank" rel="noopener" href="https://wiki.earthdata.nasa.gov/collector/pages.action?key=DAS%EF%BC%89">https://wiki.earthdata.nasa.gov/collector/pages.action?key=DAS）</a></strong></p>
+<p>安装之前需要配置java环境，可参考网络教程，这里不再赘述</p>
+<p>在官网下载Linux版本的heg压缩包，解压后会有一个install文件和tar压缩包</p>
+<p>运行install文件，按指示输入</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">HDF-EOS To GeoTIFF Conversion Tool (HEG) Installation<br><span class="hljs-comment">----------------------------------------------------------</span><br><br>To install <span class="hljs-keyword">the</span> HEG Tool:<br><br><span class="hljs-number">1.</span> The heg.tar <span class="hljs-built_in">file</span> must be present <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> current <span class="hljs-built_in">directory</span>.<br><span class="hljs-number">2.</span> You must know <span class="hljs-keyword">the</span> <span class="hljs-built_in">directory</span> path where <span class="hljs-keyword">the</span> HEG is <span class="hljs-built_in">to</span> be installed.<br><span class="hljs-number">3.</span> You must know <span class="hljs-keyword">the</span> path <span class="hljs-built_in">to</span> <span class="hljs-keyword">the</span> Java bin <span class="hljs-built_in">directory</span> <span class="hljs-keyword">on</span> <span class="hljs-title">your</span> <span class="hljs-title">system</span>.<br><br>Do you wish <span class="hljs-built_in">to</span> proceed <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> HEG v2<span class="hljs-number">.15</span> Build <span class="hljs-number">9.8</span> installation? [y/n]<br>y<br><br>Where would you like <span class="hljs-built_in">to</span> install HEG?<br><br>  IMPORTANT NOTE:<br>  Be sure <span class="hljs-built_in">to</span> give <span class="hljs-keyword">an</span> absolute <span class="hljs-built_in">directory</span> path, <span class="hljs-keyword">without</span> special <span class="hljs-keyword">characters</span>.<br>     For example: /home/faculty/jsmith/heg<br><br>  To install HEG <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> subdirectory <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> current <span class="hljs-built_in">directory</span>, just press <span class="hljs-keyword">the</span> ENTER key.<br><br>  Enter <span class="hljs-keyword">the</span> HEG <span class="hljs-built_in">directory</span> path:<br><br><br>WARNING: Directory /home/palwe/app/heg/heg already exists.<br>Proceeding <span class="hljs-keyword">with</span> install may overwrite existing <span class="hljs-built_in">files</span>.<br><br>Proceed <span class="hljs-keyword">with</span> install <span class="hljs-keyword">into</span> /home/palwe/app/heg/heg? [y/n]<br>y<br> .....Moving heg.tar <span class="hljs-built_in">to</span> /home/palwe/app/heg/heg<br> .....Untarring heg.tar<br><br>*******<br> <span class="hljs-comment">-- Untar executed successfully! --</span><br><br><br>Where is your java bin <span class="hljs-built_in">directory</span> located?<br><br>  IMPORTANT NOTE:<br>  Give <span class="hljs-keyword">an</span> absolute path, <span class="hljs-keyword">without</span> special <span class="hljs-keyword">characters</span>.<br>     For example: /usr/java/bin<br><br>  Enter <span class="hljs-keyword">the</span> path <span class="hljs-built_in">to</span> your java bin <span class="hljs-built_in">directory</span>: <br>/home/palwe/java/jdk1<span class="hljs-number">.8</span><span class="hljs-number">.0</span>_461/bin<br><br>   You will be able <span class="hljs-built_in">to</span> run HEG <span class="hljs-built_in">from</span> <span class="hljs-keyword">the</span> <span class="hljs-keyword">command</span> <span class="hljs-title">line</span>, <span class="hljs-title">but</span> <span class="hljs-title">you</span> <span class="hljs-title">may</span><br>   have problems <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> HEG GUI.  After installtion is completed,<br>   <span class="hljs-keyword">try</span> running <span class="hljs-keyword">the</span> HEG <span class="hljs-built_in">shell</span> script <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> HEG bin <span class="hljs-built_in">directory</span>.<br>   If <span class="hljs-keyword">the</span> GUI does <span class="hljs-keyword">not</span> appear, make sure Java is installed <span class="hljs-keyword">on</span> <span class="hljs-title">your</span> <span class="hljs-title">system</span>.<br>   Then locate <span class="hljs-keyword">the</span> Java bin <span class="hljs-built_in">directory</span> <span class="hljs-keyword">and</span> reinstall <span class="hljs-keyword">the</span> HEG.<br><br>Please enter <span class="hljs-keyword">a</span> username <span class="hljs-built_in">to</span> be used internally <span class="hljs-keyword">by</span> HEG, (e.g. BOB):<br>BOB<br><br><br><br>          *****************************************************************<br>          *       Congratulations! You have successfully installed        *<br>          * HDF-EOS To GeoTIFF Conversion Tool (HEG) v2<span class="hljs-number">.15</span> Build <span class="hljs-number">9.8</span> <span class="hljs-keyword">on</span> <span class="hljs-title">your</span> <span class="hljs-title">system</span>! *<br>          *****************************************************************<br><br><br>          To <span class="hljs-built_in">start</span> HEG, type <span class="hljs-string">&quot;HEG&quot;</span> <span class="hljs-keyword">at</span> <span class="hljs-keyword">the</span> <span class="hljs-keyword">command</span> <span class="hljs-title">line</span> <span class="hljs-title">in</span> <span class="hljs-title">the</span>        <br>             following <span class="hljs-built_in">directory</span>:                                      <br>                  /home/palwe/app/heg/heg/bin/    <br></code></pre></td></tr></table></figure>
+<p>安装成功后运行HEG即可调出GUI界面进行数据处理<br><img src="/img/GUI.png" srcset="/img/loading.gif" lazyload alt="GUI"></p>
+<p>将HEG加入环境变量即可随时调用</p>
+<h4 id="3、数据拼接与转换"><a href="#3、数据拼接与转换" class="headerlink" title="3、数据拼接与转换"></a><strong>3、数据拼接与转换</strong></h4><p>点击Tool 切换至Stitch&#x2F;Subset工具，选择数据文件夹导入数据方法，左侧选择波段，这里我们选择LC_Type1</p>
+<p>输出格式选择GeoTIFF，重采样选择Bilinear，投影选择Geographic 设置完成后点击accept，最后点右下角Batch Run即可输出拼接影像</p>
+<p><img src="/img/subset.png" srcset="/img/loading.gif" lazyload alt="拼接"></p>
+<p><strong>利用convert_geotiff转换tif文件到二进制文件</strong></p>
+<p>输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">convert_geotiff -w 1 -t 5000 -u <span class="hljs-string">&quot;category&quot;</span> -d <span class="hljs-string">&quot;500m 17-category IGBP-MODIS landuse(China)&quot;</span> -b 0 -m 0 ../image.tif<br></code></pre></td></tr></table></figure>
+<p>-w 1：土地利用表征数字为从1-21（这里到17），使用一个字节进行存储就足够了</p>
+<p>-m 0：tiff文件中用0来表示缺测值</p>
+<p>生成类似文件<img src="/img/num.png" srcset="/img/loading.gif" lazyload alt="二进制">即代表转换成功</p>
+<hr>
+<p>参考教程：<br>1、<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/FzU6dEYGVKbhvLrFwXieig">https://mp.weixin.qq.com/s/FzU6dEYGVKbhvLrFwXieig</a><br>2、<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2297389">https://cloud.tencent.com/developer/article/2297389</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/geotiff/" class="print-no-link">#geotiff</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Geotiff to binary file</div>
+      <div>http://example.com/2025/09/23/geotiff转换/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Pengwen Zhang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/18/linux/" title="Linux Learning">
+                        <span class="hidden-mobile">Linux Learning</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a ><span>我的学习博客| </span></a> Powered by <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
