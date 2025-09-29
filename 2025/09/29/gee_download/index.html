@@ -19,25 +19,23 @@
   <meta name="author" content="Pengwen Zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习Linux指令的记录，教程来源于菜鸟教程">
+    <meta name="description" content="python环境下使用gee下载全国人口和GDP格网数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux Learning">
-<meta property="og:url" content="http://example.com/2025/09/18/linux/index.html">
+<meta property="og:title" content="download images on GEE">
+<meta property="og:url" content="http://example.com/2025/09/29/gee_download/index.html">
 <meta property="og:site_name" content="Palwe-Code">
-<meta property="og:description" content="学习Linux指令的记录，教程来源于菜鸟教程">
+<meta property="og:description" content="python环境下使用gee下载全国人口和GDP格网数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/Linux.jpg">
-<meta property="article:published_time" content="2025-09-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-19T01:25:50.929Z">
+<meta property="article:published_time" content="2025-09-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-29T03:47:45.146Z">
 <meta property="article:author" content="Pengwen Zhang">
-<meta property="article:tag" content="command">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="GEE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/Linux.jpg">
   
   
   
-  <title>Linux Learning -Palwe-Code</title>
+  <title>download images on GEE -Palwe-Code</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux Learning"></span>
+            <span id="subtitle" data-typed-text="download images on GEE"></span>
           
         </div>
 
@@ -214,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-09-18 00:00" pubdate>
-          2025年9月18日 凌晨
+        <time datetime="2025-09-29 00:00" pubdate>
+          2025年9月29日 凌晨
         </time>
       </span>
     
@@ -226,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          354 字
+          905 字
         
       </span>
     
@@ -237,7 +235,7 @@
         
         
         
-          3 分钟
+          8 分钟
         
       </span>
     
@@ -274,78 +272,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linux Learning</h1>
+            <h1 id="seo-header">download images on GEE</h1>
             
             
               <div class="markdown-body">
                 
-                <p>学习Linux指令的记录，教程来源于菜鸟<a target="_blank" rel="noopener" href="https://www.runoob.com/markdown/md-tutorial.html">教程</a></p>
-<h1 id="Linux-Learning"><a href="#Linux-Learning" class="headerlink" title="Linux Learning"></a>Linux Learning</h1><h2 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h2><ul>
-<li>ls 列出目录和文件名</li>
-<li>cd 切换目录</li>
-<li>pwd 显示当前目录</li>
-<li>mkdir 创建新目录</li>
-<li>rmdir 删除空目录</li>
-<li>cp 复制</li>
-<li>rm 删除</li>
-<li>mv 移动或修改名称</li>
-</ul>
-<h2 id="文件查看命令"><a href="#文件查看命令" class="headerlink" title="文件查看命令"></a>文件查看命令</h2><ul>
-<li>cat 从第一行开始显示文件内容</li>
-<li>tac 与cat相反，从最后一行开始</li>
-<li>nl 显示文件输出行号</li>
-<li>more 按页显示文件内容</li>
-<li>less 可以往前翻页</li>
-<li>head 只看头几行</li>
-<li>tail 只看尾几行<ul>
-<li>-n接数字代表显示几行</li>
-<li>-f表示持续侦测后面所接的档名</li>
-</ul>
-</li>
-</ul>
-<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><ul>
-<li><p>df文件系统的整体磁盘使用量</p>
-<ul>
-<li>h 可读显示方式</li>
-<li>T 文件系统类型</li>
-<li>t 指定类型文件系统</li>
-<li>i inode使用情况</li>
-<li>H 1000b为单位</li>
-<li>k kb显示</li>
-<li>a 所有文件系统包括虚拟文件系统</li>
-</ul>
-</li>
-<li><p>du 检查磁盘空间使用量</p>
-</li>
-<li><p>fdisk 用于磁盘分区</p>
-</li>
-</ul>
-<hr>
-<h2 id="vi-vim的使用"><a href="#vi-vim的使用" class="headerlink" title="vi&#x2F;vim的使用"></a>vi&#x2F;vim的使用</h2><h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><ul>
-<li>i 输入模式</li>
-<li>x 删除字符</li>
-<li>： 底线模式</li>
-<li>a 插入模式</li>
-<li>o 下方插入新行，进入插入模式</li>
-<li>O 上方插入新行，进入插入模式</li>
-<li>dd 剪切当前行</li>
-<li>yy 复制当前行</li>
-<li>p 粘贴到下方</li>
-<li>P 粘贴到上方</li>
-<li>u 撤销上一次</li>
-<li>ctrl + r 重做</li>
-<li>:w 保存文件</li>
-<li>:q 退出vim</li>
-<li>:ql 强制退出不保存</li>
-</ul>
-<h3 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h3><p>ESC可返回普通模式</p>
-<h3 id="底线命令模式"><a href="#底线命令模式" class="headerlink" title="底线命令模式"></a>底线命令模式</h3><ul>
-<li>:w 保存文件</li>
-<li>:q 退出vim</li>
-<li>:wq 保存并退出</li>
-<li>:q！强制退出</li>
-</ul>
-<p><img src="https://www.runoob.com/wp-content/uploads/2014/07/vim-vi-workmodel.png" srcset="/img/loading.gif" lazyload alt="vim工作模式"></p>
+                <p>人口数据来自GlobPOP: A 33-year (1990-2022) global gridded population dataset generated by cluster analysis and statistical learning<a target="_blank" rel="noopener" href="https://zenodo.org/records/11179644">链接</a><br>GDP数据来自Data for: Downscaled gridded global dataset for Gross Domestic Product (GDP) per capita at purchasing power parity (PPP) over 1990-2022<a target="_blank" rel="noopener" href="https://zenodo.org/records/13943886">链接</a></p>
+<p>尽管zonodo上已经提供数据的下载链接，但是由于数据量过大，国内连接不稳定，不能按研究区域下载等原因，使用GEE下载会更加方便快捷</p>
+<p>这里采用吴秋生老师提供的python的geemap库获取全国范围的以上数据</p>
+<h3 id="1、配置python环境："><a href="#1、配置python环境：" class="headerlink" title="1、配置python环境："></a>1、配置python环境：</h3><p>安装geemap库，调用api进行下载操作</p>
+<p>有关如何配置环境，吴秋生老师提供的的<a target="_blank" rel="noopener" href="https://geemap.org/installation/">官方网站</a>已经介绍的很详细了，也可以根据youtube上的教程来</p>
+<p>另外，这里虽然可以直接在自己的环境中安装geemap库，但是官方建议直接创建新环境安装，geemap会自动安装合适版本的所有依赖，避免环境中依赖库版本不适配带来的麻烦</p>
+<h3 id="2、使用GEE获取数据："><a href="#2、使用GEE获取数据：" class="headerlink" title="2、使用GEE获取数据："></a>2、使用GEE获取数据：</h3><p>首先使用GEE要先注册GEE账号，具体操作可参考网上的教程，这里不再说明</p>
+<p>使用geemap之前需要运行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1. 认证与初始化（首次需要浏览器授权）</span><br><span class="hljs-keyword">import</span> ee<br><span class="hljs-keyword">import</span> geemap<br>ee.Authenticate()<br>ee.Initialize()<br></code></pre></td></tr></table></figure>
+<p>进行账号认证和初始化</p>
+<p>gee下载数据到本地需要先上传到谷歌云盘再手动下载到本地，geemap提供了直接下载到本地的方法download_ee_image以及ee_export_image,（这里笔者在下载人口数据时使用download_ee_image由于网络接连问题并不能正常下载，最终仍是创建task上传到云盘下载）</p>
+<p>这里以下载人口数据为例介绍：</p>
+<h4 id="1、获取数据集和边界数据"><a href="#1、获取数据集和边界数据" class="headerlink" title="1、获取数据集和边界数据"></a>1、获取数据集和边界数据</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1) 中国国界</span><br>china_fc = (<br>    ee.FeatureCollection(<span class="hljs-string">&#x27;USDOS/LSIB_SIMPLE/2017&#x27;</span>)<br>    .<span class="hljs-built_in">filter</span>(ee.Filter.eq(<span class="hljs-string">&#x27;country_na&#x27;</span>, <span class="hljs-string">&#x27;China&#x27;</span>))<br>)<br>china_geom = china_fc.geometry()<br><br><span class="hljs-comment"># 2) 目标数据集</span><br>globpop = ee.ImageCollection(<span class="hljs-string">&#x27;projects/sat-io/open-datasets/GLOBPOP_COUNT&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这里直接使用了google earth提供的边界数据，可能会存在争议问题，建议自己上传边界使用</p>
+<h4 id="2、构建筛选裁剪函数"><a href="#2、构建筛选裁剪函数" class="headerlink" title="2、构建筛选裁剪函数"></a>2、构建筛选裁剪函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 3) 需要处理的年份</span><br>years = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1990</span>, <span class="hljs-number">2023</span>))<br><br><span class="hljs-comment"># 4) 根据年份筛选影像并裁剪</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_clipped_year_image</span>(<span class="hljs-params">year</span>):<br>    image = (<br>        globpop<br>        .<span class="hljs-built_in">filter</span>(ee.Filter.calendarRange(year, year, <span class="hljs-string">&#x27;year&#x27;</span>))<br>        .mosaic()                         <span class="hljs-comment"># 若该年有多景，合成为单景</span><br>        .clip(china_geom)<br>        .<span class="hljs-built_in">set</span>(&#123;<span class="hljs-string">&#x27;export_year&#x27;</span>: year&#125;)<br>    )<br>    <span class="hljs-keyword">return</span> image<br></code></pre></td></tr></table></figure>
+
+<p>按年筛选影像并设置年属性，按上面的边界裁剪</p>
+<h4 id="3、导出数据到本地或云盘"><a href="#3、导出数据到本地或云盘" class="headerlink" title="3、导出数据到本地或云盘"></a>3、导出数据到本地或云盘</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 6) 导出到 Google Drive</span><br><span class="hljs-keyword">for</span> year <span class="hljs-keyword">in</span> years:<br>    year_img = get_clipped_year_image(year)<br>    task = ee.batch.Export.image.toDrive(<br>        image=year_img,<br>        description=<span class="hljs-string">f&#x27;China_Globpop_<span class="hljs-subst">&#123;year&#125;</span>&#x27;</span>,<br>        folder=<span class="hljs-string">&#x27;GEE_Exports&#x27;</span>,<br>        fileNamePrefix=<span class="hljs-string">f&#x27;china_globpop_<span class="hljs-subst">&#123;year&#125;</span>&#x27;</span>,<br>        region=china_geom,<br>        scale=<span class="hljs-number">1000</span>,         <span class="hljs-comment"># 根据需要调整分辨率；注意越小体积越大</span><br>        maxPixels=<span class="hljs-number">1e13</span><br>    )<br>    task.start()<br></code></pre></td></tr></table></figure>
+
+<p>根据需要设置相关属性如scale栅格大小、fileNamePrefix文件前缀等，最后创建task上传至Google Drive</p>
+<p>本地下载：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python">output_dir = Path(<span class="hljs-string">r&quot;You_path&quot;</span>)<br>output_dir.mkdir(parents=<span class="hljs-literal">True</span>, exist_ok=<span class="hljs-literal">True</span>)<br><br>proj = gdp.projection().getInfo()  <span class="hljs-comment"># 使用原始投影参数</span><br><br><span class="hljs-keyword">for</span> year <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1990</span>, <span class="hljs-number">2023</span>):<br>    image = (<br>        china_collection<br>        .<span class="hljs-built_in">filter</span>(ee.Filter.eq(<span class="hljs-string">&quot;year&quot;</span>, year))<br>        .first()<br>    )<br>    <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;year&#125;</span> 年无数据，已跳过。&quot;</span>)<br>        <span class="hljs-keyword">continue</span><br><br>    outfile = output_dir / <span class="hljs-string">f&quot;china_gdp_per_capita_ppp_<span class="hljs-subst">&#123;year&#125;</span>.tif&quot;</span><br>    geemap.ee_export_image(<br>        image,<br>        filename=<span class="hljs-built_in">str</span>(outfile),<br>        region=china_geom,<br>        crs=proj[<span class="hljs-string">&quot;crs&quot;</span>],<br>        crs_transform=proj[<span class="hljs-string">&quot;transform&quot;</span>],<br>        file_per_band=<span class="hljs-literal">False</span>,<br>        timeout=<span class="hljs-number">600</span><br>    )<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;year&#125;</span> 年影像已保存：<span class="hljs-subst">&#123;outfile&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>即可直接保存到本地</p>
+<p>关于这两个函数笔者在运行时出现类似Crs Code is Unknown[….]的错误，这里查找了原因可能是由于proj.db的位置指向错误导致版本不符，可以设置环境变量解决</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Set-Item Env:PROJ_LIB <span class="hljs-string">&quot;C:\SoftWares\miniconda\envs\gee\Library\share\proj&quot;</span><br>Set-Item Env:GDAL_DATA <span class="hljs-string">&quot;C:\SoftWares\miniconda\envs\gee\Library\share\gdal</span><br></code></pre></td></tr></table></figure>
+
+<p>完整代码已上传至<a target="_blank" rel="noopener" href="https://github.com/E-Golem/veg_water_balance">Github</a></p>
+<p>有疑问欢迎随时交流</p>
 
                 
               </div>
@@ -364,7 +325,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/GEE/" class="category-chain-item">-GEE</a>
   
   
 
@@ -379,9 +340,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/command/" class="print-no-link">#command</a>
+        <a href="/tags/python/" class="print-no-link">#python</a>
       
-        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+        <a href="/tags/GEE/" class="print-no-link">#GEE</a>
       
     </div>
   
@@ -393,8 +354,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux Learning</div>
-      <div>http://example.com/2025/09/18/linux/</div>
+      <div>download images on GEE</div>
+      <div>http://example.com/2025/09/29/gee_download/</div>
     </div>
     <div class="license-meta">
       
@@ -406,7 +367,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年9月18日</div>
+          <div>2025年9月29日</div>
         </div>
       
       
@@ -438,18 +399,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/09/23/geotiff%E8%BD%AC%E6%8D%A2/" title="Geotiff to binary file">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Geotiff to binary file</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/09/16/pytorch/" title="pytorch">
-                        <span class="hidden-mobile">pytorch</span>
+                      <a href="/2025/09/23/geotiff%E8%BD%AC%E6%8D%A2/" title="Geotiff to binary file">
+                        <span class="hidden-mobile">Geotiff to binary file</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
