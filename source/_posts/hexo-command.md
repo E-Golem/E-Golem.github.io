@@ -1,0 +1,17 @@
+---
+title: hexo命令学习记录
+date: 2025-09-11 16:04:52
+tags: [hexo,command]
+excerpt: hexo命令学习记录
+categories:
+    - WEB
+banner_img: /img/hexo.png
+---
+# hexo 命令
+- hexo new "postName" #新建文章
+- hexo new page "pageName" #新建页面
+- hexo generate #生成静态页面至public目录
+- hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
+- hexo deploy #部署到GitHub
+- hexo help  # 查看帮助
+- hexo version  #查看Hexo的版本
