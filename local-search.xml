@@ -4,6 +4,104 @@
   
   
   <entry>
+    <title>GLASS Data</title>
+    <link href="/2026/01/14/GLASS-Data/"/>
+    <url>/2026/01/14/GLASS-Data/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>CliamteDL</title>
+    <link href="/2025/12/22/ClimateDL/"/>
+    <url>/2025/12/22/ClimateDL/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>-Deep Learning -climate_learn</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>Deep Learning</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>conda常用命令学习</title>
+    <link href="/2025/12/17/conda-command/"/>
+    <url>/2025/12/17/conda-command/</url>
+    
+    <content type="html"><![CDATA[<p><strong>记录部分常用conda指令：（持续更新）</strong></p><ul><li>conda list -n {环境名} {包名}  –列出指定环境包信息，不加环境名和包名就是列出当前环境所有包</li><li>conda env list&#x2F;conda info –envs  –查看环境</li><li>conda env remove -n {环境名}  –删除环境</li><li>conda clean -a  –删除环境后释放缓存</li><li>conda install -c conda-forge {包名}  –使用conda-forge下载包</li><li>conda activate {环境名}  –激活环境</li><li>conda deactivate  –退出当前环境，如果不是base环境需要执行两次</li><li></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+      <category>conda</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>codna</tag>
+      
+      <tag>command</tag>
+      
+      <tag>python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Algorithm Learning</title>
+    <link href="/2025/12/16/Algorithm/"/>
+    <url>/2025/12/16/Algorithm/</url>
+    
+    <content type="html"><![CDATA[<p>尝试在 力扣上面刷点算法题，不管有没有用吧，就当学学数学了<br><strong>时间复杂度（Time Complexity）</strong></p><p>时间复杂度衡量的是：当输入规模 n 变大时，代码执行的基本操作次数大概会怎么增长。<br>用大 O（Big-O）表示的是“增长的级别”，忽略常数和低阶项。</p><p>常见例子（n 是数组长度）：</p><ul><li><p>O(1)：操作次数基本不随 n 变（常数级）。<br>例：读取 prices[0]。</p></li><li><p>O(n)：操作次数和 n 成正比。<br>例：遍历一遍数组，每个元素处理一次。 对列表进行切片时恢复至一份新列表，增加时间复杂度</p></li><li><p>O(n²)：操作次数大约和 n² 成正比，n 稍大就会很慢。<br>例：两层循环，外层 n 次、内层平均 n 次。</p></li></ul><p>判断方法（粗略但好用）：<br>看循环结构——一层“完整遍历 n”的循环通常是 O(n)；两层嵌套通常是 O(n²)。<br><strong>空间复杂度（Space Complexity）</strong></p><p>空间复杂度衡量的是：除了输入数据本身以外，你额外用掉的内存随 n 的增长趋势。</p><p>常见例子：</p><ul><li><p>O(1)：只用固定数量的变量，不随 n 变。<br>例：ans, streak, prev 这几个变量。</p></li><li><p>O(n)：额外开了一个和输入同规模的结构（数组&#x2F;列表&#x2F;哈希表等）。<br>例：b &#x3D; [0]*n，或者 prices[i:]（切片会新建一个列表，长度大约是 n-i）。</p></li></ul><hr><p><strong>哈希表</strong></p><blockquote><p>在 Python 里，“哈希表”通常指 dict（字典）（以及底层同样依赖哈希表的 set（集合））。它的核心价值是：用“键（key）→值（value）”做快速查找，平均情况下插入&#x2F;查询&#x2F;删除都是 O(1) 级别。</p></blockquote><p>dict的key必须是可哈希（hashable）的，常见数据类型<code>int/float/str/tuple(确保内部也都是可哈希)/frozenset</code> 都可以哈希。而<code>list/dict/set</code> 都不可哈希，因为这些类型可变。</p><p><code>hash()</code> 会输出整数哈希值</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2025/11/28/hello-world/"/>
     <url>/2025/11/28/hello-world/</url>
@@ -157,9 +255,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>command</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -213,9 +311,9 @@
     
     <tags>
       
-      <tag>hexo</tag>
-      
       <tag>command</tag>
+      
+      <tag>hexo</tag>
       
     </tags>
     
