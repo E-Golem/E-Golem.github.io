@@ -21,7 +21,7 @@
   
     <meta name="description" content="WPS的运行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WRF在Linux系统下的安装教程（手动编译）">
+<meta property="og:title" content="WRF4.0安装教程">
 <meta property="og:url" content="https://e-golem.github.io/2025/11/10/WRF%E7%9A%84%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="Palwe-Code">
 <meta property="og:description" content="WPS的运行">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://e-golem.github.io/img/wrf/wrf/install.png">
 <meta property="og:image" content="https://e-golem.github.io/img/wrf/wps/install.png">
 <meta property="article:published_time" content="2025-11-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-28T02:27:30.737Z">
+<meta property="article:modified_time" content="2026-01-26T04:04:06.473Z">
 <meta property="article:author" content="Pengwen Zhang">
 <meta property="article:tag" content="WRF">
 <meta property="article:tag" content="Linux">
@@ -40,7 +40,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>WRF在Linux系统下的安装教程（手动编译） -Palwe-Code</title>
+  <title>WRF4.0安装教程 -Palwe-Code</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="WRF在Linux系统下的安装教程（手动编译）"></span>
+            <span id="subtitle" data-typed-text="WRF4.0安装教程"></span>
           
         </div>
 
@@ -234,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          2.4k 字
         
       </span>
     
@@ -245,7 +245,7 @@
         
         
         
-          26 分钟
+          25 分钟
         
       </span>
     
@@ -304,12 +304,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">WRF在Linux系统下的安装教程（手动编译）</h1>
+            <h1 id="seo-header">WRF4.0安装教程</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2025-11-28T10:27:30+08:00
+                    本文最后更新于 2026-01-26T12:04:06+08:00
                   
                   
 
@@ -319,10 +319,12 @@
             
               <div class="markdown-body">
                 
-                <h3 id="I、首先是获取安装WRF需要的相关的软件包"><a href="#I、首先是获取安装WRF需要的相关的软件包" class="headerlink" title="I、首先是获取安装WRF需要的相关的软件包"></a>I、首先是获取安装WRF需要的相关的软件包</h3><p>批量解压压缩包到特定文件夹中</p>
+                <h3 id="I、获取安装WRF需要的相关的软件包"><a href="#I、获取安装WRF需要的相关的软件包" class="headerlink" title="I、获取安装WRF需要的相关的软件包"></a>I、获取安装WRF需要的相关的软件包</h3><p>批量解压压缩包到特定文件夹中</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ./zhang/Lib<br><span class="hljs-comment">#进入存放压缩包的目录</span><br><span class="hljs-keyword">for</span> gz_file <span class="hljs-keyword">in</span> *.gz; <span class="hljs-keyword">do</span><br>    <span class="hljs-comment"># 获取不带扩展名的文件名</span><br>    dir_name=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;gz_file%.gz&#125;</span>&quot;</span><br>    <br>    <span class="hljs-comment"># 创建文件夹</span><br>    <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&quot;<span class="hljs-variable">$dir_name</span>&quot;</span><br>    <br>    <span class="hljs-comment"># 解压到对应文件夹</span><br>    tar -xzvf <span class="hljs-variable">$gz_file</span> -C ~/zhang/Lib/<span class="hljs-variable">$dir_name</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;已解压 <span class="hljs-variable">$gz_file</span> 到文件夹 <span class="hljs-variable">$dir_name</span>/&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="II、首先安装编译器（intel系列或者gcc系列）"><a href="#II、首先安装编译器（intel系列或者gcc系列）" class="headerlink" title="II、首先安装编译器（intel系列或者gcc系列）"></a>II、首先安装编译器（intel系列或者gcc系列）</h3><p>这里选择安装gcc编译器，注意一定要使用合适版本的编译器（WRF4.0对应大概是gcc-7.3.0），可以避免很多错误<br>首先需要安装依赖，运行</p>
+<p>如果已经有所有的离线安装包里可以直接解压安装，如果没有可以通过<code>wget</code>指令获取安装包。另外这里安装可以灵活一些，如果有sudo权限的可以使用<code>apt-get</code>或者<code>yum</code>指令安装某些依赖库，会省去很多麻烦。</p>
+<h3 id="II、安装编译器（intel系列或者gcc系列）"><a href="#II、安装编译器（intel系列或者gcc系列）" class="headerlink" title="II、安装编译器（intel系列或者gcc系列）"></a>II、安装编译器（intel系列或者gcc系列）</h3><p>这里选择安装gcc编译器，注意一定要使用合适版本的编译器（WRF4.0对应大概是gcc-7.3.0），可以避免很多错误（如果环境里已经有了gcc也建议重新装一个兼容性好的编译器，并在bashrc中指定编译器，这样能避免很多由于版本不兼容造成的编译错误）</p>
+<p>首先需要安装依赖，运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./contrib/download_prerequisites<br></code></pre></td></tr></table></figure>
 
 <p>创建build文件夹并进入<br>前面的操作还是老一套configure ，make ，make install三步走</p>
@@ -338,7 +340,7 @@
 <p>当这个变量被设置时，它会告诉 configure 脚本、make 工具链或编译器（如 gcc）：“嘿，当你要把程序链接（Link）成一个可执行文件时，除了你正常需要链接的库之外，务必也要把我便利贴上写的这些库（比如 -lgeotiff, -ltiff）一起链接进去。”</p>
 <p>可使用 <code>unset LIBS\LDFLAGS\CFLAGS</code>指令先把环境变量去除</p>
 <p>2、其次，conda环境下也会导致编译出现问题（需要c语言环境），因此需要退出conda环境，使用<code>conda deactivate</code>退出conda，首次退出当前环境会退回到base环境，需要再退出一次</p>
-<h3 id="III、按顺序安装其他软件"><a href="#III、按顺序安装其他软件" class="headerlink" title="III、按顺序安装其他软件"></a>III、按顺序安装其他软件</h3><p>这里可以专门创建一个目录用来存放所有软件的bin，lib，include，方便后续指定路径，比如在根目录下创建目录app，后续安装路径全都指定到这个目录下</p>
+<h3 id="III、按顺序安装其他依赖"><a href="#III、按顺序安装其他依赖" class="headerlink" title="III、按顺序安装其他依赖"></a>III、按顺序安装其他依赖</h3><p>这里可以专门创建一个目录用来存放所有软件的bin，lib，include，方便后续指定路径，比如在根目录下创建目录app，后续安装路径全都指定到这个目录</p>
 <h4 id="1、安装zlib"><a href="#1、安装zlib" class="headerlink" title="1、安装zlib"></a>1、安装zlib</h4><h4 id="2、安装szip软件，配置时加上-–enable-shared"><a href="#2、安装szip软件，配置时加上-–enable-shared" class="headerlink" title="2、安装szip软件，配置时加上 –enable-shared"></a>2、安装szip软件，配置时加上 –enable-shared</h4><h4 id="3、hdf5的安装需要上面个两个作为依赖"><a href="#3、hdf5的安装需要上面个两个作为依赖" class="headerlink" title="3、hdf5的安装需要上面个两个作为依赖"></a>3、hdf5的安装需要上面个两个作为依赖</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --enable-shared --enable-fortran --with-zlib=/home/zhangpengwen/palwe/app/ --with-szip=/home/zhangpengwen/palwe/app/ --prefix=/home/zhangpengwen/palwe/app/<br></code></pre></td></tr></table></figure>
 
 <p>时间会比较久</p>
@@ -348,6 +350,7 @@
 <p>安装完成后，配置环境变量：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CPPFLAGS=<span class="hljs-string">&quot;-I<span class="hljs-variable">$CONDA_PREFIX</span>/include <span class="hljs-variable">$CPPFLAGS</span>&quot;</span><br><span class="hljs-built_in">export</span> LDFLAGS=<span class="hljs-string">&quot;-L<span class="hljs-variable">$CONDA_PREFIX</span>/lib <span class="hljs-variable">$LDFLAGS</span>&quot;</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$CONDA_PREFIX</span>/lib:<span class="hljs-variable">$LD_LIBRARY_PATH</span>&quot;</span><br></code></pre></td></tr></table></figure>
 
+<p>环境变量的配置很重要，注意不要写错</p>
 <p>注意这一步要在conda环境下进行，否则无法找到conda路径</p>
 <p>之后老套路安装，不过依然要加上动态库</p>
 <h4 id="5、安装netcdf-c"><a href="#5、安装netcdf-c" class="headerlink" title="5、安装netcdf-c"></a>5、安装netcdf-c</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --enable-shared --enable-netcdf4 CPPFLAGS=-I/home/zhangpengwen/palwe/app/include --prefix=/home/zhangpengwen/palwe/app/ LDFLAGS=-L/home/zhangpengwen/palwe/app/lib<br></code></pre></td></tr></table></figure>
@@ -357,7 +360,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda install -c conda-forge m4<br></code></pre></td></tr></table></figure>
 
 <p>成功安装后即可顺利安装netcdf-c</p>
-<h4 id="6、安装netcdf-fortran"><a href="#6、安装netcdf-fortran" class="headerlink" title="6、安装netcdf-fortran"></a>6、安装netcdf-fortran</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/home/zhangpengwen/palwe/app/lib/:<span class="hljs-variable">$&#123;LD_LIBARY_PATH&#125;</span><br></code></pre></td></tr></table></figure>
+<h4 id="6、安装netcdf-fortran"><a href="#6、安装netcdf-fortran" class="headerlink" title="6、安装netcdf-fortran"></a>6、安装netcdf-fortran</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/home/zhangpengwen/palwe/app/lib/:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br></code></pre></td></tr></table></figure>
 
 <p>首先设置环境变量，告诉系统找依赖的libary都去这个路径下去找<br>后续步骤同上，不过 –enable-netcdf4 要删除</p>
 <h4 id="7、安装netcdf-cxx"><a href="#7、安装netcdf-cxx" class="headerlink" title="7、安装netcdf-cxx"></a>7、安装netcdf-cxx</h4><p>安装步骤同上，不再赘述</p>
@@ -387,24 +390,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./compile em_real &gt;&amp; compile.log<br></code></pre></td></tr></table></figure>
 
 <p>这里由于执行了 &gt;&amp; compile.log 因此输出和报错不会出现在屏幕上，而是被保存成日志文件，这是由于在编译大型文件时由于信息太快不易发现错误，因此保存日志方便查找error出现的位置</p>
-<p>————-以下是修正部分，仅供参考,不需要照做———————————————————————————————<br>发现编译错误了，查找原因发现（grep -i “Fatal” compile.log）是找不到 mpif.h 文件，最后发现还是环境变量的问题,configure找到的是conda里的mpif90，然而conda没有安装编译器</p>
-<p>安装mpich时 configure出现错误，原因是gcc编译器版本太高，导致把一些旧写法识别为了错误导致configure报错<br>解决办法：1）安装更新的mpich版本（可能会存在其他的依赖问题）2）告诉编译器忽略这个错误<br>这里采用第二种办法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CC=/home/zhangpengwen/palwe/app/gcc-13.3.0/bin/gcc<br><span class="hljs-built_in">export</span> CXX=/home/zhangpengwen/palwe/app/gcc-13.3.0/bin/g++<br><span class="hljs-built_in">export</span> FC=/home/zhangpengwen/palwe/app/gcc-13.3.0/bin/gfortran<br><span class="hljs-built_in">export</span> F77=<span class="hljs-variable">$FC</span><br><span class="hljs-built_in">export</span> FFLAGS=<span class="hljs-string">&quot;-w -fallow-argument-mismatch -O2&quot;</span><br><span class="hljs-built_in">export</span> FCFLAGS=<span class="hljs-string">&quot;-w -fallow-argument-mismatch -O2&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>make编译时又出错了，这里是由于高版本的gcc修改了默认选项从 -fcommon 变成了 -fno-common,使用下面指令修改</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">CFLAGS=<span class="hljs-string">&quot;-fcommon&quot;</span> CXXFLAGS=<span class="hljs-string">&quot;-fcommon&quot;</span> \<br>    ./configure --prefix=/app/ --enable-shared<br>make -j 8<br>make install<br></code></pre></td></tr></table></figure>
-
-<p>成功安装，可以使用which指令看一下是否能在安装目录下找到mpif90</p>
-<p>export PATH&#x3D;&#x2F;home&#x2F;zhangpengwen&#x2F;palwe&#x2F;app&#x2F;bin:$PATH</p>
-<p>ln -s &#x2F;home&#x2F;zhangpengwen&#x2F;palwe&#x2F;app&#x2F;include&#x2F;mpif.h mpif.h</p>
-<p>然而最终没有解决</p>
-<p>——————修正结束，一次失败的修正————————————————————————————————–</p>
-<p>最终解决方案：<br>1、退出conda环境，configure时会出现报错说找不到m4，这里是因为当初是把m4安装到了conda下，所以说在安装依赖时一定不要在多个环境下安装，而且不建议全部都在conda中安装<br>使用wget下载m4源码包即可下载<br>wget <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz">http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz</a><br>之后还按之前的步骤安装</p>
+<p>解决方案：<br>1、退出conda环境，configure时会出现报错说找不到m4，这里是因为当初是把m4安装到了conda下，所以说在安装依赖时一定不要在多个环境下安装，而且不建议全部都在conda中安装<br>使用wget下载m4源码包即可下载<br>wget <a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz">http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz</a><br>之后还按之前的步骤安装</p>
 <p>2、修改configure.wrf以下几行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">FC              =       $(DM_FC)<br>LIB_EXTERNAL    = \<br>                      -L$(WRF_SRC_ROOT_DIR)/external/io_netcdf -lwrfio_nf -L/home/zhangpengwen/palwe/app/lib -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz<br>FCBASEOPTS_NO_G = -w $(FORMAT_FREE) $(BYTESWAPIO) -fallow-argument-mismatch -fallow-invalid-boz<br></code></pre></td></tr></table></figure>
 
-<p><strong>注意，这里只代表我这里出现的问题可以这样解决，并且中间有部分其他修改步骤未作记录，因此只供参考，具体问题再去自行查找(另外进一步证明了gemini比gpt好用)</strong></p>
+<p>版本问题很容易遇到，这里可以在涉及到gcc，gfortran编译器的变量后面全部加上这个忽略语句，可以避免因为版本不兼容造成的编译失败</p>
 <p>最后出现<br>Executables successfully built<br>即说明安装成功</p>
+<p>可以打开run目录<code>ls</code>查看文件，如果是生成的exe是红色的仍代表编译失败，程序不可用，如果是蓝色的就说明编译成功了</p>
 <p>可以尝试运行生成的可执行程序来测试是否安装成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> run<br>./wrf.exe<br></code></pre></td></tr></table></figure>
 
@@ -432,7 +424,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ungrib/src/ngl/g2<br>make clean<br><span class="hljs-built_in">rm</span> -f *.o *.mod<br><span class="hljs-built_in">cd</span> ../../../..<br><span class="hljs-comment"># 现在你应该回到了 WPS-4.0 根目录</span><br></code></pre></td></tr></table></figure>
 
 <p>之后重新编译即可，笔者这里是直接成功了，还是一样，可以看到WPS根目录下生成了三个exe程序就说明编译成功了，也可以尝试运行测试一下</p>
-<p>OK，到这里就完成了WRF的安装全流程，接下来就可以直接跑了。</p>
+<p>OK，到这里就完成了WRF的安装全流程。</p>
 
                 
               </div>
@@ -480,7 +472,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>WRF在Linux系统下的安装教程（手动编译）</div>
+      <div>WRF4.0安装教程</div>
       <div>https://e-golem.github.io/2025/11/10/WRF的安装/</div>
     </div>
     <div class="license-meta">
