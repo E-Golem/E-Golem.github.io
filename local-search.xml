@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>server Linux installation</title>
+    <link href="/2026/01/31/server-Linux-installation/"/>
+    <url>/2026/01/31/server-Linux-installation/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）</title>
     <link href="/2026/01/14/GLASS-Data/"/>
     <url>/2026/01/14/GLASS-Data/</url>
@@ -47,9 +60,9 @@
     
     <tags>
       
-      <tag>Deep Learning</tag>
-      
       <tag>python</tag>
+      
+      <tag>Deep Learning</tag>
       
     </tags>
     
@@ -78,9 +91,9 @@
       
       <tag>python</tag>
       
-      <tag>codna</tag>
-      
       <tag>command</tag>
+      
+      <tag>codna</tag>
       
     </tags>
     
@@ -105,9 +118,9 @@
     
     <tags>
       
-      <tag>python</tag>
-      
       <tag>Algorithm</tag>
+      
+      <tag>python</tag>
       
     </tags>
     
@@ -257,7 +270,7 @@
     <link href="/2025/09/18/linux/"/>
     <url>/2025/09/18/linux/</url>
     
-    <content type="html"><![CDATA[<p>学习Linux指令的记录，教程来源于菜鸟<a href="https://www.runoob.com/markdown/md-tutorial.html">教程</a></p><h1 id="Linux-Learning"><a href="#Linux-Learning" class="headerlink" title="Linux Learning"></a>Linux Learning</h1><h2 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h2><ul><li>ls 列出目录和文件名</li><li>cd 切换目录</li><li>pwd 显示当前目录</li><li>mkdir 创建新目录</li><li>rmdir 删除空目录</li><li>cp 复制</li><li>rm 删除</li><li>mv 移动或修改名称</li></ul><h2 id="文件查看命令"><a href="#文件查看命令" class="headerlink" title="文件查看命令"></a>文件查看命令</h2><ul><li>cat 从第一行开始显示文件内容</li><li>tac 与cat相反，从最后一行开始</li><li>nl 显示文件输出行号</li><li>more 按页显示文件内容</li><li>less 可以往前翻页</li><li>head 只看头几行</li><li>tail 只看尾几行<ul><li>-n接数字代表显示几行</li><li>-f表示持续侦测后面所接的档名</li></ul></li></ul><h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><ul><li><p>df文件系统的整体磁盘使用量</p><ul><li>h 可读显示方式</li><li>T 文件系统类型</li><li>t 指定类型文件系统</li><li>i inode使用情况</li><li>H 1000b为单位</li><li>k kb显示</li><li>a 所有文件系统包括虚拟文件系统</li></ul></li><li><p>du 检查磁盘空间使用量</p></li><li><p>fdisk 用于磁盘分区</p></li></ul><hr><h2 id="vi-vim的使用"><a href="#vi-vim的使用" class="headerlink" title="vi&#x2F;vim的使用"></a>vi&#x2F;vim的使用</h2><h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><ul><li>i 输入模式</li><li>x 删除字符</li><li>： 底线模式</li><li>a 插入模式</li><li>o 下方插入新行，进入插入模式</li><li>O 上方插入新行，进入插入模式</li><li>dd 剪切当前行</li><li>yy 复制当前行</li><li>p 粘贴到下方</li><li>P 粘贴到上方</li><li>u 撤销上一次</li><li>ctrl + r 重做</li><li>:w 保存文件</li><li>:q 退出vim</li><li>:ql 强制退出不保存</li></ul><h3 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h3><p>ESC可返回普通模式</p><h3 id="底线命令模式"><a href="#底线命令模式" class="headerlink" title="底线命令模式"></a>底线命令模式</h3><ul><li>:w 保存文件</li><li>:q 退出vim</li><li>:wq 保存并退出</li><li>:q！强制退出</li></ul><p><img src="https://www.runoob.com/wp-content/uploads/2014/07/vim-vi-workmodel.png" alt="vim工作模式"></p>]]></content>
+    <content type="html"><![CDATA[<p>学习Linux指令的记录，教程来源于菜鸟<a href="https://www.runoob.com/markdown/md-tutorial.html">教程</a></p><h1 id="Linux-Learning"><a href="#Linux-Learning" class="headerlink" title="Linux Learning"></a>Linux Learning</h1><h2 id="目录处理命令"><a href="#目录处理命令" class="headerlink" title="目录处理命令"></a>目录处理命令</h2><ul><li>ls 列出目录和文件名</li><li>cd 切换目录</li><li>pwd 显示当前目录</li><li>mkdir 创建新目录</li><li>rmdir 删除空目录</li><li>cp 复制</li><li>rm 删除</li><li>mv 移动或修改名称</li></ul><h2 id="文件查看命令"><a href="#文件查看命令" class="headerlink" title="文件查看命令"></a>文件查看命令</h2><ul><li>touch 创建新文件</li><li>cat 从第一行开始显示文件内容</li><li>tac 与cat相反，从最后一行开始</li><li>nl 显示文件输出行号</li><li>more 按页显示文件内容</li><li>less 可以往前翻页</li><li>head 只看头几行</li><li>tail 只看尾几行<ul><li>-n接数字代表显示几行</li><li>-f表示持续侦测后面所接的档名</li></ul></li></ul><h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><ul><li><p>df文件系统的整体磁盘使用量</p><ul><li>h 可读显示方式</li><li>T 文件系统类型</li><li>t 指定类型文件系统</li><li>i inode使用情况</li><li>H 1000b为单位</li><li>k kb显示</li><li>a 所有文件系统包括虚拟文件系统</li></ul></li><li><p>du 检查磁盘空间使用量</p></li><li><p>fdisk 用于磁盘分区</p></li></ul><hr><h2 id="vi-vim的使用"><a href="#vi-vim的使用" class="headerlink" title="vi&#x2F;vim的使用"></a>vi&#x2F;vim的使用</h2><h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><ul><li>i 输入模式</li><li>x 删除字符</li><li>： 底线模式</li><li>a 插入模式</li><li>o 下方插入新行，进入插入模式</li><li>O 上方插入新行，进入插入模式</li><li>dd 剪切当前行</li><li>yy 复制当前行</li><li>p 粘贴到下方</li><li>P 粘贴到上方</li><li>u 撤销上一次</li><li>ctrl + r 重做</li><li>:w 保存文件</li><li>:q 退出vim</li><li>:ql 强制退出不保存</li></ul><h3 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h3><p>ESC可返回普通模式</p><h3 id="底线命令模式"><a href="#底线命令模式" class="headerlink" title="底线命令模式"></a>底线命令模式</h3><ul><li>:w 保存文件</li><li>:q 退出vim</li><li>:wq 保存并退出</li><li>:q！强制退出</li></ul><p><img src="https://www.runoob.com/wp-content/uploads/2014/07/vim-vi-workmodel.png" alt="vim工作模式"></p>]]></content>
     
     
     <categories>
@@ -269,9 +282,9 @@
     
     <tags>
       
-      <tag>command</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>command</tag>
       
     </tags>
     
@@ -298,9 +311,9 @@
     
     <tags>
       
-      <tag>Deep Learning</tag>
-      
       <tag>python</tag>
+      
+      <tag>Deep Learning</tag>
       
     </tags>
     
@@ -325,9 +338,9 @@
     
     <tags>
       
-      <tag>command</tag>
-      
       <tag>hexo</tag>
+      
+      <tag>command</tag>
       
     </tags>
     
