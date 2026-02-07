@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>服务器Linux系统的安装和配置</title>
+    <link href="/2026/01/31/server-Linux-installation/"/>
+    <url>/2026/01/31/server-Linux-installation/</url>
+    
+    <content type="html"><![CDATA[<p>课题组从学校申请到了一些服务器，这里总结一下对服务器系统进行重装和配置的过程</p><h2 id="1、安装Linux系统"><a href="#1、安装Linux系统" class="headerlink" title="1、安装Linux系统"></a>1、安装Linux系统</h2><h3 id="1-1-制作系统盘"><a href="#1-1-制作系统盘" class="headerlink" title="1.1 制作系统盘"></a>1.1 制作系统盘</h3><p>需要一个空间大于8G的U盘，提前格式化。将镜像源文件iso下载后使用相关烤盘工具将系统烤到U盘中（如UltralSO）。</p><p>尽管是安装在服务器上，但是最好也是使用桌面端，因为相关配置在使用图形化界面是会更直观和方便  </p><p>这里使用的是<em><strong>ubuntu20.04.6 desktop</strong></em>版（较稳定版本，非最新）</p><h3 id="1-2-安装系统"><a href="#1-2-安装系统" class="headerlink" title="1.2 安装系统"></a>1.2 安装系统</h3><p>将外设（键鼠、显示器等）以及U盘插入服务器接口</p><ul><li>F11 进入boot menu</li><li>选择系统U盘进入安装界面（UEFI前缀）</li><li>选择oem installation方式（默认安装可能会出现问题）</li><li>没有什么特殊需求的话，选项基本都是默认</li><li>最后设置自己的用户名和密码（用户名和主机名使用oem是默认为oem的，后续安装完成后可以进行修改）</li></ul><p>这个过程中没有网络，需要进入系统后在设置-网络中进行配置<br>配置项：IP地址、子网掩码、DNS、关网IP地址</p><p>可使用ping指令来检测ip配置是否成功</p><h2 id="2、-SSH配置"><a href="#2、-SSH配置" class="headerlink" title="2、 SSH配置"></a>2、 SSH配置</h2><p>之后进行ssh的配置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt full-upgrade -y<br><span class="hljs-comment">#这里是由于前面安装时无网络，很多需要网络下载的组件在系统安装时没有装上，这里手动安装一下</span><br><span class="hljs-built_in">sudo</span> apt install openssh-server<br><span class="hljs-built_in">sudo</span> apt-get install telnet<br><span class="hljs-built_in">sudo</span> apt-get install nmap <br><span class="hljs-comment">#安装端口连接软件</span><br><span class="hljs-built_in">sudo</span> ufw status <br><span class="hljs-comment">#查看端口状态</span><br><span class="hljs-built_in">sudo</span> ufw <span class="hljs-built_in">enable</span><br><span class="hljs-built_in">sudo</span> ufw allow 22/tcp <br><span class="hljs-comment">#开放某个端口，默认22是开放的</span><br></code></pre></td></tr></table></figure><p>依次执行上面的指令</p><p>之后即可在远端连接ssh</p><h2 id="3、可能遇到的问题"><a href="#3、可能遇到的问题" class="headerlink" title="3、可能遇到的问题"></a>3、可能遇到的问题</h2><p>由于有的服务器可能存在硬件问题，因此需要排查</p><h2 id="4、硬盘扩充"><a href="#4、硬盘扩充" class="headerlink" title="4、硬盘扩充"></a>4、硬盘扩充</h2><p>由于容量不太够，因此要进行硬盘的扩充，由于这里硬盘是RAID阵列，需要对硬盘进行配置才能被正确识别并使用</p><p>RAID是指一种硬盘存储技术，RAID1是指由两块相同的硬盘，将一个硬盘经乡道另一个硬盘上作为备份，用一半容量换更高的数据安全性</p><p>这里要用到 <strong>StorCLI</strong> ，它是RAID控制器的配置和监控工具，允许你在操作系统内查看、配置和管理你的 硬件<strong>RAID</strong>阵列</p><p>首先安装<strong>StorCLI</strong>（apt无法下载，需离线安装）</p><p>查看硬盘状态</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 /eall /sall show<br><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 /vall show<br></code></pre></td></tr></table></figure><p>清除Foreign,Foreign是指物理硬盘上存在以前的RAID配置，需要先清除再创建新的虚拟磁盘</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 /fall delete<br></code></pre></td></tr></table></figure><p>创建新单盘VD（UGood可创建，意思是空闲）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 add vd <span class="hljs-built_in">type</span>=raid0 drives=252:3 <span class="hljs-comment">#（硬盘位置）</span><br></code></pre></td></tr></table></figure><p>查看磁盘状态</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsblk -d -o NAME,MODEL,SIZE,TYPE<br></code></pre></td></tr></table></figure><p>slurm的配置<br>&#x2F;etc&#x2F;hosts 写入<br>munge.key<br>master端slurm的安装<br>client端slurm的安装<br>ssh密钥生成，免密ssh<br>munge -n | ssh node1 unmunge 测试</p><p>完成cu05的测试（成功）</p><p>id -u munge<br>id -g munge<br>必须调整为一致<br>需要把占位的程序移动到其他位置</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）</title>
     <link href="/2026/01/14/GLASS-Data/"/>
     <url>/2026/01/14/GLASS-Data/</url>

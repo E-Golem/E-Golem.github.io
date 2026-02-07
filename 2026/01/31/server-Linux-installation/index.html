@@ -19,29 +19,24 @@
   <meta name="author" content="Pengwen Zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GLASS数据的下载和预处理">
+    <meta name="description" content="介绍了服务器上Linux（Ubuntu）系统的安装和配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）">
-<meta property="og:url" content="https://e-golem.github.io/2026/01/14/GLASS-Data/index.html">
+<meta property="og:title" content="服务器Linux系统的安装和配置">
+<meta property="og:url" content="https://e-golem.github.io/2026/01/31/server-Linux-installation/index.html">
 <meta property="og:site_name" content="Palwe-Code">
-<meta property="og:description" content="GLASS数据的下载和预处理">
+<meta property="og:description" content="介绍了服务器上Linux（Ubuntu）系统的安装和配置">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://e-golem.github.io/2026/01/14/GLASS-Data/s.png">
-<meta property="og:image" content="https://e-golem.github.io/2026/01/14/GLASS-Data/bluesky.png">
-<meta property="og:image" content="https://e-golem.github.io/2026/01/14/GLASS-Data/nc.png">
-<meta property="article:published_time" content="2026-01-14T03:45:39.000Z">
-<meta property="article:modified_time" content="2026-02-03T09:36:15.904Z">
+<meta property="article:published_time" content="2026-01-31T07:27:23.000Z">
+<meta property="article:modified_time" content="2026-02-07T01:42:40.619Z">
 <meta property="article:author" content="Pengwen Zhang">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="WRF">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://e-golem.github.io/2026/01/14/GLASS-Data/s.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成） -Palwe-Code</title>
+  <title>服务器Linux系统的安装和配置 -Palwe-Code</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）"></span>
+            <span id="subtitle" data-typed-text="服务器Linux系统的安装和配置"></span>
           
         </div>
 
@@ -223,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-14 11:45" pubdate>
-          2026年1月14日 中午
+        <time datetime="2026-01-31 15:27" pubdate>
+          2026年1月31日 下午
         </time>
       </span>
     
@@ -235,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          544 字
+          779 字
         
       </span>
     
@@ -246,7 +241,7 @@
         
         
         
-          6 分钟
+          8 分钟
         
       </span>
     
@@ -305,12 +300,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）</h1>
+            <h1 id="seo-header">服务器Linux系统的安装和配置</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2026-02-03T17:36:15+08:00
+                    本文最后更新于 2026-02-07T09:42:40+08:00
                   
                   
 
@@ -320,29 +315,45 @@
             
               <div class="markdown-body">
                 
-                <p>北师大全球陆表特征参量（GLASS）数据集，<a target="_blank" rel="noopener" href="https://glass-product.bnu.edu.cn/">简介</a><br>下载地址：<a target="_blank" rel="noopener" href="https://glass.hku.hk/download.html">GLASS 数据集</a></p>
-<p>原本WRF中用到的是MODIS ALBEDO，然而GLASS数据集空值更少，精度更好，因此将MODIS数据替换成GLASS数据会提升实验结果的可靠性。</p>
-<p>下面介绍GLASS数据的处理的步骤</p>
-<h2 id="1、下载Albedo-MODIS-500m数据"><a href="#1、下载Albedo-MODIS-500m数据" class="headerlink" title="1、下载Albedo MODIS 500m数据"></a>1、下载Albedo MODIS 500m数据</h2><p>GLASS提供的数据集是hdf格式的地图瓦片，时间分辨率是8d，空间分辨率是500m，下载页数据按天数存储到对应的目录下，命名以瓦片编号区分。中国范围内的瓦片编号已经在脚本中提供。</p>
-<h2 id="2、地表反照率的计算"><a href="#2、地表反照率的计算" class="headerlink" title="2、地表反照率的计算"></a>2、地表反照率的计算</h2><p><a target="_blank" rel="noopener" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2017JD027010">参考文献</a><br>计算公式</p>
-<blockquote>
-<p><strong>Albedo&#x3D;(1-s)<em>\alpha_b+s</em>\alpha_w</strong>  </p>
-</blockquote>
-<p><em>s</em>为太阳漫辐射漫射的比例，alpha_b为黑天反照率(BSA)，alpha_w为白天反照率(WSA)<br>对于GLASS数据，只需要用shortwave短波辐射计算即可（短波已经包含了可见光和近红外波段）</p>
-<blockquote>
-<p><em>黑天反照率（Black-sky albedo）</em>：是指地表再仅有直射太阳光照射条件下的反照率；<br><em>白天反照率（White-sky albedo</em>：是指地表再全漫射光（如多云或阴天）条件下的反照率</p>
-</blockquote>
-<p><em>漫射天窗比</em>（S）：是漫射辐照度占辐射总量的比例<br> s &#x3D;（漫射可见光+漫射红外）&#x2F;（漫射可见光+漫射红外+直射可见光+直射红外）<br>使用NCEP数据进行计算<a target="_blank" rel="noopener" href="https://downloads.psl.noaa.gov/Datasets/ncep.reanalysis/Monthlies/surface_gauss/">https://downloads.psl.noaa.gov/Datasets/ncep.reanalysis/Monthlies/surface_gauss&#x2F;</a></p>
-<p>代码如下：  </p>
-<p>漫射天窗比计算结果如下：<img src="/2026/01/14/GLASS-Data/s.png" srcset="/img/loading.gif" lazyload class="" title="漫射天窗比"></p>
-<p>之后根据公式计算蓝空反照率（包括hdf转化为tif、图像镶嵌、以及坐标系的转化）：</p>
-<p>代码如下：</p>
-<p>最终裁剪后的结果如下：<img src="/2026/01/14/GLASS-Data/bluesky.png" srcset="/img/loading.gif" lazyload class="" title="裁剪后的蓝空反照率数据，可以看出空值很少"></p>
-<h2 id="3、波段合成与转换成nc数据"><a href="#3、波段合成与转换成nc数据" class="headerlink" title="3、波段合成与转换成nc数据"></a>3、波段合成与转换成nc数据</h2><p>这里使用的是qgis环境，qgis的安装用到了micromamba</p>
-<p>波段合成代码：</p>
-<p>波段合成后的tif转nc代码： ,不过这里是转换为压缩的netcdf4格式，如果是WRF中需要的netcdf classic则不能压缩，数据量会很大。</p>
-<p>转化后的nc数据如下：<img src="/2026/01/14/GLASS-Data/nc.png" srcset="/img/loading.gif" lazyload class="" title="转换后的nc数据可视化"></p>
-<p>至此GLASS数据处理完成，后续就是将nc数据替换到WRF中，即可进行后续的调参。</p>
+                <p>课题组从学校申请到了一些服务器，这里总结一下对服务器系统进行重装和配置的过程</p>
+<h2 id="1、安装Linux系统"><a href="#1、安装Linux系统" class="headerlink" title="1、安装Linux系统"></a>1、安装Linux系统</h2><h3 id="1-1-制作系统盘"><a href="#1-1-制作系统盘" class="headerlink" title="1.1 制作系统盘"></a>1.1 制作系统盘</h3><p>需要一个空间大于8G的U盘，提前格式化。将镜像源文件iso下载后使用相关烤盘工具将系统烤到U盘中（如UltralSO）。</p>
+<p>尽管是安装在服务器上，但是最好也是使用桌面端，因为相关配置在使用图形化界面是会更直观和方便  </p>
+<p>这里使用的是<em><strong>ubuntu20.04.6 desktop</strong></em>版（较稳定版本，非最新）</p>
+<h3 id="1-2-安装系统"><a href="#1-2-安装系统" class="headerlink" title="1.2 安装系统"></a>1.2 安装系统</h3><p>将外设（键鼠、显示器等）以及U盘插入服务器接口</p>
+<ul>
+<li>F11 进入boot menu</li>
+<li>选择系统U盘进入安装界面（UEFI前缀）</li>
+<li>选择oem installation方式（默认安装可能会出现问题）</li>
+<li>没有什么特殊需求的话，选项基本都是默认</li>
+<li>最后设置自己的用户名和密码（用户名和主机名使用oem是默认为oem的，后续安装完成后可以进行修改）</li>
+</ul>
+<p>这个过程中没有网络，需要进入系统后在设置-网络中进行配置<br>配置项：IP地址、子网掩码、DNS、关网IP地址</p>
+<p>可使用ping指令来检测ip配置是否成功</p>
+<h2 id="2、-SSH配置"><a href="#2、-SSH配置" class="headerlink" title="2、 SSH配置"></a>2、 SSH配置</h2><p>之后进行ssh的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt full-upgrade -y<br><span class="hljs-comment">#这里是由于前面安装时无网络，很多需要网络下载的组件在系统安装时没有装上，这里手动安装一下</span><br><span class="hljs-built_in">sudo</span> apt install openssh-server<br><span class="hljs-built_in">sudo</span> apt-get install telnet<br><span class="hljs-built_in">sudo</span> apt-get install nmap <br><span class="hljs-comment">#安装端口连接软件</span><br><span class="hljs-built_in">sudo</span> ufw status <br><span class="hljs-comment">#查看端口状态</span><br><span class="hljs-built_in">sudo</span> ufw <span class="hljs-built_in">enable</span><br><span class="hljs-built_in">sudo</span> ufw allow 22/tcp <br><span class="hljs-comment">#开放某个端口，默认22是开放的</span><br></code></pre></td></tr></table></figure>
+
+<p>依次执行上面的指令</p>
+<p>之后即可在远端连接ssh</p>
+<h2 id="3、可能遇到的问题"><a href="#3、可能遇到的问题" class="headerlink" title="3、可能遇到的问题"></a>3、可能遇到的问题</h2><p>由于有的服务器可能存在硬件问题，因此需要排查</p>
+<h2 id="4、硬盘扩充"><a href="#4、硬盘扩充" class="headerlink" title="4、硬盘扩充"></a>4、硬盘扩充</h2><p>由于容量不太够，因此要进行硬盘的扩充，由于这里硬盘是RAID阵列，需要对硬盘进行配置才能被正确识别并使用</p>
+<p>RAID是指一种硬盘存储技术，RAID1是指由两块相同的硬盘，将一个硬盘经乡道另一个硬盘上作为备份，用一半容量换更高的数据安全性</p>
+<p>这里要用到 <strong>StorCLI</strong> ，它是RAID控制器的配置和监控工具，允许你在操作系统内查看、配置和管理你的 硬件<strong>RAID</strong>阵列</p>
+<p>首先安装<strong>StorCLI</strong>（apt无法下载，需离线安装）</p>
+<p>查看硬盘状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 /eall /sall show<br><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 /vall show<br></code></pre></td></tr></table></figure>
+
+<p>清除Foreign,Foreign是指物理硬盘上存在以前的RAID配置，需要先清除再创建新的虚拟磁盘</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 /fall delete<br></code></pre></td></tr></table></figure>
+
+<p>创建新单盘VD（UGood可创建，意思是空闲）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /opt/MegaRAID/storcli/storcli64 /c0 add vd <span class="hljs-built_in">type</span>=raid0 drives=252:3 <span class="hljs-comment">#（硬盘位置）</span><br></code></pre></td></tr></table></figure>
+
+<p>查看磁盘状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsblk -d -o NAME,MODEL,SIZE,TYPE<br></code></pre></td></tr></table></figure>
+
+<p>slurm的配置<br>&#x2F;etc&#x2F;hosts 写入<br>munge.key<br>master端slurm的安装<br>client端slurm的安装<br>ssh密钥生成，免密ssh<br>munge -n | ssh node1 unmunge 测试</p>
+<p>完成cu05的测试（成功）</p>
+<p>id -u munge<br>id -g munge<br>必须调整为一致<br>需要把占位的程序移动到其他位置</p>
 
                 
               </div>
@@ -361,7 +372,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/python/" class="category-chain-item">python</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -376,9 +387,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/python/" class="print-no-link">#python</a>
-      
-        <a href="/tags/WRF/" class="print-no-link">#WRF</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
     </div>
   
@@ -390,8 +399,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）</div>
-      <div>https://e-golem.github.io/2026/01/14/GLASS-Data/</div>
+      <div>服务器Linux系统的安装和配置</div>
+      <div>https://e-golem.github.io/2026/01/31/server-Linux-installation/</div>
     </div>
     <div class="license-meta">
       
@@ -403,7 +412,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年1月14日</div>
+          <div>2026年1月31日</div>
         </div>
       
       
@@ -435,18 +444,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/31/server-Linux-installation/" title="服务器Linux系统的安装和配置">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">服务器Linux系统的安装和配置</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/12/22/ClimateDL/" title="CliamteDL">
-                        <span class="hidden-mobile">CliamteDL</span>
+                      <a href="/2026/01/14/GLASS-Data/" title="GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）">
+                        <span class="hidden-mobile">GLASS ALBEDO MODIS 500m 数据集的下载和处理（hdf转tif、栅格镶嵌、波段合成）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
