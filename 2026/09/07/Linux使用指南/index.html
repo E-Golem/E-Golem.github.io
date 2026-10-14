@@ -1,0 +1,2139 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/earth.png">
+  <link rel="icon" href="/img/earth.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pengwen Zhang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux 使用指南 面向测绘工程 &#x2F; 大气科学（WRF 数值模拟）方向研究生系统平台：Ubuntu（20.04 &#x2F; 22.04 &#x2F; 24.04）说明：本文所有命令均为真实可用的标准命令，涵盖基础指令、软件安装、系统管理、并行计算、科学计算（netCDF&#x2F;HDF5）、WRF 实战以及求职应试高频考点。命令请结合实际环境核对参数后再执行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux使用指南">
+<meta property="og:url" content="https://e-golem.github.io/2026/09/07/Linux%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Palwe-Code">
+<meta property="og:description" content="Linux 使用指南 面向测绘工程 &#x2F; 大气科学（WRF 数值模拟）方向研究生系统平台：Ubuntu（20.04 &#x2F; 22.04 &#x2F; 24.04）说明：本文所有命令均为真实可用的标准命令，涵盖基础指令、软件安装、系统管理、并行计算、科学计算（netCDF&#x2F;HDF5）、WRF 实战以及求职应试高频考点。命令请结合实际环境核对参数后再执行。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-09-07T03:00:12.000Z">
+<meta property="article:modified_time" content="2026-10-14T02:38:37.201Z">
+<meta property="article:author" content="Pengwen Zhang">
+<meta property="article:tag" content="WRF">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Linux使用指南 -Palwe-Code</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"e-golem.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2025-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HOME</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux使用指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Pengwen Zhang
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-09-07 11:00" pubdate>
+          2026年9月7日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          120 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux使用指南</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    本文最后更新于 2026-10-14T10:38:37+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Linux-使用指南"><a href="#Linux-使用指南" class="headerlink" title="Linux 使用指南"></a>Linux 使用指南</h1><blockquote>
+<p>面向测绘工程 &#x2F; 大气科学（WRF 数值模拟）方向研究生<br>系统平台：Ubuntu（20.04 &#x2F; 22.04 &#x2F; 24.04）<br>说明：本文所有命令均为真实可用的标准命令，涵盖基础指令、软件安装、系统管理、并行计算、科学计算（netCDF&#x2F;HDF5）、WRF 实战以及求职应试高频考点。命令请结合实际环境核对参数后再执行。</p>
+</blockquote>
+<span id="more"></span>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>第一部分 基础篇<ul>
+<li><ol>
+<li>Linux 概述与文件系统</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>命令行基础与 Shell</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>文件与目录操作</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>文本查看与处理</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>文件查找</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>文件压缩与归档</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>用户与权限管理</li>
+</ol>
+</li>
+<li><ol start="8">
+<li>环境变量与 Shell 配置</li>
+</ol>
+</li>
+<li><ol start="9">
+<li>网络与远程连接</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>第二部分 系统管理与软件安装<ul>
+<li><ol start="10">
+<li>进程管理与系统监控</li>
+</ol>
+</li>
+<li><ol start="11">
+<li>系统信息与硬件</li>
+</ol>
+</li>
+<li><ol start="12">
+<li>磁盘与文件系统</li>
+</ol>
+</li>
+<li><ol start="13">
+<li>服务管理与定时任务</li>
+</ol>
+</li>
+<li><ol start="14">
+<li>软件安装（apt &#x2F; 源码 &#x2F; conda &#x2F; pip）</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>第三部分 文本处理与脚本编程<ul>
+<li><ol start="15">
+<li>grep &#x2F; sed &#x2F; awk 与正则表达式</li>
+</ol>
+</li>
+<li><ol start="16">
+<li>Vim 编辑器</li>
+</ol>
+</li>
+<li><ol start="17">
+<li>Shell 脚本编程</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>第四部分 并行计算与科学计算<ul>
+<li><ol start="18">
+<li>高性能计算基础</li>
+</ol>
+</li>
+<li><ol start="19">
+<li>OpenMP 共享内存并行</li>
+</ol>
+</li>
+<li><ol start="20">
+<li>MPI 分布式并行</li>
+</ol>
+</li>
+<li><ol start="21">
+<li>SLURM 作业调度系统</li>
+</ol>
+</li>
+<li><ol start="22">
+<li>环境模块 module</li>
+</ol>
+</li>
+<li><ol start="23">
+<li>科学计算库与数据工具</li>
+</ol>
+</li>
+<li><ol start="24">
+<li>WRF 模型实战</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>第五部分 求职与应试篇<ul>
+<li><ol start="25">
+<li>高频面试考点</li>
+</ol>
+</li>
+<li><ol start="26">
+<li>常用命令速查表</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="第一部分-基础篇"><a href="#第一部分-基础篇" class="headerlink" title="第一部分 基础篇"></a>第一部分 基础篇</h1><h2 id="1-Linux-概述与文件系统"><a href="#1-Linux-概述与文件系统" class="headerlink" title="1. Linux 概述与文件系统"></a>1. Linux 概述与文件系统</h2><h3 id="1-1-什么是-Linux"><a href="#1-1-什么是-Linux" class="headerlink" title="1.1 什么是 Linux"></a>1.1 什么是 Linux</h3><p>Linux 是一款开源的类 Unix 操作系统内核（Kernel），1991 年由 Linus Torvalds 发布。通常所说的”Linux 系统”是”内核 + GNU 工具集 + 发行版”的组合。常见发行版：</p>
+<ul>
+<li>Debian 系：Ubuntu、Debian、Linux Mint —— 使用 <code>apt</code> 包管理</li>
+<li>RedHat 系：CentOS、RHEL、Fedora —— 使用 <code>yum</code>&#x2F;<code>dnf</code> 包管理</li>
+<li>SUSE 系：openSUSE、SLES —— 使用 <code>zypper</code></li>
+<li>Arch 系：Arch Linux、Manjaro —— 使用 <code>pacman</code></li>
+</ul>
+<p><strong>为什么科研（WRF）要用 Linux</strong>：</p>
+<ul>
+<li>免费开源，数值模式（WRF、WRF-Chem、CMAQ）官方支持 Linux</li>
+<li>强大的 Shell 脚本能力，便于批量处理与自动循环</li>
+<li>适合高性能计算（HPC）集群，多节点并行</li>
+<li>稳定、资源占用低、权限控制清晰</li>
+<li>大量科研工具（NCL、CDO、netCDF 工具、Fortran 编译器）原生支持</li>
+</ul>
+<h3 id="1-2-Shell-与终端"><a href="#1-2-Shell-与终端" class="headerlink" title="1.2 Shell 与终端"></a>1.2 Shell 与终端</h3><ul>
+<li><strong>终端（Terminal）</strong>：人机交互的窗口程序</li>
+<li><strong>Shell</strong>：解释执行命令的程序，常见 Bash（Ubuntu 默认）、Zsh、Sh、Tcsh</li>
+<li>查看当前 Shell：<code>echo $SHELL</code></li>
+<li>查看系统默认 Shell：<code>cat /etc/passwd | grep $(whoami)</code></li>
+</ul>
+<h3 id="1-3-文件系统层次标准（FHS）"><a href="#1-3-文件系统层次标准（FHS）" class="headerlink" title="1.3 文件系统层次标准（FHS）"></a>1.3 文件系统层次标准（FHS）</h3><p>Linux 一切皆文件。常用目录：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/</code></td>
+<td>根目录，所有文件的起点</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>普通用户家目录（如 <code>/home/zhangsan</code>）</td>
+</tr>
+<tr>
+<td><code>/root</code></td>
+<td>超级用户（root）家目录</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>系统配置文件</td>
+</tr>
+<tr>
+<td><code>/bin</code>、<code>/sbin</code></td>
+<td>系统可执行命令（sbin 多为管理员命令）</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>系统软件与库（<code>/usr/local</code> 常为手动安装软件目录）</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>可变数据，如日志 <code>/var/log</code>、缓存 <code>/var/cache</code></td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>临时文件，重启可能清空</td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>第三方大型软件</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>设备文件（硬盘、终端等）</td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>虚拟文件系统，内存中的系统与进程信息</td>
+</tr>
+<tr>
+<td><code>/sys</code></td>
+<td>内核与硬件信息虚拟文件系统</td>
+</tr>
+<tr>
+<td><code>/mnt</code>、<code>/media</code></td>
+<td>挂载点（U 盘、光盘等）</td>
+</tr>
+</tbody></table>
+<p><strong>路径概念</strong>：</p>
+<ul>
+<li>绝对路径：从根目录开始，如 <code>/home/user/test.nc</code></li>
+<li>相对路径：相对当前目录，如 <code>./test.nc</code>、<code>../data/</code></li>
+<li><code>.</code> 当前目录；<code>..</code> 上一级目录；<code>~</code> 当前用户家目录；<code>-</code> 上一次所在目录</li>
+<li>使用 <code>pwd</code> 查看当前绝对路径</li>
+</ul>
+<hr>
+<h2 id="2-命令行基础与-Shell"><a href="#2-命令行基础与-Shell" class="headerlink" title="2. 命令行基础与 Shell"></a>2. 命令行基础与 Shell</h2><h3 id="2-1-命令格式"><a href="#2-1-命令格式" class="headerlink" title="2.1 命令格式"></a>2.1 命令格式</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">命令 <span class="hljs-selector-attr">[选项]</span> <span class="hljs-selector-attr">[参数]</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>ls -la /home</code>：<code>ls</code> 是命令，<code>-l</code>、<code>-a</code> 是选项，<code>/home</code> 是参数</li>
+<li>短选项合并：<code>ls -la</code> 等价于 <code>ls -l -a</code></li>
+<li>长选项：<code>ls --all --long</code></li>
+</ul>
+<h3 id="2-2-常用快捷键（Bash）"><a href="#2-2-常用快捷键（Bash）" class="headerlink" title="2.2 常用快捷键（Bash）"></a>2.2 常用快捷键（Bash）</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Tab</code></td>
+<td>命令&#x2F;文件名&#x2F;路径自动补全</td>
+</tr>
+<tr>
+<td><code>Ctrl + C</code></td>
+<td>终止当前前台进程</td>
+</tr>
+<tr>
+<td><code>Ctrl + Z</code></td>
+<td>挂起当前进程（可用 <code>fg</code> 恢复）</td>
+</tr>
+<tr>
+<td><code>Ctrl + D</code></td>
+<td>退出当前 Shell（EOF）</td>
+</tr>
+<tr>
+<td><code>Ctrl + L</code></td>
+<td>清屏（等价于 <code>clear</code>）</td>
+</tr>
+<tr>
+<td><code>Ctrl + A</code> &#x2F; <code>Ctrl + E</code></td>
+<td>光标跳到行首 &#x2F; 行尾</td>
+</tr>
+<tr>
+<td><code>Ctrl + U</code> &#x2F; <code>Ctrl + K</code></td>
+<td>删除光标前 &#x2F; 光标后内容</td>
+</tr>
+<tr>
+<td><code>Ctrl + R</code></td>
+<td>反向搜索历史命令</td>
+</tr>
+<tr>
+<td><code>↑</code> &#x2F; <code>↓</code></td>
+<td>浏览历史命令</td>
+</tr>
+<tr>
+<td><code>Ctrl + W</code></td>
+<td>删除光标前一个单词</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-获取帮助"><a href="#2-3-获取帮助" class="headerlink" title="2.3 获取帮助"></a>2.3 获取帮助</h3><ul>
+<li><code>man 命令</code>：查看命令手册，如 <code>man ls</code>（<code>q</code> 退出，<code>/</code> 搜索，<code>n</code> 下一个匹配）</li>
+<li><code>命令 --help</code> 或 <code>命令 -h</code>：快速查看用法</li>
+<li><code>info 命令</code>：更详细的文档</li>
+<li><code>whatis 命令</code>：一句话说明命令用途</li>
+<li><code>apropos 关键词</code>：按功能关键词搜索命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">man <span class="hljs-built_in">ls</span><br><span class="hljs-built_in">ls</span> --<span class="hljs-built_in">help</span><br>whatis grep<br>apropos compress<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-4-重定向与管道"><a href="#2-4-重定向与管道" class="headerlink" title="2.4 重定向与管道"></a>2.4 重定向与管道</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 重定向</span><br><span class="hljs-built_in">command</span> &gt; file      <span class="hljs-comment"># 标准输出覆盖写入文件</span><br><span class="hljs-built_in">command</span> &gt;&gt; file     <span class="hljs-comment"># 标准输出追加到文件</span><br><span class="hljs-built_in">command</span> &lt; file      <span class="hljs-comment"># 从文件读取标准输入</span><br><span class="hljs-built_in">command</span> 2&gt; err.log  <span class="hljs-comment"># 标准错误单独写入文件</span><br><span class="hljs-built_in">command</span> &gt; out.log 2&gt;&amp;1   <span class="hljs-comment"># 标准输出和错误都写入同一文件</span><br><span class="hljs-built_in">command</span> &gt; /dev/null      <span class="hljs-comment"># 丢弃输出（/dev/null 是黑洞设备）</span><br><br><span class="hljs-comment"># 管道：把前一个命令的输出作为后一个命令的输入</span><br>ps aux | grep wrf<br><span class="hljs-built_in">ls</span> | <span class="hljs-built_in">wc</span> -l<br><span class="hljs-built_in">cat</span> file | <span class="hljs-built_in">head</span> -20<br></code></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<code>2&gt;&amp;1</code> 表示把文件描述符 2（stderr）重定向到 1（stdout）当前指向的位置，必须写成 <code>2&gt;&amp;1</code> 而不是 <code>2&gt;1</code>。</p>
+<hr>
+<h2 id="3-文件与目录操作"><a href="#3-文件与目录操作" class="headerlink" title="3. 文件与目录操作"></a>3. 文件与目录操作</h2><h3 id="3-1-目录操作"><a href="#3-1-目录操作" class="headerlink" title="3.1 目录操作"></a>3.1 目录操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">pwd</span>                       <span class="hljs-comment"># 显示当前工作目录</span><br><span class="hljs-built_in">cd</span> /home/user             <span class="hljs-comment"># 切换目录</span><br><span class="hljs-built_in">cd</span> ~  或 <span class="hljs-built_in">cd</span>               <span class="hljs-comment"># 回到家目录</span><br><span class="hljs-built_in">cd</span> -                      <span class="hljs-comment"># 回到上次目录</span><br><span class="hljs-built_in">cd</span> ..                     <span class="hljs-comment"># 上一级</span><br><span class="hljs-built_in">mkdir</span> dir1                <span class="hljs-comment"># 创建目录</span><br><span class="hljs-built_in">mkdir</span> -p a/b/c            <span class="hljs-comment"># 递归创建多级目录</span><br><span class="hljs-built_in">rmdir</span> <span class="hljs-built_in">dir</span>                 <span class="hljs-comment"># 删除空目录（非空会报错）</span><br><span class="hljs-built_in">ls</span>                        <span class="hljs-comment"># 列出文件</span><br><span class="hljs-built_in">ls</span> -l                     <span class="hljs-comment"># 长格式（权限、属主、大小、时间）</span><br><span class="hljs-built_in">ls</span> -a                     <span class="hljs-comment"># 显示隐藏文件（以 . 开头）</span><br><span class="hljs-built_in">ls</span> -lh                    <span class="hljs-comment"># 人类可读大小（K/M/G）</span><br><span class="hljs-built_in">ls</span> -lt                    <span class="hljs-comment"># 按修改时间排序</span><br><span class="hljs-built_in">ls</span> -lR                    <span class="hljs-comment"># 递归列出</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-2-文件操作"><a href="#3-2-文件操作" class="headerlink" title="3.2 文件操作"></a>3.2 文件操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">touch</span> file.txt            <span class="hljs-comment"># 创建空文件 / 更新文件时间戳</span><br><span class="hljs-built_in">cp</span> file1 file2            <span class="hljs-comment"># 复制文件</span><br><span class="hljs-built_in">cp</span> -r dir1 dir2           <span class="hljs-comment"># 递归复制目录</span><br><span class="hljs-built_in">cp</span> -i file1 file2         <span class="hljs-comment"># 覆盖前提示</span><br><span class="hljs-built_in">mv</span> file1 file2            <span class="hljs-comment"># 移动 / 重命名</span><br><span class="hljs-built_in">rm</span> file                   <span class="hljs-comment"># 删除文件</span><br><span class="hljs-built_in">rm</span> -r <span class="hljs-built_in">dir</span>                 <span class="hljs-comment"># 递归删除目录</span><br><span class="hljs-built_in">rm</span> -f file                <span class="hljs-comment"># 强制删除不提示</span><br><span class="hljs-built_in">rm</span> -rf <span class="hljs-built_in">dir</span>                <span class="hljs-comment"># 慎用！强制递归删除</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ <code>rm -rf</code> 具有破坏性，执行前务必确认路径正确，尤其是 <code>rm -rf /</code> 或 <code>rm -rf ~</code> 会造成灾难性后果。删除重要数据前建议先备份。</p>
+</blockquote>
+<h3 id="3-3-链接（ln）"><a href="#3-3-链接（ln）" class="headerlink" title="3.3 链接（ln）"></a>3.3 链接（ln）</h3><ul>
+<li><strong>软链接（符号链接）</strong>：类似 Windows 快捷方式，可跨文件系统，可指向目录；源文件删除后失效</li>
+<li><strong>硬链接</strong>：多个名字指向同一 inode，不可跨文件系统，不可指向目录；删除其中一个不影响另一个</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -s /data/file.txt link.txt   <span class="hljs-comment"># 创建软链接</span><br><span class="hljs-built_in">ln</span> /data/file.txt hard.txt      <span class="hljs-comment"># 创建硬链接</span><br><span class="hljs-built_in">ls</span> -li                          <span class="hljs-comment"># 查看 inode 编号</span><br><span class="hljs-built_in">readlink</span> link.txt               <span class="hljs-comment"># 查看软链接指向</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-4-文件类型与元信息"><a href="#3-4-文件类型与元信息" class="headerlink" title="3.4 文件类型与元信息"></a>3.4 文件类型与元信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">file test.nc               <span class="hljs-comment"># 查看文件类型</span><br><span class="hljs-built_in">stat</span> test.nc               <span class="hljs-comment"># 查看详细元信息（大小、权限、时间戳、inode）</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-文本查看与处理"><a href="#4-文本查看与处理" class="headerlink" title="4. 文本查看与处理"></a>4. 文本查看与处理</h2><h3 id="4-1-查看文件"><a href="#4-1-查看文件" class="headerlink" title="4.1 查看文件"></a>4.1 查看文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> file            <span class="hljs-comment"># 输出全部内容</span><br><span class="hljs-built_in">cat</span> -n file         <span class="hljs-comment"># 带行号输出</span><br>less file           <span class="hljs-comment"># 分页查看（推荐大文件）：空格翻页、/搜索、q退出</span><br>more file           <span class="hljs-comment"># 分页查看（功能较少）</span><br><span class="hljs-built_in">head</span> -20 file       <span class="hljs-comment"># 查看前 20 行（默认 10 行）</span><br><span class="hljs-built_in">tail</span> -20 file       <span class="hljs-comment"># 查看后 20 行</span><br><span class="hljs-built_in">tail</span> -f file        <span class="hljs-comment"># 实时跟踪文件新增内容（看日志必备，Ctrl+C 退出）</span><br><span class="hljs-built_in">tail</span> -n 50 -f log.txt<br><span class="hljs-built_in">nl</span> file             <span class="hljs-comment"># 带行号输出</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-文本统计与处理"><a href="#4-2-文本统计与处理" class="headerlink" title="4.2 文本统计与处理"></a>4.2 文本统计与处理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">wc</span> file             <span class="hljs-comment"># 行数、单词数、字节数</span><br><span class="hljs-built_in">wc</span> -l file          <span class="hljs-comment"># 只统计行数</span><br><span class="hljs-built_in">sort</span> file           <span class="hljs-comment"># 排序（默认按字典序）</span><br><span class="hljs-built_in">sort</span> -n file        <span class="hljs-comment"># 按数值排序</span><br><span class="hljs-built_in">sort</span> -r file        <span class="hljs-comment"># 降序</span><br><span class="hljs-built_in">sort</span> -k2 file       <span class="hljs-comment"># 按第 2 列排序</span><br><span class="hljs-built_in">uniq</span>                <span class="hljs-comment"># 去重（必须先 sort，只去相邻重复）</span><br><span class="hljs-built_in">sort</span> file | <span class="hljs-built_in">uniq</span> -c <span class="hljs-comment"># 统计每行出现次数</span><br><span class="hljs-built_in">cut</span> -d: -f1 /etc/passwd      <span class="hljs-comment"># 按冒号分隔取第 1 列</span><br><span class="hljs-built_in">cut</span> -c1-10 file              <span class="hljs-comment"># 取每行前 10 个字符</span><br><span class="hljs-built_in">paste</span> a.txt b.txt            <span class="hljs-comment"># 按列合并文件</span><br><span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;a-z&#x27;</span> <span class="hljs-string">&#x27;A-Z&#x27;</span> &lt; file        <span class="hljs-comment"># 大小写转换</span><br>diff file1 file2             <span class="hljs-comment"># 比较文件差异</span><br>cmp file1 file2              <span class="hljs-comment"># 逐字节比较</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-3-编码与十六进制"><a href="#4-3-编码与十六进制" class="headerlink" title="4.3 编码与十六进制"></a>4.3 编码与十六进制</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">file -i file.txt       <span class="hljs-comment"># 查看文件编码</span><br>iconv -f gbk -t utf8 old.txt &gt; new.txt   <span class="hljs-comment"># 编码转换（处理中文乱码常用）</span><br><span class="hljs-built_in">od</span> -c file             <span class="hljs-comment"># 八进制/字符方式查看</span><br>xxd file               <span class="hljs-comment"># 十六进制查看</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-文件查找"><a href="#5-文件查找" class="headerlink" title="5. 文件查找"></a>5. 文件查找</h2><h3 id="5-1-find（最强大、最常用）"><a href="#5-1-find（最强大、最常用）" class="headerlink" title="5.1 find（最强大、最常用）"></a>5.1 find（最强大、最常用）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">find . -name <span class="hljs-string">&quot;*.nc&quot;</span>            <span class="hljs-comment"># 按文件名查找（当前目录递归）</span><br>find /data -name <span class="hljs-string">&quot;wrfout*&quot;</span>     <span class="hljs-comment"># 指定路径查找</span><br>find . -<span class="hljs-built_in">type</span> f                 <span class="hljs-comment"># 只找普通文件</span><br>find . -<span class="hljs-built_in">type</span> d                 <span class="hljs-comment"># 只找目录</span><br>find . -size +100M             <span class="hljs-comment"># 大于 100MB 的文件</span><br>find . -size -1k               <span class="hljs-comment"># 小于 1KB</span><br>find . -mtime -7               <span class="hljs-comment"># 最近 7 天内修改</span><br>find . -mtime +30              <span class="hljs-comment"># 30 天前修改</span><br>find . -name <span class="hljs-string">&quot;*.log&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> &#123;&#125; \;    <span class="hljs-comment"># 找到后执行删除</span><br>find . -name <span class="hljs-string">&quot;*.tmp&quot;</span> -delete           <span class="hljs-comment"># 直接删除</span><br>find . -maxdepth 2 -name <span class="hljs-string">&quot;*.nc&quot;</span>        <span class="hljs-comment"># 限制搜索深度</span><br>find . -perm 755               <span class="hljs-comment"># 按权限查找</span><br>find . -user username          <span class="hljs-comment"># 按属主查找</span><br>find . -newer ref.txt          <span class="hljs-comment"># 比 ref.txt 更新的文件</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-2-其他查找命令"><a href="#5-2-其他查找命令" class="headerlink" title="5.2 其他查找命令"></a>5.2 其他查找命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">locate wrfout        <span class="hljs-comment"># 基于数据库快速查找（需 updatedb 更新，可能不含最新文件）</span><br><span class="hljs-built_in">which</span> mpirun         <span class="hljs-comment"># 查找命令所在路径</span><br>whereis gcc          <span class="hljs-comment"># 查找命令、源码、man 手册位置</span><br><span class="hljs-built_in">type</span> <span class="hljs-built_in">ls</span>              <span class="hljs-comment"># 显示命令类型（内置/别名/外部命令）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="5-3-在文件内容中查找"><a href="#5-3-在文件内容中查找" class="headerlink" title="5.3 在文件内容中查找"></a>5.3 在文件内容中查找</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;keyword&quot;</span> file          <span class="hljs-comment"># 在文件中匹配</span><br>grep -r <span class="hljs-string">&quot;keyword&quot;</span> /path/     <span class="hljs-comment"># 递归搜索目录</span><br>grep -n <span class="hljs-string">&quot;error&quot;</span> log.txt      <span class="hljs-comment"># 显示行号</span><br>grep -i <span class="hljs-string">&quot;warning&quot;</span> file       <span class="hljs-comment"># 忽略大小写</span><br>grep -v <span class="hljs-string">&quot;^#&quot;</span> config          <span class="hljs-comment"># 排除注释行</span><br>grep -c <span class="hljs-string">&quot;error&quot;</span> <span class="hljs-built_in">log</span>          <span class="hljs-comment"># 统计匹配行数</span><br>grep -l <span class="hljs-string">&quot;keyword&quot;</span> *.txt      <span class="hljs-comment"># 只显示包含关键字的文件名</span><br>grep -A2 -B2 <span class="hljs-string">&quot;error&quot;</span> <span class="hljs-built_in">log</span>     <span class="hljs-comment"># 显示匹配行及前后各 2 行</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-文件压缩与归档"><a href="#6-文件压缩与归档" class="headerlink" title="6. 文件压缩与归档"></a>6. 文件压缩与归档</h2><h3 id="6-1-tar（最常用）"><a href="#6-1-tar（最常用）" class="headerlink" title="6.1 tar（最常用）"></a>6.1 tar（最常用）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 打包压缩</span><br>tar -czvf archive.tar.gz <span class="hljs-built_in">dir</span>/       <span class="hljs-comment"># 打包并用 gzip 压缩</span><br>tar -cjvf archive.tar.bz2 <span class="hljs-built_in">dir</span>/      <span class="hljs-comment"># 用 bzip2 压缩（更小更慢）</span><br>tar -cJvf archive.tar.xz <span class="hljs-built_in">dir</span>/       <span class="hljs-comment"># 用 xz 压缩</span><br>tar -czvf archive.tar.gz --exclude=<span class="hljs-string">&quot;*.log&quot;</span> <span class="hljs-built_in">dir</span>/   <span class="hljs-comment"># 排除某些文件</span><br><br><span class="hljs-comment"># 解压</span><br>tar -xzvf archive.tar.gz            <span class="hljs-comment"># 解压到当前目录</span><br>tar -xzvf archive.tar.gz -C /target <span class="hljs-comment"># 解压到指定目录</span><br>tar -tzvf archive.tar.gz            <span class="hljs-comment"># 只查看内容不解压</span><br>tar -xvf archive.tar                <span class="hljs-comment"># 解压未压缩的 tar</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="6-2-单独压缩工具"><a href="#6-2-单独压缩工具" class="headerlink" title="6.2 单独压缩工具"></a>6.2 单独压缩工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">gzip file            <span class="hljs-comment"># 压缩为 file.gz（原文件删除）</span><br>gzip -d file.gz      <span class="hljs-comment"># 解压</span><br>gunzip file.gz<br>bzip2 file           <span class="hljs-comment"># bzip2 压缩</span><br>xz file              <span class="hljs-comment"># xz 压缩</span><br>zip -r archive.zip <span class="hljs-built_in">dir</span>/    <span class="hljs-comment"># 压缩为 zip</span><br>unzip archive.zip          <span class="hljs-comment"># 解压 zip</span><br>unzip -l archive.zip       <span class="hljs-comment"># 查看 zip 内容</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="6-3-直接查看压缩文件内容"><a href="#6-3-直接查看压缩文件内容" class="headerlink" title="6.3 直接查看压缩文件内容"></a>6.3 直接查看压缩文件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">zcat file.gz         <span class="hljs-comment"># 查看 gz 文件内容</span><br>zgrep <span class="hljs-string">&quot;error&quot;</span> file.gz<br>zless file.gz<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>科研中最常见的组合是 <code>tar -xzvf</code> 解压源码包，以及 <code>tar -czvf</code> 打包结果数据。建议统一使用 <code>.tar.gz</code>。</p>
+</blockquote>
+<hr>
+<h2 id="7-用户与权限管理"><a href="#7-用户与权限管理" class="headerlink" title="7. 用户与权限管理"></a>7. 用户与权限管理</h2><h3 id="7-1-用户与用户组概念"><a href="#7-1-用户与用户组概念" class="headerlink" title="7.1 用户与用户组概念"></a>7.1 用户与用户组概念</h3><ul>
+<li>用户信息：<code>/etc/passwd</code>；组信息：<code>/etc/group</code>；密码（加密）：<code>/etc/shadow</code></li>
+<li>每个用户有 UID（用户 ID），root 的 UID 为 0</li>
+<li>每个文件有属主（owner）、属组（group）、其他用户（others）</li>
+</ul>
+<h3 id="7-2-查看用户与身份"><a href="#7-2-查看用户与身份" class="headerlink" title="7.2 查看用户与身份"></a>7.2 查看用户与身份</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">whoami</span>          <span class="hljs-comment"># 当前用户名</span><br><span class="hljs-built_in">id</span>              <span class="hljs-comment"># 当前用户 UID、GID、所属组</span><br><span class="hljs-built_in">id</span> username     <span class="hljs-comment"># 查看指定用户</span><br><span class="hljs-built_in">who</span>             <span class="hljs-comment"># 当前登录用户</span><br>w               <span class="hljs-comment"># 登录用户及其操作</span><br>last            <span class="hljs-comment"># 最近登录记录</span><br><span class="hljs-built_in">groups</span>          <span class="hljs-comment"># 当前用户所属组</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-3-用户管理（需-root-或-sudo）"><a href="#7-3-用户管理（需-root-或-sudo）" class="headerlink" title="7.3 用户管理（需 root 或 sudo）"></a>7.3 用户管理（需 root 或 sudo）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> useradd -m -s /bin/bash zhangsan     <span class="hljs-comment"># 创建用户并建家目录、指定 Shell</span><br><span class="hljs-built_in">sudo</span> passwd zhangsan                      <span class="hljs-comment"># 设置/修改密码</span><br><span class="hljs-built_in">sudo</span> userdel -r zhangsan                  <span class="hljs-comment"># 删除用户并删除家目录</span><br><span class="hljs-built_in">sudo</span> usermod -aG <span class="hljs-built_in">sudo</span> zhangsan            <span class="hljs-comment"># 把用户加入 sudo 组（-aG 追加）</span><br><span class="hljs-built_in">sudo</span> usermod -s /bin/zsh zhangsan         <span class="hljs-comment"># 修改用户默认 Shell</span><br><span class="hljs-built_in">sudo</span> groupadd team1                       <span class="hljs-comment"># 创建组</span><br><span class="hljs-built_in">sudo</span> groupdel team1                       <span class="hljs-comment"># 删除组</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-4-权限基础"><a href="#7-4-权限基础" class="headerlink" title="7.4 权限基础"></a>7.4 权限基础</h3><p><code>ls -l</code> 输出中权限字段共 10 位，例如 <code>-rwxr-xr--</code>：</p>
+<ul>
+<li>第 1 位：文件类型（<code>-</code> 普通文件、<code>d</code> 目录、<code>l</code> 链接、<code>b/c</code> 设备）</li>
+<li>第 2-4 位：属主权限（r 读、w 写、x 执行）</li>
+<li>第 5-7 位：属组权限</li>
+<li>第 8-10 位：其他用户权限</li>
+</ul>
+<p>权限数值（二进制加权）：读 r&#x3D;4，写 w&#x3D;2，执行 x&#x3D;1</p>
+<table>
+<thead>
+<tr>
+<th>数值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>rwx（读+写+执行）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>rw-（读+写）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>r-x（读+执行）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>r–（只读）</td>
+</tr>
+<tr>
+<td>0</td>
+<td>—（无权限）</td>
+</tr>
+</tbody></table>
+<h3 id="7-5-chmod（修改权限）"><a href="#7-5-chmod（修改权限）" class="headerlink" title="7.5 chmod（修改权限）"></a>7.5 chmod（修改权限）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> 755 script.sh     <span class="hljs-comment"># rwxr-xr-x，属主可读写执行，其他人可读执行</span><br><span class="hljs-built_in">chmod</span> 644 file.txt      <span class="hljs-comment"># rw-r--r--，常见于普通数据文件</span><br><span class="hljs-built_in">chmod</span> 600 id_rsa        <span class="hljs-comment"># rw-------，私钥文件必须这样</span><br><span class="hljs-built_in">chmod</span> +x script.sh      <span class="hljs-comment"># 给所有用户加执行权限</span><br><span class="hljs-built_in">chmod</span> u+x file          <span class="hljs-comment"># 仅属主加执行权限</span><br><span class="hljs-built_in">chmod</span> g-w file          <span class="hljs-comment"># 去掉组写权限</span><br><span class="hljs-built_in">chmod</span> -R 755 <span class="hljs-built_in">dir</span>/       <span class="hljs-comment"># 递归修改目录下所有文件</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-6-chown-chgrp（修改属主属组）"><a href="#7-6-chown-chgrp（修改属主属组）" class="headerlink" title="7.6 chown &#x2F; chgrp（修改属主属组）"></a>7.6 chown &#x2F; chgrp（修改属主属组）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> user file                <span class="hljs-comment"># 修改属主</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> user:group file          <span class="hljs-comment"># 同时修改属主和属组</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R user:group <span class="hljs-built_in">dir</span>/       <span class="hljs-comment"># 递归修改</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chgrp</span> group file               <span class="hljs-comment"># 只修改属组</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-7-特殊权限"><a href="#7-7-特殊权限" class="headerlink" title="7.7 特殊权限"></a>7.7 特殊权限</h3><ul>
+<li><strong>setuid (4xxx)</strong>：执行时以文件属主身份运行（如 <code>/usr/bin/passwd</code>）</li>
+<li><strong>setgid (2xxx)</strong>：目录内新建文件继承目录属组</li>
+<li><strong>sticky (1xxx)</strong>：目录内只能删除自己创建的文件（如 <code>/tmp</code>，权限为 <code>drwxrwxrwt</code>）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> u+s /path/file     <span class="hljs-comment"># 加 setuid</span><br><span class="hljs-built_in">chmod</span> 1777 /tmp          <span class="hljs-comment"># rwxrwxrwt，sticky 位</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-8-默认权限-umask"><a href="#7-8-默认权限-umask" class="headerlink" title="7.8 默认权限 umask"></a>7.8 默认权限 umask</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">umask</span>            <span class="hljs-comment"># 查看当前 umask（如 0022）</span><br><span class="hljs-built_in">umask</span> 022        <span class="hljs-comment"># 修改默认权限掩码</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="7-9-su-与-sudo"><a href="#7-9-su-与-sudo" class="headerlink" title="7.9 su 与 sudo"></a>7.9 su 与 sudo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">su -                  <span class="hljs-comment"># 切换到 root（- 表示同时加载 root 环境）</span><br>su - username         <span class="hljs-comment"># 切换到指定用户</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">command</span>          <span class="hljs-comment"># 以 root 权限执行单条命令</span><br><span class="hljs-built_in">sudo</span> -i               <span class="hljs-comment"># 进入 root 交互 Shell</span><br><span class="hljs-built_in">sudo</span> -u user <span class="hljs-built_in">command</span>  <span class="hljs-comment"># 以指定用户身份执行</span><br></code></pre></td></tr></table></figure>
+
+<p><code>sudo</code> 权限由 <code>/etc/sudoers</code> 控制（用 <code>visudo</code> 编辑）。sudo 执行需要密码，密码有缓存时间（默认 15 分钟）。</p>
+<hr>
+<h2 id="8-环境变量与-Shell-配置"><a href="#8-环境变量与-Shell-配置" class="headerlink" title="8. 环境变量与 Shell 配置"></a>8. 环境变量与 Shell 配置</h2><h3 id="8-1-环境变量"><a href="#8-1-环境变量" class="headerlink" title="8.1 环境变量"></a>8.1 环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>               <span class="hljs-comment"># 查看 PATH</span><br><span class="hljs-built_in">printenv</span>                 <span class="hljs-comment"># 打印所有环境变量</span><br><span class="hljs-built_in">env</span>                      <span class="hljs-comment"># 同上</span><br><span class="hljs-built_in">export</span> MYVAR=value       <span class="hljs-comment"># 定义并导出环境变量（子进程可见）</span><br>MYVAR=value              <span class="hljs-comment"># 仅当前 Shell 生效的变量</span><br><span class="hljs-built_in">unset</span> MYVAR              <span class="hljs-comment"># 删除变量</span><br></code></pre></td></tr></table></figure>
+
+<p>常用环境变量：</p>
+<ul>
+<li><code>PATH</code>：可执行文件搜索路径（冒号分隔）</li>
+<li><code>HOME</code>：当前用户家目录</li>
+<li><code>SHELL</code>：当前 Shell</li>
+<li><code>LANG</code>：语言环境（如 <code>zh_CN.UTF-8</code>）</li>
+<li><code>LD_LIBRARY_PATH</code>：动态库搜索路径（源码编译软件常需设置）</li>
+<li><code>NETCDF</code>、<code>HDF5</code>、<code>MPICH</code>：科学计算软件自定义变量（WRF 安装关键）</li>
+</ul>
+<h3 id="8-2-修改-PATH"><a href="#8-2-修改-PATH" class="headerlink" title="8.2 修改 PATH"></a>8.2 修改 PATH</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 临时生效（当前终端）</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/opt/software/bin<br><br><span class="hljs-comment"># 永久生效：写入 ~/.bashrc</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export PATH=$PATH:/opt/software/bin&#x27;</span> &gt;&gt; ~/.bashrc<br><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-3-Shell-配置文件加载顺序"><a href="#8-3-Shell-配置文件加载顺序" class="headerlink" title="8.3 Shell 配置文件加载顺序"></a>8.3 Shell 配置文件加载顺序</h3><p>登录式 Shell（ssh 登录）：<code>/etc/profile</code> → <code>~/.profile</code>（或 <code>~/.bash_profile</code>）→ <code>~/.bashrc</code><br>非登录式 Shell（新终端）：<code>~/.bashrc</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc      <span class="hljs-comment"># 立即重新加载配置（等价于 . ~/.bashrc）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="8-4-常用配置示例（-bashrc）"><a href="#8-4-常用配置示例（-bashrc）" class="headerlink" title="8.4 常用配置示例（~&#x2F;.bashrc）"></a>8.4 常用配置示例（~&#x2F;.bashrc）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 别名</span><br><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span><br><span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span><br><span class="hljs-built_in">alias</span> <span class="hljs-built_in">rm</span>=<span class="hljs-string">&#x27;rm -i&#x27;</span><br><span class="hljs-built_in">alias</span> q=<span class="hljs-string">&#x27;exit&#x27;</span><br><br><span class="hljs-comment"># 提示符</span><br><span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&#x27;\u@\h:\w\$ &#x27;</span><br><br><span class="hljs-comment"># WRF 相关环境变量（示例）</span><br><span class="hljs-built_in">export</span> DIR=/home/user/Build_WRF<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/netcdf/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> NETCDF=<span class="hljs-variable">$DIR</span>/netcdf<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-5-命令历史"><a href="#8-5-命令历史" class="headerlink" title="8.5 命令历史"></a>8.5 命令历史</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">history</span>          <span class="hljs-comment"># 查看历史命令</span><br><span class="hljs-built_in">history</span> 20       <span class="hljs-comment"># 查看最近 20 条</span><br>!<span class="hljs-built_in">ls</span>              <span class="hljs-comment"># 重新执行最近以 ls 开头的命令</span><br>!!               <span class="hljs-comment"># 重新执行上一条命令</span><br>!$               <span class="hljs-comment"># 上一条命令的最后一个参数</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="8-6-通配符"><a href="#8-6-通配符" class="headerlink" title="8.6 通配符"></a>8.6 通配符</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> *.nc          <span class="hljs-comment"># 匹配任意多个字符</span><br><span class="hljs-built_in">ls</span> file?.txt     <span class="hljs-comment"># ？匹配单个字符</span><br><span class="hljs-built_in">ls</span> [abc]*.txt    <span class="hljs-comment"># 匹配 a/b/c 开头</span><br><span class="hljs-built_in">ls</span> file[1-3].txt <span class="hljs-comment"># 匹配数字 1-3</span><br><span class="hljs-built_in">ls</span> &#123;1..10&#125;.txt   <span class="hljs-comment"># 花括号展开（Bash）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="8-7-命令替换与变量替换"><a href="#8-7-命令替换与变量替换" class="headerlink" title="8.7 命令替换与变量替换"></a>8.7 命令替换与变量替换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Today is <span class="hljs-subst">$(date)</span>&quot;</span>        <span class="hljs-comment"># $( ) 命令替换</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Today is `date`&quot;</span>         <span class="hljs-comment"># 反引号命令替换（旧写法）</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$HOME</span>                     <span class="hljs-comment"># 变量引用</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;HOME&#125;</span>                   <span class="hljs-comment"># 变量引用（推荐写法）</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-网络与远程连接"><a href="#9-网络与远程连接" class="headerlink" title="9. 网络与远程连接"></a>9. 网络与远程连接</h2><h3 id="9-1-网络信息查看"><a href="#9-1-网络信息查看" class="headerlink" title="9.1 网络信息查看"></a>9.1 网络信息查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">ip addr              <span class="hljs-comment"># 查看 IP 地址（推荐）</span><br>ip route             <span class="hljs-comment"># 查看路由</span><br>hostname             <span class="hljs-comment"># 查看主机名</span><br>hostname -I          <span class="hljs-comment"># 查看本机 IP</span><br>ss -tulnp            <span class="hljs-comment"># 查看监听端口（推荐，替代 netstat）</span><br>netstat -tulnp       <span class="hljs-comment"># 旧命令，需安装 net-tools</span><br>ping www.baidu.com   <span class="hljs-comment"># 测试连通性</span><br>traceroute host      <span class="hljs-comment"># 路由追踪</span><br>nslookup domain      <span class="hljs-comment"># DNS 查询</span><br>dig domain           <span class="hljs-comment"># DNS 查询（更详细）</span><br>curl -I https://xxx  <span class="hljs-comment"># 查看 HTTP 响应头</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="9-2-SSH-远程登录"><a href="#9-2-SSH-远程登录" class="headerlink" title="9.2 SSH 远程登录"></a>9.2 SSH 远程登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 基本登录</span><br>ssh user@192.168.1.100<br>ssh -p 2222 user@host        <span class="hljs-comment"># 指定端口</span><br>ssh -X user@host             <span class="hljs-comment"># 开启 X11 图形转发</span><br><br><span class="hljs-comment"># 密钥登录（免密）</span><br>ssh-keygen -t ed25519        <span class="hljs-comment"># 生成密钥（可指定 -f ~/.ssh/id_ed25519）</span><br>ssh-copy-id user@host        <span class="hljs-comment"># 把公钥复制到远程主机</span><br>ssh user@host                <span class="hljs-comment"># 之后即可免密登录</span><br><br><span class="hljs-comment"># 配置文件 ~/.ssh/config（可定义主机别名）</span><br>Host cluster<br>    HostName 192.168.1.100<br>    User zhangsan<br>    Port 22<br><span class="hljs-comment"># 之后直接 ssh cluster</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="9-3-文件传输"><a href="#9-3-文件传输" class="headerlink" title="9.3 文件传输"></a>9.3 文件传输</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># scp（加密拷贝）</span><br>scp file.txt user@host:/home/user/<br>scp -r <span class="hljs-built_in">dir</span> user@host:/home/user/    <span class="hljs-comment"># 递归拷贝目录</span><br>scp user@host:/path/file.txt ./     <span class="hljs-comment"># 从远程下载</span><br><br><span class="hljs-comment"># rsync（增量同步，科研拷贝大目录首选）</span><br>rsync -avz /local/dir/ user@host:/remote/dir/<br>rsync -avz --delete src/ dst/       <span class="hljs-comment"># 删除源端已不存在的文件（双向一致）</span><br>rsync -avz --progress data/ bak/    <span class="hljs-comment"># 显示进度</span><br>rsync -e <span class="hljs-string">&#x27;ssh -p 2222&#x27;</span> src user@host:dst   <span class="hljs-comment"># 指定端口</span><br><br><span class="hljs-comment"># sftp 交互式传输</span><br>sftp user@host<br><span class="hljs-comment"># 内部命令：get file 下载；put file 上传；ls；cd</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="9-4-下载工具"><a href="#9-4-下载工具" class="headerlink" title="9.4 下载工具"></a>9.4 下载工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -c https://url/file.tar.gz     <span class="hljs-comment"># 下载，-c 断点续传</span><br>wget -O name.tar.gz https://url     <span class="hljs-comment"># 指定保存文件名</span><br>curl -O https://url/file.tar.gz     <span class="hljs-comment"># 下载并保留原名</span><br>curl -o file https://url            <span class="hljs-comment"># 指定文件名</span><br>curl -X POST -d <span class="hljs-string">&quot;data&quot;</span> http://...   <span class="hljs-comment"># 发送 POST 请求</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="9-5-长时间任务后台运行"><a href="#9-5-长时间任务后台运行" class="headerlink" title="9.5 长时间任务后台运行"></a>9.5 长时间任务后台运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> <span class="hljs-built_in">command</span> &gt; log.txt 2&gt;&amp;1 &amp;      <span class="hljs-comment"># 退出终端后仍继续运行</span><br><span class="hljs-built_in">nohup</span> python run.py &gt; out.log 2&gt;&amp;1 &amp;<br><br><span class="hljs-comment"># tmux（终端复用器，推荐，可断开重连）</span><br>tmux new -s work        <span class="hljs-comment"># 新建会话</span><br>tmux detach             <span class="hljs-comment"># 断开（Ctrl+B 然后 D）</span><br>tmux attach -t work     <span class="hljs-comment"># 重新连接</span><br>tmux <span class="hljs-built_in">ls</span>                 <span class="hljs-comment"># 列出会话</span><br><br><span class="hljs-comment"># screen（另一种复用器）</span><br>screen -S work          <span class="hljs-comment"># 新建</span><br>screen -r work          <span class="hljs-comment"># 恢复</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在远程服务器跑 WRF 等长时间任务，务必使用 <code>nohup</code> 或 <code>tmux</code>&#x2F;<code>screen</code>，避免 SSH 断开导致任务中断。</p>
+</blockquote>
+<hr>
+<h1 id="第二部分-系统管理与软件安装"><a href="#第二部分-系统管理与软件安装" class="headerlink" title="第二部分 系统管理与软件安装"></a>第二部分 系统管理与软件安装</h1><h2 id="10-进程管理与系统监控"><a href="#10-进程管理与系统监控" class="headerlink" title="10. 进程管理与系统监控"></a>10. 进程管理与系统监控</h2><h3 id="10-1-查看进程"><a href="#10-1-查看进程" class="headerlink" title="10.1 查看进程"></a>10.1 查看进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps aux              <span class="hljs-comment"># 查看所有进程（BSD 风格）</span><br>ps -ef              <span class="hljs-comment"># 查看所有进程（System V 风格）</span><br>ps -ef | grep wrf   <span class="hljs-comment"># 过滤查看特定进程</span><br>pstree              <span class="hljs-comment"># 以树状查看进程关系</span><br>pidof sshd          <span class="hljs-comment"># 查看某程序 PID</span><br>pgrep -l python     <span class="hljs-comment"># 按名字查 PID</span><br></code></pre></td></tr></table></figure>
+
+<p><code>ps aux</code> 关键列：USER（用户）、PID（进程号）、%CPU、%MEM、VSZ&#x2F;RSS（内存）、STAT（状态）、START、TIME、COMMAND</p>
+<p>STAT 常见状态：<code>R</code> 运行、<code>S</code> 睡眠、<code>D</code> 不可中断睡眠、<code>Z</code> 僵尸进程、<code>T</code> 停止、<code>&lt;</code> 高优先级、<code>N</code> 低优先级</p>
+<h3 id="10-2-动态监控"><a href="#10-2-动态监控" class="headerlink" title="10.2 动态监控"></a>10.2 动态监控</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">top                 <span class="hljs-comment"># 动态监控（P 按 CPU 排序、M 按内存排序、q 退出）</span><br>htop                <span class="hljs-comment"># 更友好的监控（需安装：sudo apt install htop）</span><br>free -h             <span class="hljs-comment"># 查看内存使用</span><br><span class="hljs-built_in">uptime</span>              <span class="hljs-comment"># 系统运行时间与负载</span><br>watch -n 2 free -h  <span class="hljs-comment"># 每 2 秒刷新</span><br>vmstat 1 5          <span class="hljs-comment"># 每秒输出一次，共 5 次（CPU/内存/IO）</span><br>iostat              <span class="hljs-comment"># 磁盘 IO 监控</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="10-3-终止进程"><a href="#10-3-终止进程" class="headerlink" title="10.3 终止进程"></a>10.3 终止进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> PID            <span class="hljs-comment"># 发送 TERM 信号（优雅终止）</span><br><span class="hljs-built_in">kill</span> -9 PID         <span class="hljs-comment"># 强制终止（SIGKILL，无法被忽略）</span><br><span class="hljs-built_in">kill</span> -15 PID        <span class="hljs-comment"># 默认 TERM</span><br>pkill python        <span class="hljs-comment"># 按进程名终止</span><br>killall mpirun      <span class="hljs-comment"># 按名称终止所有匹配进程</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>kill -9</code> 是最后手段，可能导致数据丢失；先尝试 <code>kill</code>（TERM），无效再 <code>-9</code>。</p>
+</blockquote>
+<h3 id="10-4-后台任务管理"><a href="#10-4-后台任务管理" class="headerlink" title="10.4 后台任务管理"></a>10.4 后台任务管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> &amp;           <span class="hljs-comment"># 后台运行</span><br><span class="hljs-built_in">jobs</span>                <span class="hljs-comment"># 查看后台任务</span><br><span class="hljs-built_in">fg</span> %1               <span class="hljs-comment"># 将后台任务 1 调到前台</span><br><span class="hljs-built_in">bg</span> %1               <span class="hljs-comment"># 将挂起任务放后台继续运行</span><br>Ctrl+Z              <span class="hljs-comment"># 挂起当前任务</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="10-5-进程优先级"><a href="#10-5-进程优先级" class="headerlink" title="10.5 进程优先级"></a>10.5 进程优先级</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nice</span> -n -5 <span class="hljs-built_in">command</span>      <span class="hljs-comment"># 以更高优先级运行（nice 范围 -20~19，默认 0）</span><br>renice -n -5 PID        <span class="hljs-comment"># 修改运行中进程优先级</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="10-6-文件占用排查"><a href="#10-6-文件占用排查" class="headerlink" title="10.6 文件占用排查"></a>10.6 文件占用排查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsof -i :8080       <span class="hljs-comment"># 查看占用 8080 端口的进程</span><br>lsof file.txt       <span class="hljs-comment"># 查看打开某文件的进程</span><br>lsof | grep deleted <span class="hljs-comment"># 查看被删除但仍被占用的文件（磁盘空间不释放的常见原因）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="10-7-日志与内核信息"><a href="#10-7-日志与内核信息" class="headerlink" title="10.7 日志与内核信息"></a>10.7 日志与内核信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">dmesg               <span class="hljs-comment"># 内核日志（硬件、驱动问题）</span><br>dmesg | <span class="hljs-built_in">tail</span> -50    <span class="hljs-comment"># 看最近的内核日志</span><br>journalctl          <span class="hljs-comment"># systemd 日志</span><br>journalctl -u sshd -f   <span class="hljs-comment"># 跟踪某服务日志</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="11-系统信息与硬件"><a href="#11-系统信息与硬件" class="headerlink" title="11. 系统信息与硬件"></a>11. 系统信息与硬件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -a                 <span class="hljs-comment"># 内核版本与系统架构</span><br><span class="hljs-built_in">cat</span> /etc/os-release      <span class="hljs-comment"># 发行版信息</span><br><span class="hljs-built_in">cat</span> /etc/lsb-release     <span class="hljs-comment"># Ubuntu 版本</span><br>lscpu                    <span class="hljs-comment"># CPU 详细信息（核心数、线程数、架构、频率）</span><br>free -h                  <span class="hljs-comment"># 内存总量与使用</span><br>lsblk                    <span class="hljs-comment"># 磁盘与分区</span><br><span class="hljs-built_in">df</span> -h                    <span class="hljs-comment"># 文件系统使用情况</span><br><span class="hljs-built_in">du</span> -sh /path             <span class="hljs-comment"># 目录占用空间</span><br>hostnamectl              <span class="hljs-comment"># 主机名与系统信息</span><br><span class="hljs-built_in">uptime</span>                   <span class="hljs-comment"># 开机时长与负载</span><br><span class="hljs-built_in">nproc</span>                    <span class="hljs-comment"># CPU 逻辑核心数（并行计算常用）</span><br>lsusb                    <span class="hljs-comment"># USB 设备</span><br>lspci                    <span class="hljs-comment"># PCI 设备（如显卡）</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="12-磁盘与文件系统"><a href="#12-磁盘与文件系统" class="headerlink" title="12. 磁盘与文件系统"></a>12. 磁盘与文件系统</h2><h3 id="12-1-磁盘使用情况"><a href="#12-1-磁盘使用情况" class="headerlink" title="12.1 磁盘使用情况"></a>12.1 磁盘使用情况</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">df</span> -h               <span class="hljs-comment"># 各挂载点磁盘占用（人类可读）</span><br><span class="hljs-built_in">df</span> -i               <span class="hljs-comment"># inode 使用情况（inode 满但空间有余的排查）</span><br><span class="hljs-built_in">du</span> -sh <span class="hljs-built_in">dir</span>/         <span class="hljs-comment"># 目录总大小</span><br><span class="hljs-built_in">du</span> -sh *            <span class="hljs-comment"># 当前目录下各项大小</span><br><span class="hljs-built_in">du</span> -h --max-depth=1 /home   <span class="hljs-comment"># 限制深度</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>排查”磁盘满了”的标准流程</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">df</span> -h                       <span class="hljs-comment"># 先看哪个分区满了</span><br><span class="hljs-built_in">du</span> -sh /* 2&gt;/dev/null       <span class="hljs-comment"># 逐层定位大目录</span><br><span class="hljs-built_in">du</span> -h --max-depth=1 /home/user 2&gt;/dev/null | <span class="hljs-built_in">sort</span> -hr | <span class="hljs-built_in">head</span><br>find / -xdev -size +1G -<span class="hljs-built_in">type</span> f 2&gt;/dev/null   <span class="hljs-comment"># 找超大文件</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="12-2-挂载与卸载"><a href="#12-2-挂载与卸载" class="headerlink" title="12.2 挂载与卸载"></a>12.2 挂载与卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount                       <span class="hljs-comment"># 查看当前挂载</span><br>mount /dev/sdb1 /mnt/data   <span class="hljs-comment"># 挂载分区（需 sudo）</span><br>umount /mnt/data            <span class="hljs-comment"># 卸载</span><br>lsblk -f                    <span class="hljs-comment"># 查看分区格式与 UUID</span><br>blkid                       <span class="hljs-comment"># 查看块设备 UUID</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="12-3-分区与格式化（了解，慎用）"><a href="#12-3-分区与格式化（了解，慎用）" class="headerlink" title="12.3 分区与格式化（了解，慎用）"></a>12.3 分区与格式化（了解，慎用）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> fdisk -l           <span class="hljs-comment"># 查看磁盘与分区表</span><br><span class="hljs-built_in">sudo</span> fdisk /dev/sdb     <span class="hljs-comment"># 交互式分区（危险操作）</span><br><span class="hljs-built_in">sudo</span> mkfs.ext4 /dev/sdb1   <span class="hljs-comment"># 格式化为 ext4（会清空数据！）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="12-4-etc-fstab（开机自动挂载）"><a href="#12-4-etc-fstab（开机自动挂载）" class="headerlink" title="12.4 &#x2F;etc&#x2F;fstab（开机自动挂载）"></a>12.4 &#x2F;etc&#x2F;fstab（开机自动挂载）</h3><p>格式：<code>设备 UUID  挂载点  文件系统类型  选项  备份  检查顺序</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 示例行</span><br>UUID=xxxx-xxxx  /data  ext4  defaults  0  2<br></code></pre></td></tr></table></figure>
+<p>修改后 <code>sudo mount -a</code> 生效（不要随意改动，写错可能导致无法开机）。</p>
+<hr>
+<h2 id="13-服务管理与定时任务"><a href="#13-服务管理与定时任务" class="headerlink" title="13. 服务管理与定时任务"></a>13. 服务管理与定时任务</h2><h3 id="13-1-systemd（现代-Ubuntu-服务管理）"><a href="#13-1-systemd（现代-Ubuntu-服务管理）" class="headerlink" title="13.1 systemd（现代 Ubuntu 服务管理）"></a>13.1 systemd（现代 Ubuntu 服务管理）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl status sshd        <span class="hljs-comment"># 查看服务状态（Ubuntu 上 SSH 服务名为 ssh）</span><br>systemctl start ssh<br>systemctl stop ssh<br>systemctl restart ssh<br>systemctl <span class="hljs-built_in">enable</span> ssh         <span class="hljs-comment"># 开机自启</span><br>systemctl <span class="hljs-built_in">disable</span> ssh        <span class="hljs-comment"># 取消开机自启</span><br>systemctl list-units --<span class="hljs-built_in">type</span>=service --state=running   <span class="hljs-comment"># 列出运行中的服务</span><br>systemctl daemon-reload      <span class="hljs-comment"># 重载配置（修改 unit 文件后）</span><br>systemd-analyze              <span class="hljs-comment"># 分析开机耗时</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：Ubuntu 上 SSH 服务的单元名为 <code>ssh</code>（不是 <code>sshd</code>），但 RHEL&#x2F;CentOS 为 <code>sshd</code>。</p>
+</blockquote>
+<h3 id="13-2-journalctl-查看日志"><a href="#13-2-journalctl-查看日志" class="headerlink" title="13.2 journalctl 查看日志"></a>13.2 journalctl 查看日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">journalctl -u ssh -n 50      <span class="hljs-comment"># 查看 ssh 服务最近 50 行日志</span><br>journalctl -u ssh -f         <span class="hljs-comment"># 实时跟踪</span><br>journalctl --since <span class="hljs-string">&quot;1 hour ago&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="13-3-crontab-定时任务"><a href="#13-3-crontab-定时任务" class="headerlink" title="13.3 crontab 定时任务"></a>13.3 crontab 定时任务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">crontab -l          <span class="hljs-comment"># 查看当前用户的定时任务</span><br>crontab -e          <span class="hljs-comment"># 编辑定时任务</span><br>crontab -r          <span class="hljs-comment"># 删除所有定时任务</span><br></code></pre></td></tr></table></figure>
+
+<p>cron 格式：<code>分 时 日 月 周 命令</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 每分钟执行</span><br>* * * * * <span class="hljs-built_in">command</span><br><span class="hljs-comment"># 每天凌晨 2 点执行</span><br>0 2 * * * /home/user/backup.sh<br><span class="hljs-comment"># 每小时的 5 分执行</span><br>5 * * * * <span class="hljs-built_in">command</span><br><span class="hljs-comment"># 每周一 8 点执行</span><br>0 8 * * 1 <span class="hljs-built_in">command</span><br><span class="hljs-comment"># 每 10 分钟</span><br>*/10 * * * * <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
+
+<p>示例：每天凌晨 3 点备份数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">0 3 * * * tar -czf /backup/data_$(<span class="hljs-built_in">date</span> +\%Y\%m\%d).tar.gz /data<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：cron 命令中 <code>%</code> 需要转义为 <code>\%</code>。</p>
+</blockquote>
+<h3 id="13-4-at-一次性任务"><a href="#13-4-at-一次性任务" class="headerlink" title="13.4 at 一次性任务"></a>13.4 at 一次性任务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">at now + 1 hour          <span class="hljs-comment"># 一小时后执行（然后输入命令，Ctrl+D 结束）</span><br>at 22:00                 <span class="hljs-comment"># 晚上 10 点执行</span><br>atq                      <span class="hljs-comment"># 查看待执行任务</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="14-软件安装"><a href="#14-软件安装" class="headerlink" title="14. 软件安装"></a>14. 软件安装</h2><h3 id="14-1-apt（Debian-Ubuntu-包管理器）"><a href="#14-1-apt（Debian-Ubuntu-包管理器）" class="headerlink" title="14.1 apt（Debian&#x2F;Ubuntu 包管理器）"></a>14.1 apt（Debian&#x2F;Ubuntu 包管理器）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update                  <span class="hljs-comment"># 更新软件源索引（必须定期执行）</span><br><span class="hljs-built_in">sudo</span> apt upgrade                 <span class="hljs-comment"># 升级所有已安装软件</span><br><span class="hljs-built_in">sudo</span> apt install &lt;包名&gt;          <span class="hljs-comment"># 安装软件</span><br><span class="hljs-built_in">sudo</span> apt install vim htop git    <span class="hljs-comment"># 一次安装多个</span><br><span class="hljs-built_in">sudo</span> apt remove &lt;包名&gt;           <span class="hljs-comment"># 卸载（保留配置文件）</span><br><span class="hljs-built_in">sudo</span> apt purge &lt;包名&gt;            <span class="hljs-comment"># 彻底卸载（含配置）</span><br><span class="hljs-built_in">sudo</span> apt autoremove              <span class="hljs-comment"># 自动清理无用的依赖包</span><br><span class="hljs-built_in">sudo</span> apt search &lt;关键词&gt;         <span class="hljs-comment"># 搜索软件</span><br>apt show &lt;包名&gt;                  <span class="hljs-comment"># 查看软件详情</span><br>apt list --installed             <span class="hljs-comment"># 列出已安装软件</span><br><span class="hljs-built_in">sudo</span> apt clean                   <span class="hljs-comment"># 清理下载缓存</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>换国内源（加速）</strong>：编辑 <code>/etc/apt/sources.list</code>（Ubuntu 22.04 及以后可能是 <code>.sources</code> 文件），将 <code>archive.ubuntu.com</code> 替换为清华&#x2F;阿里&#x2F;中科大镜像，然后 <code>sudo apt update</code>。</p>
+<h3 id="14-2-dpkg（底层包工具）"><a href="#14-2-dpkg（底层包工具）" class="headerlink" title="14.2 dpkg（底层包工具）"></a>14.2 dpkg（底层包工具）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">dpkg -l                <span class="hljs-comment"># 列出所有已安装包</span><br>dpkg -L &lt;包名&gt;         <span class="hljs-comment"># 查看包安装了哪些文件</span><br>dpkg -i package.deb    <span class="hljs-comment"># 安装本地 deb 包（需 sudo）</span><br>dpkg -r &lt;包名&gt;         <span class="hljs-comment"># 卸载</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="14-3-源码编译安装（科研软件最常见方式）"><a href="#14-3-源码编译安装（科研软件最常见方式）" class="headerlink" title="14.3 源码编译安装（科研软件最常见方式）"></a>14.3 源码编译安装（科研软件最常见方式）</h3><p>标准三步流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/opt/mylib<br>make<br>make install<br></code></pre></td></tr></table></figure>
+
+<p>常用编译参数与工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --<span class="hljs-built_in">help</span>                      <span class="hljs-comment"># 查看所有配置选项</span><br>./configure --prefix=<span class="hljs-variable">$HOME</span>/install      <span class="hljs-comment"># 指定安装目录</span><br>make -j4                                <span class="hljs-comment"># 4 核并行编译（加速）</span><br>make check                              <span class="hljs-comment"># 运行测试</span><br>make install                            <span class="hljs-comment"># 安装</span><br>make clean                              <span class="hljs-comment"># 清理编译中间文件</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>源码编译需安装编译工具链</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install build-essential        <span class="hljs-comment"># 含 gcc、g++、make 等</span><br><span class="hljs-built_in">sudo</span> apt install gfortran               <span class="hljs-comment"># Fortran 编译器（WRF 必需）</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>常见编译错误排查思路</strong>：</p>
+<ul>
+<li>缺少头文件 → 安装 <code>*-dev</code> 包</li>
+<li>找不到库 → 检查 <code>LD_LIBRARY_PATH</code>、<code>LDFLAGS</code></li>
+<li>找不到编译器 → 检查 PATH 与 <code>CC</code>&#x2F;<code>FC</code> 环境变量</li>
+</ul>
+<h3 id="14-4-conda-Miniconda（Python-科学环境管理）"><a href="#14-4-conda-Miniconda（Python-科学环境管理）" class="headerlink" title="14.4 conda &#x2F; Miniconda（Python 科学环境管理）"></a>14.4 conda &#x2F; Miniconda（Python 科学环境管理）</h3><p>安装 Miniconda：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh<br>bash Miniconda3-latest-Linux-x86_64.sh<br><span class="hljs-comment"># 安装后重启终端或 source ~/.bashrc</span><br></code></pre></td></tr></table></figure>
+
+<p>常用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n myenv python=3.10     <span class="hljs-comment"># 创建环境（指定 Python 版本）</span><br>conda activate myenv                  <span class="hljs-comment"># 激活环境</span><br>conda deactivate                      <span class="hljs-comment"># 退出环境</span><br>conda <span class="hljs-built_in">env</span> list                        <span class="hljs-comment"># 查看所有环境</span><br>conda install numpy pandas            <span class="hljs-comment"># 安装包</span><br>conda search numpy                    <span class="hljs-comment"># 搜索包</span><br>conda list                            <span class="hljs-comment"># 列出当前环境已装包</span><br>conda remove -n myenv --all           <span class="hljs-comment"># 删除环境</span><br>conda <span class="hljs-built_in">env</span> <span class="hljs-built_in">export</span> &gt; env.yml            <span class="hljs-comment"># 导出环境配置</span><br>conda <span class="hljs-built_in">env</span> create -f env.yml           <span class="hljs-comment"># 从配置恢复环境</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>加速：配置国内 conda 源（清华镜像）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main<br>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free<br>conda config --<span class="hljs-built_in">set</span> show_channel_urls <span class="hljs-built_in">yes</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>科研建议：用 conda 创建独立环境管理 WRF 后处理工具（wrf-python、xarray、cartopy 等），避免污染系统 Python。</p>
+</blockquote>
+<h3 id="14-5-pip（Python-包管理）"><a href="#14-5-pip（Python-包管理）" class="headerlink" title="14.5 pip（Python 包管理）"></a>14.5 pip（Python 包管理）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install numpy                 <span class="hljs-comment"># 安装</span><br>pip install -r requirements.txt   <span class="hljs-comment"># 按文件批量安装</span><br>pip list                          <span class="hljs-comment"># 列出已安装</span><br>pip show numpy                    <span class="hljs-comment"># 查看包信息</span><br>pip uninstall numpy               <span class="hljs-comment"># 卸载</span><br>pip freeze &gt; requirements.txt     <span class="hljs-comment"># 导出当前环境依赖</span><br>pip install --upgrade pip         <span class="hljs-comment"># 升级 pip</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>配置国内 pip 源（清华镜像）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip config <span class="hljs-built_in">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<br></code></pre></td></tr></table></figure>
+
+<p><strong>venv 虚拟环境（系统自带 Python 用）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 -m venv myenv<br><span class="hljs-built_in">source</span> myenv/bin/activate<br>deactivate<br></code></pre></td></tr></table></figure>
+
+<h3 id="14-6-其他安装方式"><a href="#14-6-其他安装方式" class="headerlink" title="14.6 其他安装方式"></a>14.6 其他安装方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> snap install &lt;软件&gt;          <span class="hljs-comment"># snap 包（Ubuntu 自带）</span><br><span class="hljs-built_in">sudo</span> apt install flatpak          <span class="hljs-comment"># flatpak（较少用）</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="第三部分-文本处理与脚本编程"><a href="#第三部分-文本处理与脚本编程" class="headerlink" title="第三部分 文本处理与脚本编程"></a>第三部分 文本处理与脚本编程</h1><h2 id="15-grep-sed-awk-与正则表达式"><a href="#15-grep-sed-awk-与正则表达式" class="headerlink" title="15. grep &#x2F; sed &#x2F; awk 与正则表达式"></a>15. grep &#x2F; sed &#x2F; awk 与正则表达式</h2><h3 id="15-1-正则表达式基础"><a href="#15-1-正则表达式基础" class="headerlink" title="15.1 正则表达式基础"></a>15.1 正则表达式基础</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.</code></td>
+<td>任意单个字符</td>
+<td><code>a.c</code> 匹配 abc、axc</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>前一个字符重复 0 次或多次</td>
+<td><code>ab*c</code> 匹配 ac、abc、abbc</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>前一个字符重复 1 次或多次（需 -E）</td>
+<td><code>ab+c</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>前一个字符出现 0 或 1 次（需 -E）</td>
+<td><code>ab?c</code></td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td>字符集合</td>
+<td><code>[abc]</code>、<code>[0-9]</code>、<code>[a-z]</code></td>
+</tr>
+<tr>
+<td><code>[^]</code></td>
+<td>排除集合</td>
+<td><code>[^0-9]</code> 非数字</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>行首</td>
+<td><code>^#</code> 注释行</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>行尾</td>
+<td><code>end$</code></td>
+</tr>
+<tr>
+<td><code>()</code></td>
+<td>分组</td>
+<td><code>(ab)+</code></td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>或（需 -E）</td>
+<td><code>cat|dog</code></td>
+</tr>
+<tr>
+<td><code>&#123;&#125;</code></td>
+<td>重复次数（需 -E）</td>
+<td><code>a&#123;2,4&#125;</code></td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>单词边界</td>
+<td><code>\bwrf\b</code></td>
+</tr>
+<tr>
+<td><code>\d</code>、<code>\w</code>、<code>\s</code></td>
+<td>数字、单词字符、空白</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="15-2-grep（文本搜索）"><a href="#15-2-grep（文本搜索）" class="headerlink" title="15.2 grep（文本搜索）"></a>15.2 grep（文本搜索）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep <span class="hljs-string">&quot;error&quot;</span> file                 <span class="hljs-comment"># 基础匹配</span><br>grep -E <span class="hljs-string">&quot;error|fail&quot;</span> <span class="hljs-built_in">log</span>          <span class="hljs-comment"># 扩展正则（或）</span><br>grep -E <span class="hljs-string">&quot;^[0-9]+&quot;</span> file            <span class="hljs-comment"># 行首数字</span><br>grep -P <span class="hljs-string">&quot;\d+&quot;</span> file                <span class="hljs-comment"># Perl 正则（\d）</span><br>grep -v <span class="hljs-string">&quot;^#&quot;</span> config               <span class="hljs-comment"># 排除注释行</span><br>grep -n <span class="hljs-string">&quot;wrf&quot;</span> namelist.input      <span class="hljs-comment"># 带行号</span><br>grep -r <span class="hljs-string">&quot;SUCCESS&quot;</span> .               <span class="hljs-comment"># 递归</span><br>grep -i <span class="hljs-string">&quot;warning&quot;</span> <span class="hljs-built_in">log</span>             <span class="hljs-comment"># 忽略大小写</span><br>grep -w <span class="hljs-string">&quot;file&quot;</span> txt                <span class="hljs-comment"># 全词匹配</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>实用场景</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看 WRF 运行日志中的成功标志</span><br>grep <span class="hljs-string">&quot;SUCCESS&quot;</span> rsl.out.0000<br><span class="hljs-comment"># 统计错误次数</span><br>grep -c <span class="hljs-string">&quot;ERROR&quot;</span> rsl.error.0000<br><span class="hljs-comment"># 找出包含 error 的文件</span><br>grep -rl <span class="hljs-string">&quot;error&quot;</span> /home/user/logs/<br></code></pre></td></tr></table></figure>
+
+<h3 id="15-3-sed（流编辑器）"><a href="#15-3-sed（流编辑器）" class="headerlink" title="15.3 sed（流编辑器）"></a>15.3 sed（流编辑器）</h3><p>基本格式：<code>sed [选项] &#39;脚本&#39; 文件</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed <span class="hljs-string">&#x27;s/old/new/&#x27;</span> file            <span class="hljs-comment"># 每行第一个 old 替换为 new</span><br>sed <span class="hljs-string">&#x27;s/old/new/g&#x27;</span> file           <span class="hljs-comment"># 全部替换（g 全局）</span><br>sed -i <span class="hljs-string">&#x27;s/foo/bar/g&#x27;</span> file        <span class="hljs-comment"># 直接修改原文件（-i）</span><br>sed -n <span class="hljs-string">&#x27;5,10p&#x27;</span> file              <span class="hljs-comment"># 打印第 5-10 行</span><br>sed -n <span class="hljs-string">&#x27;1p&#x27;</span> file                 <span class="hljs-comment"># 打印第一行</span><br>sed <span class="hljs-string">&#x27;/^$/d&#x27;</span> file                 <span class="hljs-comment"># 删除空行（d 删除）</span><br>sed <span class="hljs-string">&#x27;/pattern/d&#x27;</span> file            <span class="hljs-comment"># 删除匹配行</span><br>sed -i <span class="hljs-string">&#x27;/^#/d&#x27;</span> config            <span class="hljs-comment"># 删除注释行</span><br>sed <span class="hljs-string">&#x27;s/^/&gt;&gt; /&#x27;</span> file              <span class="hljs-comment"># 每行行首加前缀</span><br>sed <span class="hljs-string">&#x27;s/$/&lt;&lt; /&#x27;</span> file              <span class="hljs-comment"># 行尾追加</span><br>sed <span class="hljs-string">&#x27;s/pattern/&amp; &amp;/&#x27;</span> file        <span class="hljs-comment"># &amp; 代表匹配到的内容</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>实用场景</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 备份后替换（保留原文件）</span><br>sed -i.bak <span class="hljs-string">&#x27;s/old/new/g&#x27;</span> file<br><span class="hljs-comment"># 在 namelist 中批量替换路径</span><br>sed -i <span class="hljs-string">&#x27;s|/home/old|/home/new|g&#x27;</span> namelist.wps<br></code></pre></td></tr></table></figure>
+
+<h3 id="15-4-awk（文本处理神器）"><a href="#15-4-awk（文本处理神器）" class="headerlink" title="15.4 awk（文本处理神器）"></a>15.4 awk（文本处理神器）</h3><p>基本格式：<code>awk [选项] &#39;模式 &#123;动作&#125;&#39; 文件</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span> file            <span class="hljs-comment"># 打印第一列（默认按空白分隔）</span><br>awk <span class="hljs-string">&#x27;&#123;print $1, $3&#125;&#x27;</span> file        <span class="hljs-comment"># 打印第一、三列</span><br>awk -F: <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span> /etc/passwd <span class="hljs-comment"># 指定分隔符为冒号</span><br>awk <span class="hljs-string">&#x27;&#123;print NR, $0&#125;&#x27;</span> file        <span class="hljs-comment"># NR 行号，$0 整行</span><br>awk <span class="hljs-string">&#x27;&#123;sum += $1&#125; END &#123;print sum&#125;&#x27;</span> data   <span class="hljs-comment"># 求第一列总和</span><br>awk <span class="hljs-string">&#x27;$3 &gt; 100 &#123;print $1&#125;&#x27;</span> data   <span class="hljs-comment"># 条件过滤</span><br>awk <span class="hljs-string">&#x27;NR&gt;=2 &amp;&amp; NR&lt;=5 &#123;print&#125;&#x27;</span> file <span class="hljs-comment"># 打印 2-5 行</span><br>awk <span class="hljs-string">&#x27;&#123;printf &quot;%s %.2f\n&quot;, $1, $2&#125;&#x27;</span> file  <span class="hljs-comment"># 格式化输出</span><br>awk <span class="hljs-string">&#x27;BEGIN &#123;print &quot;start&quot;&#125; &#123;print&#125; END &#123;print &quot;end&quot;&#125;&#x27;</span> file<br>awk <span class="hljs-string">&#x27;/pattern/ &#123;print&#125;&#x27;</span> file     <span class="hljs-comment"># 匹配正则的行</span><br>awk <span class="hljs-string">&#x27;&#123;a[$1]++&#125; END &#123;for (k in a) print k, a[k]&#125;&#x27;</span> file   <span class="hljs-comment"># 按第一列统计计数</span><br></code></pre></td></tr></table></figure>
+
+<p>awk 内置变量：<code>NR</code> 当前行号、<code>NF</code> 当前行字段数、<code>$0</code> 整行、<code>$1</code>~&#96;$n<code> 各字段、</code>FS<code> 字段分隔符、</code>OFS&#96; 输出分隔符</p>
+<p><strong>实用场景</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 提取日志中的时间与温度</span><br>awk <span class="hljs-string">&#x27;&#123;print $1, $2, $7&#125;&#x27;</span> obs.log<br><span class="hljs-comment"># 计算文件大小总和</span><br><span class="hljs-built_in">ls</span> -l *.nc | awk <span class="hljs-string">&#x27;&#123;sum += $5&#125; END &#123;print sum/1024/1024 &quot; MB&quot;&#125;&#x27;</span><br><span class="hljs-comment"># 统计各状态出现次数</span><br>ps aux | awk <span class="hljs-string">&#x27;&#123;print $8&#125;&#x27;</span> | <span class="hljs-built_in">sort</span> | <span class="hljs-built_in">uniq</span> -c<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="16-Vim-编辑器"><a href="#16-Vim-编辑器" class="headerlink" title="16. Vim 编辑器"></a>16. Vim 编辑器</h2><h3 id="16-1-三种模式"><a href="#16-1-三种模式" class="headerlink" title="16.1 三种模式"></a>16.1 三种模式</h3><ul>
+<li><strong>普通模式</strong>：默认模式，用于移动与操作</li>
+<li><strong>插入模式</strong>：输入文字（按 <code>i</code> 进入）</li>
+<li><strong>命令模式</strong>：输入命令（按 <code>:</code> 进入）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim file.txt        <span class="hljs-comment"># 打开/创建文件</span><br>vim +20 file.txt    <span class="hljs-comment"># 打开并跳到第 20 行</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="16-2-基本操作速查"><a href="#16-2-基本操作速查" class="headerlink" title="16.2 基本操作速查"></a>16.2 基本操作速查</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>按键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>进入插入模式</td>
+<td><code>i</code>（光标前）、<code>a</code>（光标后）、<code>o</code>（下一行新建）、<code>O</code>（上一行新建）</td>
+</tr>
+<tr>
+<td>退出插入模式</td>
+<td><code>Esc</code></td>
+</tr>
+<tr>
+<td>保存</td>
+<td><code>:w</code></td>
+</tr>
+<tr>
+<td>退出</td>
+<td><code>:q</code>；强制退出 <code>:q!</code></td>
+</tr>
+<tr>
+<td>保存并退出</td>
+<td><code>:wq</code> 或 <code>ZZ</code></td>
+</tr>
+<tr>
+<td>移动光标</td>
+<td><code>h</code> <code>j</code> <code>k</code> <code>l</code>（左 下 上 右）</td>
+</tr>
+<tr>
+<td>跳行首&#x2F;行尾</td>
+<td><code>0</code> &#x2F; <code>$</code></td>
+</tr>
+<tr>
+<td>跳文件首&#x2F;尾</td>
+<td><code>gg</code> &#x2F; <code>G</code></td>
+</tr>
+<tr>
+<td>跳第 N 行</td>
+<td><code>:N</code> 或 <code>N G</code></td>
+</tr>
+<tr>
+<td>删除当前字符</td>
+<td><code>x</code></td>
+</tr>
+<tr>
+<td>删除当前行</td>
+<td><code>dd</code></td>
+</tr>
+<tr>
+<td>删除 N 行</td>
+<td><code>N dd</code></td>
+</tr>
+<tr>
+<td>复制当前行</td>
+<td><code>yy</code></td>
+</tr>
+<tr>
+<td>粘贴</td>
+<td><code>p</code>（光标后）、<code>P</code>（光标前）</td>
+</tr>
+<tr>
+<td>撤销</td>
+<td><code>u</code>；重做 <code>Ctrl+R</code></td>
+</tr>
+<tr>
+<td>查找</td>
+<td><code>/keyword</code>（<code>n</code> 下一个、<code>N</code> 上一个）</td>
+</tr>
+<tr>
+<td>替换</td>
+<td><code>:s/old/new/g</code>（当前行）；<code>:%s/old/new/g</code>（全文）</td>
+</tr>
+<tr>
+<td>显示行号</td>
+<td><code>:set nu</code>；取消 <code>:set nonu</code></td>
+</tr>
+<tr>
+<td>分屏</td>
+<td><code>:sp</code> 水平、<code>:vsp</code> 垂直，<code>Ctrl+W</code> 切换</td>
+</tr>
+<tr>
+<td>保存为其他文件</td>
+<td><code>:w newfile</code></td>
+</tr>
+<tr>
+<td>打开多个文件</td>
+<td><code>vim f1 f2</code>，<code>:n</code> 下一个，<code>:prev</code> 上一个</td>
+</tr>
+</tbody></table>
+<h3 id="16-3-vim-个性化配置（-vimrc）"><a href="#16-3-vim-个性化配置（-vimrc）" class="headerlink" title="16.3 vim 个性化配置（~&#x2F;.vimrc）"></a>16.3 vim 个性化配置（~&#x2F;.vimrc）</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">set</span> <span class="hljs-keyword">nu</span>              <span class="hljs-comment">&quot; 显示行号</span><br><span class="hljs-keyword">set</span> tabstop=<span class="hljs-number">4</span>       <span class="hljs-comment">&quot; Tab 宽度</span><br><span class="hljs-keyword">set</span> <span class="hljs-built_in">shiftwidth</span>=<span class="hljs-number">4</span>    <span class="hljs-comment">&quot; 缩进宽度</span><br><span class="hljs-keyword">set</span> expandtab       <span class="hljs-comment">&quot; 用空格代替 Tab</span><br><span class="hljs-keyword">set</span> hlsearch        <span class="hljs-comment">&quot; 高亮搜索</span><br><span class="hljs-keyword">set</span> incsearch       <span class="hljs-comment">&quot; 增量搜索</span><br><span class="hljs-keyword">syntax</span> <span class="hljs-keyword">on</span>           <span class="hljs-comment">&quot; 语法高亮</span><br><span class="hljs-keyword">set</span> mouse=<span class="hljs-keyword">a</span>         <span class="hljs-comment">&quot; 启用鼠标</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改 WRF 的 namelist.wps、namelist.input 等配置文件，vim 是最常用工具。</p>
+</blockquote>
+<hr>
+<h2 id="17-Shell-脚本编程"><a href="#17-Shell-脚本编程" class="headerlink" title="17. Shell 脚本编程"></a>17. Shell 脚本编程</h2><h3 id="17-1-脚本基础"><a href="#17-1-脚本基础" class="headerlink" title="17.1 脚本基础"></a>17.1 脚本基础</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># 这是注释</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello World&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>执行方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash script.sh        <span class="hljs-comment"># 用 bash 解释执行（无需执行权限）</span><br>./script.sh           <span class="hljs-comment"># 直接执行（需 chmod +x）</span><br><span class="hljs-built_in">source</span> script.sh      <span class="hljs-comment"># 在当前 Shell 执行（变量会保留）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-2-变量"><a href="#17-2-变量" class="headerlink" title="17.2 变量"></a>17.2 变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">name=<span class="hljs-string">&quot;wrf&quot;</span>                <span class="hljs-comment"># 赋值（等号两边不能有空格）</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$name</span>                <span class="hljs-comment"># 引用</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;name&#125;</span>_run&quot;</span>        <span class="hljs-comment"># 变量边界</span><br><span class="hljs-built_in">readonly</span> pi=3.14          <span class="hljs-comment"># 只读变量</span><br><span class="hljs-built_in">unset</span> name                <span class="hljs-comment"># 删除变量</span><br><br><span class="hljs-comment"># 位置参数</span><br><span class="hljs-comment"># 脚本 $0=脚本名，$1-$9 第 1-9 个参数，$# 参数个数，$@/$* 所有参数，$? 上条命令退出码</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;脚本名: <span class="hljs-variable">$0</span>, 第一个参数: <span class="hljs-variable">$1</span>, 参数个数: <span class="hljs-variable">$#</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-3-数组"><a href="#17-3-数组" class="headerlink" title="17.3 数组"></a>17.3 数组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">arr=(a b c)<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;arr[0]&#125;</span>           <span class="hljs-comment"># a</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;arr[@]&#125;</span>           <span class="hljs-comment"># 所有元素</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;#arr[@]&#125;</span>          <span class="hljs-comment"># 元素个数</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;arr[@]&#125;</span>&quot;</span>; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>; <span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-4-运算"><a href="#17-4-运算" class="headerlink" title="17.4 运算"></a>17.4 运算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> $((<span class="hljs-number">3</span> + <span class="hljs-number">5</span>))          <span class="hljs-comment"># 整数运算</span><br><span class="hljs-built_in">echo</span> $((<span class="hljs-number">10</span> / <span class="hljs-number">3</span>))<br><span class="hljs-comment"># 浮点运算用 bc</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;scale=2; 10/3&quot;</span> | bc<br></code></pre></td></tr></table></figure>
+
+<h3 id="17-5-条件判断"><a href="#17-5-条件判断" class="headerlink" title="17.5 条件判断"></a>17.5 条件判断</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ -f file ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件存在&quot;</span><br><span class="hljs-keyword">elif</span> [ -d <span class="hljs-built_in">dir</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;是目录&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;不存在&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+
+<p>常用测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">[ -f file ]    <span class="hljs-comment"># 文件存在且为普通文件</span><br>[ -d <span class="hljs-built_in">dir</span> ]     <span class="hljs-comment"># 是目录</span><br>[ -e path ]    <span class="hljs-comment"># 路径存在</span><br>[ -z <span class="hljs-string">&quot;<span class="hljs-variable">$var</span>&quot;</span> ]  <span class="hljs-comment"># 变量为空</span><br>[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$var</span>&quot;</span> ]  <span class="hljs-comment"># 变量非空</span><br>[ <span class="hljs-string">&quot;<span class="hljs-variable">$a</span>&quot;</span> = <span class="hljs-string">&quot;<span class="hljs-variable">$b</span>&quot;</span> ]    <span class="hljs-comment"># 字符串相等（注意 = 两边空格）</span><br>[ <span class="hljs-string">&quot;<span class="hljs-variable">$a</span>&quot;</span> != <span class="hljs-string">&quot;<span class="hljs-variable">$b</span>&quot;</span> ]<br>[ <span class="hljs-string">&quot;<span class="hljs-variable">$n</span>&quot;</span> -gt 10 ]    <span class="hljs-comment"># 数字比较：-eq -ne -gt -lt -ge -le</span><br>[ -x file ]    <span class="hljs-comment"># 可执行</span><br>[ -r file ]    <span class="hljs-comment"># 可读</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-6-循环"><a href="#17-6-循环" class="headerlink" title="17.6 循环"></a>17.6 循环</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># for 数字循环</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> &#123;1..10&#125;; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-comment"># for 文件循环</span><br><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> *.nc; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;处理 <span class="hljs-variable">$f</span>&quot;</span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-comment"># while 循环</span><br>i=1<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$i</span> -le 10 ]; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span><br>    i=$((i+<span class="hljs-number">1</span>))<br><span class="hljs-keyword">done</span><br><br><span class="hljs-comment"># 读取文件每行</span><br><span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> line; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span><br><span class="hljs-keyword">done</span> &lt; file.txt<br><br><span class="hljs-comment"># break 跳出，continue 跳过本次</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-7-case-分支"><a href="#17-7-case-分支" class="headerlink" title="17.7 case 分支"></a>17.7 case 分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> <span class="hljs-keyword">in</span><br>    start) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;启动&quot;</span> ;;<br>    stop)  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;停止&quot;</span> ;;<br>    *)     <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;用法: <span class="hljs-variable">$0</span> &#123;start|stop&#125;&quot;</span> ;;<br><span class="hljs-keyword">esac</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-8-函数"><a href="#17-8-函数" class="headerlink" title="17.8 函数"></a>17.8 函数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">myfunc</span></span>() &#123;<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;参数: <span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span>&quot;</span><br>    <span class="hljs-built_in">return</span> 0<br>&#125;<br>myfunc hello world<br></code></pre></td></tr></table></figure>
+
+<h3 id="17-9-实用脚本示例"><a href="#17-9-实用脚本示例" class="headerlink" title="17.9 实用脚本示例"></a>17.9 实用脚本示例</h3><p><strong>示例 1：批量重命名 .nc 文件（加前缀）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> *.nc; <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">mv</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> <span class="hljs-string">&quot;wrf_<span class="hljs-variable">$f</span>&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例 2：备份脚本</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>backup_dir=<span class="hljs-string">&quot;/backup&quot;</span><br>data_dir=<span class="hljs-string">&quot;/data/wrfout&quot;</span><br>date_str=$(<span class="hljs-built_in">date</span> +%Y%m%d_%H%M%S)<br><span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$backup_dir</span><br>tar -czf <span class="hljs-string">&quot;<span class="hljs-variable">$backup_dir</span>/wrf_<span class="hljs-variable">$date_str</span>.tar.gz&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$data_dir</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;备份完成: <span class="hljs-variable">$backup_dir</span>/wrf_<span class="hljs-variable">$date_str</span>.tar.gz&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>示例 3：批量提交作业（配合 sbatch）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-keyword">for</span> <span class="hljs-keyword">case</span> <span class="hljs-keyword">in</span> &#123;2019,2020,2021&#125;; <span class="hljs-keyword">do</span><br>    sed <span class="hljs-string">&quot;s/CASE/<span class="hljs-variable">$case</span>/g&quot;</span> template.slurm &gt; run_<span class="hljs-variable">$case</span>.slurm<br>    sbatch run_<span class="hljs-variable">$case</span>.slurm<br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-10-脚本调试"><a href="#17-10-脚本调试" class="headerlink" title="17.10 脚本调试"></a>17.10 脚本调试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -x script.sh       <span class="hljs-comment"># 跟踪执行过程（打印每条命令）</span><br>bash -n script.sh       <span class="hljs-comment"># 只检查语法</span><br><span class="hljs-comment"># 脚本内开启</span><br><span class="hljs-built_in">set</span> -e      <span class="hljs-comment"># 任何命令出错即退出</span><br><span class="hljs-built_in">set</span> -u      <span class="hljs-comment"># 使用未定义变量报错</span><br><span class="hljs-built_in">set</span> -x      <span class="hljs-comment"># 打印执行过程</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="17-11-后台与等待"><a href="#17-11-后台与等待" class="headerlink" title="17.11 后台与等待"></a>17.11 后台与等待</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>./task1.sh &amp;<br>./task2.sh &amp;<br><span class="hljs-built_in">wait</span>                  <span class="hljs-comment"># 等待所有后台任务完成</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;全部完成&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="第四部分-并行计算与科学计算"><a href="#第四部分-并行计算与科学计算" class="headerlink" title="第四部分 并行计算与科学计算"></a>第四部分 并行计算与科学计算</h1><h2 id="18-高性能计算基础"><a href="#18-高性能计算基础" class="headerlink" title="18. 高性能计算基础"></a>18. 高性能计算基础</h2><h3 id="18-1-为什么要并行"><a href="#18-1-为什么要并行" class="headerlink" title="18.1 为什么要并行"></a>18.1 为什么要并行</h3><p>数值模式（WRF 等）计算量大，单核无法满足时效要求。并行方式：</p>
+<ul>
+<li><strong>共享内存并行（OpenMP &#x2F; 多线程）</strong>：多核共享内存，线程间通过共享变量通信。适用于单节点。</li>
+<li><strong>分布式内存并行（MPI &#x2F; 多进程）</strong>：进程间通过消息传递通信，可跨节点。适用于集群。</li>
+</ul>
+<p>WRF 采用 <strong>MPI（分布式内存）为主</strong>，可结合 OpenMP 混合并行（较少用）。</p>
+<h3 id="18-2-查看计算资源"><a href="#18-2-查看计算资源" class="headerlink" title="18.2 查看计算资源"></a>18.2 查看计算资源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nproc</span>                 <span class="hljs-comment"># 逻辑 CPU 核心数</span><br>lscpu                 <span class="hljs-comment"># CPU 详细架构（核数、线程、频率）</span><br>free -h               <span class="hljs-comment"># 内存</span><br><span class="hljs-built_in">df</span> -h /data           <span class="hljs-comment"># 数据盘空间</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="18-3-编译优化选项"><a href="#18-3-编译优化选项" class="headerlink" title="18.3 编译优化选项"></a>18.3 编译优化选项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># gcc / gfortran 常用优化选项</span><br>-O2          <span class="hljs-comment"># 标准优化（默认推荐）</span><br>-O3          <span class="hljs-comment"># 更激进优化</span><br>-O0          <span class="hljs-comment"># 不优化（调试用）</span><br>-g           <span class="hljs-comment"># 生成调试信息</span><br>-Wall        <span class="hljs-comment"># 显示全部警告</span><br>-fopenmp     <span class="hljs-comment"># 启用 OpenMP</span><br>-march=native <span class="hljs-comment"># 针对本机 CPU 指令集优化</span><br>-O2 -march=native   <span class="hljs-comment"># 常用组合</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="19-OpenMP-共享内存并行"><a href="#19-OpenMP-共享内存并行" class="headerlink" title="19. OpenMP 共享内存并行"></a>19. OpenMP 共享内存并行</h2><h3 id="19-1-概念"><a href="#19-1-概念" class="headerlink" title="19.1 概念"></a>19.1 概念</h3><p>OpenMP 是共享内存并行编程标准，用编译指导指令 <code>#pragma omp</code>（C&#x2F;C++）或 <code>!$OMP</code>（Fortran）实现。</p>
+<h3 id="19-2-示例（C）"><a href="#19-2-示例（C）" class="headerlink" title="19.2 示例（C）"></a>19.2 示例（C）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;omp.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel</span><br>    &#123;<br>        <span class="hljs-type">int</span> tid = omp_get_thread_num();<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello from thread %d\n&quot;</span>, tid);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="19-3-编译与运行"><a href="#19-3-编译与运行" class="headerlink" title="19.3 编译与运行"></a>19.3 编译与运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -fopenmp -o hello_omp hello.c<br>OMP_NUM_THREADS=4 ./hello_omp      <span class="hljs-comment"># 用 4 个线程运行</span><br><span class="hljs-built_in">export</span> OMP_NUM_THREADS=8           <span class="hljs-comment"># 或先设置环境变量</span><br>./hello_omp<br></code></pre></td></tr></table></figure>
+
+<h3 id="19-4-常用-OpenMP-指令"><a href="#19-4-常用-OpenMP-指令" class="headerlink" title="19.4 常用 OpenMP 指令"></a>19.4 常用 OpenMP 指令</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for        <span class="hljs-comment">// 并行 for 循环</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel num_threads(4)</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp critical            <span class="hljs-comment">// 临界区（互斥）</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp reduction(+:sum)    <span class="hljs-comment">// 归约</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp single / master     <span class="hljs-comment">// 单线程执行</span></span><br></code></pre></td></tr></table></figure>
+
+<h3 id="19-5-环境变量"><a href="#19-5-环境变量" class="headerlink" title="19.5 环境变量"></a>19.5 环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">OMP_NUM_THREADS        <span class="hljs-comment"># 线程数</span><br>OMP_DYNAMIC            <span class="hljs-comment"># 是否动态调整线程</span><br>OMP_STACKSIZE          <span class="hljs-comment"># 栈大小</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="20-MPI-分布式并行"><a href="#20-MPI-分布式并行" class="headerlink" title="20. MPI 分布式并行"></a>20. MPI 分布式并行</h2><h3 id="20-1-MPI-实现"><a href="#20-1-MPI-实现" class="headerlink" title="20.1 MPI 实现"></a>20.1 MPI 实现</h3><ul>
+<li><strong>MPICH</strong>：经典实现，WRF 官方教程默认推荐</li>
+<li><strong>OpenMPI</strong>：另一主流实现</li>
+</ul>
+<p>Ubuntu 快速安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install mpich libmpich-dev          <span class="hljs-comment"># MPICH</span><br><span class="hljs-built_in">sudo</span> apt install openmpi-bin libopenmpi-dev   <span class="hljs-comment"># OpenMPI</span><br></code></pre></td></tr></table></figure>
+
+<p>查看安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">mpirun --version<br>mpif90 --version<br><span class="hljs-built_in">which</span> mpirun<br></code></pre></td></tr></table></figure>
+
+<h3 id="20-2-示例（C，MPI-基础流程）"><a href="#20-2-示例（C，MPI-基础流程）" class="headerlink" title="20.2 示例（C，MPI 基础流程）"></a>20.2 示例（C，MPI 基础流程）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;mpi.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span> &#123;<br>    <span class="hljs-type">int</span> rank, size;<br>    MPI_Init(&amp;argc, &amp;argv);<br>    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);   <span class="hljs-comment">// 当前进程号</span><br>    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);   <span class="hljs-comment">// 总进程数</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello from rank %d of %d\n&quot;</span>, rank, size);<br>    MPI_Finalize();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="20-3-编译与运行"><a href="#20-3-编译与运行" class="headerlink" title="20.3 编译与运行"></a>20.3 编译与运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">mpicc -o hello_mpi hello.c          <span class="hljs-comment"># C 程序用 mpicc</span><br>mpif90 -o hello_mpi hello.f90       <span class="hljs-comment"># Fortran 程序用 mpif90</span><br>mpic++ -o hello_mpi hello.cpp       <span class="hljs-comment"># C++ 用 mpicxx/mpic++</span><br><br>mpirun -np 4 ./hello_mpi            <span class="hljs-comment"># 4 个进程并行运行</span><br>mpiexec -np 4 ./hello_mpi           <span class="hljs-comment"># 同义命令</span><br>mpirun -np 8 ./wrf.exe              <span class="hljs-comment"># 8 进程运行 WRF</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="20-4-多节点运行"><a href="#20-4-多节点运行" class="headerlink" title="20.4 多节点运行"></a>20.4 多节点运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 主机文件 hostfile（每行一个节点名）</span><br><span class="hljs-comment"># login01</span><br><span class="hljs-comment"># compute01</span><br><span class="hljs-comment"># compute02</span><br>mpirun -np 16 -hostfile hostfile ./a.out<br>mpirun -np 16 --hosts compute01,compute02 ./a.out<br></code></pre></td></tr></table></figure>
+
+<h3 id="20-5-常见-MPI-函数（了解）"><a href="#20-5-常见-MPI-函数（了解）" class="headerlink" title="20.5 常见 MPI 函数（了解）"></a>20.5 常见 MPI 函数（了解）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c">MPI_Init / MPI_Finalize         <span class="hljs-comment">// 初始化和结束</span><br>MPI_Comm_rank / MPI_Comm_size   <span class="hljs-comment">// 获取进程号和总进程数</span><br>MPI_Send / MPI_Recv             <span class="hljs-comment">// 点对点发送/接收</span><br>MPI_Bcast                       <span class="hljs-comment">// 广播</span><br>MPI_Reduce / MPI_Allreduce      <span class="hljs-comment">// 归约</span><br>MPI_Barrier                     <span class="hljs-comment">// 同步屏障</span><br>MPI_Gather / MPI_Scatter        <span class="hljs-comment">// 收集 / 分发</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="21-SLURM-作业调度系统"><a href="#21-SLURM-作业调度系统" class="headerlink" title="21. SLURM 作业调度系统"></a>21. SLURM 作业调度系统</h2><blockquote>
+<p>大多数超算中心 &#x2F; 大学 HPC 平台使用 SLURM。登录节点用于编辑提交，计算节点用于跑作业。<strong>不要在登录节点直接运行大规模计算</strong>。</p>
+</blockquote>
+<h3 id="21-1-查看资源与队列"><a href="#21-1-查看资源与队列" class="headerlink" title="21.1 查看资源与队列"></a>21.1 查看资源与队列</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sinfo                     <span class="hljs-comment"># 查看节点与分区状态</span><br>sinfo -Nel                <span class="hljs-comment"># 详细节点信息</span><br>squeue                    <span class="hljs-comment"># 查看作业队列</span><br>squeue -u <span class="hljs-variable">$USER</span>           <span class="hljs-comment"># 只看自己的作业</span><br>squeue -l                 <span class="hljs-comment"># 详细格式</span><br></code></pre></td></tr></table></figure>
+
+<p><code>sinfo</code> 中节点状态：<code>idle</code> 空闲、<code>alloc</code> 已占满、<code>mix</code> 部分占用、<code>down</code> 故障、<code>drain</code> 维护。</p>
+<h3 id="21-2-提交批处理作业（sbatch）"><a href="#21-2-提交批处理作业（sbatch）" class="headerlink" title="21.2 提交批处理作业（sbatch）"></a>21.2 提交批处理作业（sbatch）</h3><p>作业脚本 <code>job.slurm</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#SBATCH --job-name=wrf_run        # 作业名</span><br><span class="hljs-comment">#SBATCH --partition=compute       # 分区</span><br><span class="hljs-comment">#SBATCH --nodes=1                 # 节点数</span><br><span class="hljs-comment">#SBATCH --ntasks=16               # 总进程数</span><br><span class="hljs-comment">#SBATCH --ntasks-per-node=16      # 每节点进程数</span><br><span class="hljs-comment">#SBATCH --cpus-per-task=1         # 每进程核数</span><br><span class="hljs-comment">#SBATCH --time=24:00:00           # 最长运行时间</span><br><span class="hljs-comment">#SBATCH --output=wrf_%j.out       # 标准输出（%j 为作业号）</span><br><span class="hljs-comment">#SBATCH --error=wrf_%j.err        # 错误输出</span><br><span class="hljs-comment">#SBATCH --mail-type=END           # 结束邮件通知</span><br><span class="hljs-comment">#SBATCH --mail-user=xxx@xx.com</span><br><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$SLURM_SUBMIT_DIR</span>              <span class="hljs-comment"># 进入提交目录</span><br>module load mpich netcdf          <span class="hljs-comment"># 加载环境（按平台要求）</span><br>mpirun -np <span class="hljs-variable">$SLURM_NTASKS</span> ./wrf.exe<br></code></pre></td></tr></table></figure>
+
+<p>提交与查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sbatch job.slurm<br>squeue -u <span class="hljs-variable">$USER</span><br>scancel &lt;jobid&gt;            <span class="hljs-comment"># 取消作业</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="21-3-交互式作业（srun-salloc）"><a href="#21-3-交互式作业（srun-salloc）" class="headerlink" title="21.3 交互式作业（srun &#x2F; salloc）"></a>21.3 交互式作业（srun &#x2F; salloc）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">srun --partition=compute --nodes=1 --ntasks=4 --<span class="hljs-keyword">time</span>=01:00:00 --pty bash<br><span class="hljs-comment"># 申请资源并进入计算节点交互 Shell</span><br><br>salloc --ntasks=16 --<span class="hljs-keyword">time</span>=2:00:00   <span class="hljs-comment"># 分配资源后原地交互</span><br>mpirun -np 16 ./wrf.exe<br></code></pre></td></tr></table></figure>
+
+<h3 id="21-4-查看作业详情与历史"><a href="#21-4-查看作业详情与历史" class="headerlink" title="21.4 查看作业详情与历史"></a>21.4 查看作业详情与历史</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">scontrol show job &lt;jobid&gt;      <span class="hljs-comment"># 查看作业详细信息</span><br>sacct -j &lt;jobid&gt;               <span class="hljs-comment"># 查看作业计费与状态</span><br>sacct -u <span class="hljs-variable">$USER</span>                 <span class="hljs-comment"># 查看自己的历史作业</span><br>sacct --format=JobID,JobName,State,Elapsed,MaxRSS,NodeList<br></code></pre></td></tr></table></figure>
+
+<h3 id="21-5-SLURM-常用选项汇总"><a href="#21-5-SLURM-常用选项汇总" class="headerlink" title="21.5 SLURM 常用选项汇总"></a>21.5 SLURM 常用选项汇总</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--nodes/-N</code></td>
+<td>节点数</td>
+</tr>
+<tr>
+<td><code>--ntasks/-n</code></td>
+<td>总进程数</td>
+</tr>
+<tr>
+<td><code>--ntasks-per-node</code></td>
+<td>每节点进程数</td>
+</tr>
+<tr>
+<td><code>--cpus-per-task/-c</code></td>
+<td>每进程 CPU 核数</td>
+</tr>
+<tr>
+<td><code>--time/-t</code></td>
+<td>时间限制（DD-HH:MM:SS 或 HH:MM:SS）</td>
+</tr>
+<tr>
+<td><code>--partition/-p</code></td>
+<td>分区（队列）</td>
+</tr>
+<tr>
+<td><code>--mem</code></td>
+<td>内存需求</td>
+</tr>
+<tr>
+<td><code>--gres=gpu:1</code></td>
+<td>GPU 资源</td>
+</tr>
+<tr>
+<td><code>--job-name/-J</code></td>
+<td>作业名</td>
+</tr>
+<tr>
+<td><code>--output/--error</code></td>
+<td>输出&#x2F;错误文件</td>
+</tr>
+<tr>
+<td><code>--array=1-10</code></td>
+<td>任务数组（批量并行）</td>
+</tr>
+</tbody></table>
+<h3 id="21-6-PBS-Torque-简介（部分平台）"><a href="#21-6-PBS-Torque-简介（部分平台）" class="headerlink" title="21.6 PBS&#x2F;Torque 简介（部分平台）"></a>21.6 PBS&#x2F;Torque 简介（部分平台）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">qsub job.pbs      <span class="hljs-comment"># 提交</span><br>qstat             <span class="hljs-comment"># 查看</span><br>qdel &lt;jobid&gt;      <span class="hljs-comment"># 删除</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="22-环境模块-module"><a href="#22-环境模块-module" class="headerlink" title="22. 环境模块 module"></a>22. 环境模块 module</h2><p>超算平台常用 <code>module</code> 管理软件环境，避免冲突。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">module avail            <span class="hljs-comment"># 查看可用模块</span><br>module list             <span class="hljs-comment"># 查看已加载</span><br>module load netcdf      <span class="hljs-comment"># 加载</span><br>module load mpich/4.0.2<br>module unload netcdf    <span class="hljs-comment"># 卸载</span><br>module purge            <span class="hljs-comment"># 清空所有</span><br>module show netcdf      <span class="hljs-comment"># 查看模块内容（PATH 等）</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>为什么用 module</strong>：不同版本软件共存、环境变量自动配置、避免污染系统环境。</p>
+<hr>
+<h2 id="23-科学计算库与数据工具"><a href="#23-科学计算库与数据工具" class="headerlink" title="23. 科学计算库与数据工具"></a>23. 科学计算库与数据工具</h2><h3 id="23-1-编译器"><a href="#23-1-编译器" class="headerlink" title="23.1 编译器"></a>23.1 编译器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc --version          <span class="hljs-comment"># C 编译器</span><br>g++ --version          <span class="hljs-comment"># C++ 编译器</span><br>gfortran --version     <span class="hljs-comment"># Fortran 编译器（WRF 必需）</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="23-2-netCDF-工具"><a href="#23-2-netCDF-工具" class="headerlink" title="23.2 netCDF 工具"></a>23.2 netCDF 工具</h3><p>netCDF 是 WRF 输入输出采用的数据格式。命令行工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看头信息（变量、维度、属性）——最常用</span><br>ncdump -h wrfout_d01_2026-09-01_00:00:00<br><br><span class="hljs-comment"># 查看全部数据</span><br>ncdump file.nc<br><br><span class="hljs-comment"># 查看指定变量</span><br>ncdump -v T2 file.nc<br><br><span class="hljs-comment"># 查看坐标变量</span><br>ncdump -c file.nc<br><br><span class="hljs-comment"># 图形化快速查看（需安装 ncview）</span><br>ncview wrfout_d01_2026-09-01_00:00:00<br></code></pre></td></tr></table></figure>
+
+<p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install netcdf-bin ncview<br></code></pre></td></tr></table></figure>
+
+<h3 id="23-3-NCO（netCDF-操作工具）"><a href="#23-3-NCO（netCDF-操作工具）" class="headerlink" title="23.3 NCO（netCDF 操作工具）"></a>23.3 NCO（netCDF 操作工具）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install nco<br><br>ncks -v T2,T,PSFC in.nc out.nc     <span class="hljs-comment"># 提取变量子集</span><br>ncatted -a units,T2,o,c,K in.nc    <span class="hljs-comment"># 修改属性</span><br>ncra in1.nc in2.nc out.nc          <span class="hljs-comment"># 时间维求平均</span><br>ncecat -u <span class="hljs-keyword">time</span> *.nc out.nc         <span class="hljs-comment"># 沿新维度拼接</span><br>ncbo in1.nc in2.nc diff.nc         <span class="hljs-comment"># 求差</span><br>ncap2 -s <span class="hljs-string">&quot;T2C=T2-273.15&quot;</span> in.nc out.nc   <span class="hljs-comment"># 计算新变量</span><br>ncks -d <span class="hljs-keyword">time</span>,0,10 in.nc out.nc     <span class="hljs-comment"># 截取时间范围</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="23-4-CDO（气候数据操作工具）"><a href="#23-4-CDO（气候数据操作工具）" class="headerlink" title="23.4 CDO（气候数据操作工具）"></a>23.4 CDO（气候数据操作工具）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install cdo<br><br>cdo info file.nc                 <span class="hljs-comment"># 查看变量信息</span><br>cdo daymean in.nc out.nc         <span class="hljs-comment"># 求日平均</span><br>cdo monmean in.nc out.nc         <span class="hljs-comment"># 求月平均</span><br>cdo timmean in.nc out.nc         <span class="hljs-comment"># 求时间平均</span><br>cdo remapbil,r360x180 in.nc out.nc  <span class="hljs-comment"># 重网格插值</span><br>cdo selvar,t2m in.nc out.nc      <span class="hljs-comment"># 选变量</span><br>cdo seldate,2026-01-01,2026-01-31 in.nc out.nc   <span class="hljs-comment"># 选时间段</span><br>cdo mergetime f*.nc out.nc       <span class="hljs-comment"># 时间拼接</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="23-5-HDF5-工具"><a href="#23-5-HDF5-工具" class="headerlink" title="23.5 HDF5 工具"></a>23.5 HDF5 工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install hdf5-tools<br>h5ls file.h5          <span class="hljs-comment"># 列出结构</span><br>h5dump file.h5        <span class="hljs-comment"># 转储内容</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="23-6-Python-科学计算栈（WRF-后处理）"><a href="#23-6-Python-科学计算栈（WRF-后处理）" class="headerlink" title="23.6 Python 科学计算栈（WRF 后处理）"></a>23.6 Python 科学计算栈（WRF 后处理）</h3><p>常用库：numpy、scipy、pandas、matplotlib、xarray、netCDF4、wrf-python、cartopy、metpy、pyshp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n wrf python=3.10<br>conda activate wrf<br>conda install numpy scipy matplotlib xarray netcdf4<br>pip install wrf cartopy metpy<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># xarray 读取 wrfout 示例</span><br><span class="hljs-keyword">import</span> xarray <span class="hljs-keyword">as</span> xr<br>ds = xr.open_dataset(<span class="hljs-string">&#x27;wrfout_d01_2026-09-01_00:00:00&#x27;</span>)<br><span class="hljs-built_in">print</span>(ds[<span class="hljs-string">&#x27;T2&#x27;</span>].values)          <span class="hljs-comment"># 2m 温度</span><br><span class="hljs-built_in">print</span>(ds.data_vars)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># wrf-python 示例</span><br><span class="hljs-keyword">from</span> netCDF4 <span class="hljs-keyword">import</span> Dataset<br><span class="hljs-keyword">import</span> wrf<br>nc = Dataset(<span class="hljs-string">&#x27;wrfout_d01_2026-09-01_00:00:00&#x27;</span>)<br>slp = wrf.getvar(nc, <span class="hljs-string">&#x27;slp&#x27;</span>)     <span class="hljs-comment"># 海平面气压</span><br>wrf.cartopy_xlim(slp)<br></code></pre></td></tr></table></figure>
+
+<h3 id="23-7-常用数据格式"><a href="#23-7-常用数据格式" class="headerlink" title="23.7 常用数据格式"></a>23.7 常用数据格式</h3><table>
+<thead>
+<tr>
+<th>格式</th>
+<th>说明</th>
+<th>查看工具</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NetCDF (.nc)</td>
+<td>WRF 输入输出、大气科学标准格式</td>
+<td>ncdump、ncview、NCO、CDO</td>
+</tr>
+<tr>
+<td>GRIB (.grb&#x2F;.grb2)</td>
+<td>气象业务数据（如 GFS、ERA5）</td>
+<td>wgrib2、grib_ls</td>
+</tr>
+<tr>
+<td>HDF5 (.h5)</td>
+<td>科学数据通用格式</td>
+<td>h5ls、h5dump</td>
+</tr>
+<tr>
+<td>二进制 (.dat)</td>
+<td>无头信息，需说明文档</td>
+<td>od、xxd</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="24-WRF-模型实战"><a href="#24-WRF-模型实战" class="headerlink" title="24. WRF 模型实战"></a>24. WRF 模型实战</h2><h3 id="24-1-WRF-简介"><a href="#24-1-WRF-简介" class="headerlink" title="24.1 WRF 简介"></a>24.1 WRF 简介</h3><p>WRF（Weather Research and Forecasting）是下一代中尺度天气预报模式，广泛应用于科研与业务。编译运行依赖：</p>
+<ul>
+<li><strong>netCDF-C + netCDF-Fortran</strong>：数据 I&#x2F;O 库（WRF 的 Fortran 代码必须链接 Fortran 接口）</li>
+<li><strong>HDF5</strong>：netCDF-4 底层存储库</li>
+<li><strong>zlib、libpng、Jasper</strong>：GRIB2 压缩支持（WPS ungrib 处理 GRIB2 数据需要）</li>
+<li><strong>MPICH（或 OpenMPI）</strong>：并行库</li>
+<li><strong>gcc、gfortran、make</strong>：编译工具链</li>
+</ul>
+<h3 id="24-2-环境准备"><a href="#24-2-环境准备" class="headerlink" title="24.2 环境准备"></a>24.2 环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 系统工具</span><br><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt install -y build-essential gfortran cpp m4 csh tcsh \<br>    curl wget git unzip byacc flex bison libssl-dev libxml2-dev cmake<br><br><span class="hljs-comment"># 检查编译器</span><br>gcc --version<br>gfortran --version<br>make --version<br></code></pre></td></tr></table></figure>
+
+<h3 id="24-3-目录规划与依赖库编译"><a href="#24-3-目录规划与依赖库编译" class="headerlink" title="24.3 目录规划与依赖库编译"></a>24.3 目录规划与依赖库编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> DIR=<span class="hljs-variable">$HOME</span>/Build_WRF<br><span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$DIR</span>/src <span class="hljs-variable">$DIR</span>/LIBRARIES<br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br></code></pre></td></tr></table></figure>
+
+<p><strong>1) 编译安装 netCDF（C 与 Fortran）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br>wget https://downloads.unidata.ucar.edu/netcdf-c/4.9.2/netcdf-c-4.9.2.tar.gz<br>wget https://downloads.unidata.ucar.edu/netcdf-fortran/4.6.1/netcdf-fortran-4.6.1.tar.gz<br>wget https://zlib.net/zlib-1.3.1.tar.gz<br>wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.14/hdf5-1.14.3/src/hdf5-1.14.3.tar.gz<br>wget https://github.com/OSGeo/libpng/archive/refs/tags/v1.6.39.tar.gz<br>wget https://github.com/jasper-software/jasper/archive/refs/tags/version-2.0.33.tar.gz<br>wget https://www.mpich.org/static/downloads/4.2.3/mpich-4.2.3.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>按顺序编译：zlib → HDF5 → netCDF-C → netCDF-Fortran（netCDF-Fortran 依赖 C 库）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># zlib</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br>tar -xzvf zlib-1.3.1.tar.gz &amp;&amp; <span class="hljs-built_in">cd</span> zlib-1.3.1<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/grib2<br>make -j4 &amp;&amp; make install<br><br><span class="hljs-comment"># HDF5</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br>tar -xzvf hdf5-1.14.3.tar.gz &amp;&amp; <span class="hljs-built_in">cd</span> hdf5-1.14.3<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/grib2 --with-zlib=<span class="hljs-variable">$DIR</span>/grib2 --disable-shared<br>make -j4 &amp;&amp; make install<br><br><span class="hljs-comment"># netCDF-C</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br>tar -xzvf netcdf-c-4.9.2.tar.gz &amp;&amp; <span class="hljs-built_in">cd</span> netcdf-c-4.9.2<br>CPPFLAGS=-I<span class="hljs-variable">$DIR</span>/grib2/include LDFLAGS=-L<span class="hljs-variable">$DIR</span>/grib2/lib \<br>    ./configure --prefix=<span class="hljs-variable">$DIR</span>/netcdf --disable-dap --disable-shared<br>make -j4 &amp;&amp; make install<br><br><span class="hljs-comment"># netCDF-Fortran</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br>tar -xzvf netcdf-fortran-4.6.1.tar.gz &amp;&amp; <span class="hljs-built_in">cd</span> netcdf-fortran-4.6.1<br>CPPFLAGS=-I<span class="hljs-variable">$DIR</span>/netcdf/include LDFLAGS=-L<span class="hljs-variable">$DIR</span>/netcdf/lib \<br>    LIBS=-lnetcdf ./configure --prefix=<span class="hljs-variable">$DIR</span>/netcdf --disable-shared<br>make -j4 &amp;&amp; make install<br></code></pre></td></tr></table></figure>
+
+<p><strong>2) 编译安装 MPICH</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/src<br>tar -xzvf mpich-4.2.3.tar.gz &amp;&amp; <span class="hljs-built_in">cd</span> mpich-4.2.3<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/mpich<br>make -j4 &amp;&amp; make install<br></code></pre></td></tr></table></figure>
+
+<p><strong>3) 配置环境变量（写入 ~&#x2F;.bashrc 持久化）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span><br><span class="hljs-built_in">export</span> DIR=<span class="hljs-variable">$HOME</span>/Build_WRF<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/netcdf/bin:<span class="hljs-variable">$DIR</span>/grib2/bin:<span class="hljs-variable">$DIR</span>/mpich/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> NETCDF=<span class="hljs-variable">$DIR</span>/netcdf<br><span class="hljs-built_in">export</span> HDF5=<span class="hljs-variable">$DIR</span>/grib2<br><span class="hljs-built_in">export</span> JASPERLIB=<span class="hljs-variable">$DIR</span>/grib2/lib<br><span class="hljs-built_in">export</span> JASPERINC=<span class="hljs-variable">$DIR</span>/grib2/include<br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$DIR</span>/netcdf/lib:<span class="hljs-variable">$DIR</span>/grib2/lib:<span class="hljs-variable">$LD_LIBRARY_PATH</span><br>EOF<br><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>版本号请以 WRF 官方在线教程（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/%EF%BC%89%E5%BD%93%E5%89%8D%E6%8E%A8%E8%8D%90%E7%89%88%E6%9C%AC%E4%B8%BA%E5%87%86%E3%80%82%E4%B8%8D%E5%90%8C">https://www2.mmm.ucar.edu/wrf/OnLineTutorial/）当前推荐版本为准。不同</a> WRF 版本对依赖库版本有兼容性要求，务必核对官方教程。</p>
+</blockquote>
+<h3 id="24-4-编译-WRF"><a href="#24-4-编译-WRF" class="headerlink" title="24.4 编译 WRF"></a>24.4 编译 WRF</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span><br>wget https://github.com/wrf-model/WRF/releases/download/v4.5.2/v4.5.2.tar.gz<br>tar -xzvf v4.5.2.tar.gz<br><span class="hljs-built_in">cd</span> WRF-4.5.2<br>./configure<br></code></pre></td></tr></table></figure>
+
+<p><code>./configure</code> 会进入交互菜单，选择 <strong>Fortran 编译器为 gcc (gfortran)、并行方式为 dmpar</strong> 的选项。不同版本序号不同（WRF 4.x 中通常为 34 或 35 号附近），<strong>务必以屏幕菜单实际显示的选项为准</strong>，例如选 34 后提示 <code>Configuration successful</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编译（em_real 是大气模式核心，含 real.exe 和 wrf.exe）</span><br>./compile em_real 2&gt;&amp;1 | <span class="hljs-built_in">tee</span> compile.log<br><br><span class="hljs-comment"># 检查是否成功：main 目录下应存在 4 个可执行文件</span><br><span class="hljs-built_in">ls</span> -l main/*.exe<br><span class="hljs-comment"># wrf.exe  real.exe  ndown.exe  tc.exe</span><br></code></pre></td></tr></table></figure>
+
+<p>若缺文件，用 <code>grep -E &quot;Error|错误&quot; compile.log</code> 排查。</p>
+<h3 id="24-5-编译-WPS（前处理）"><a href="#24-5-编译-WPS（前处理）" class="headerlink" title="24.5 编译 WPS（前处理）"></a>24.5 编译 WPS（前处理）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span><br>wget https://github.com/wrf-model/WPS/releases/download/v4.5/v4.5.tar.gz<br>tar -xzvf v4.5.tar.gz<br><span class="hljs-built_in">cd</span> WPS-4.5<br>./configure<br><span class="hljs-comment"># 选择 gfortran + dmpar 对应选项（以菜单为准）</span><br>./compile 2&gt;&amp;1 | <span class="hljs-built_in">tee</span> compile.log<br><span class="hljs-built_in">ls</span> geogrid.exe ungrib.exe metgrid.exe   <span class="hljs-comment"># 三个都应存在</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>下载静态地理数据</strong>（geogrid 需要）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span><br>wget https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_complete.tar.gz<br>tar -xzvf geog_complete.tar.gz    <span class="hljs-comment"># 解压出 WPS_GEOG 目录</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="24-6-WRF-标准运行流程"><a href="#24-6-WRF-标准运行流程" class="headerlink" title="24.6 WRF 标准运行流程"></a>24.6 WRF 标准运行流程</h3><p><strong>第 1 步：geogrid（定义模拟区域，生成静态地形场）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/WPS-4.5<br>vi namelist.wps     <span class="hljs-comment"># 修改模拟区域（max_dom、e_we、e_sn、dx、dy、ref_lat、ref_lon 等）</span><br>./geogrid.exe       <span class="hljs-comment"># 生成 geo_em.d01.nc（成功输出 Successful completion of geogrid）</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>第 2 步：ungrib（解码 GRIB 气象数据）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./link_grib.csh /path/to/your/gfs_files/*.grib2    <span class="hljs-comment"># 链接 GRIB 数据</span><br><span class="hljs-built_in">ln</span> -sf ungrib/Variable_Tables/Vtable.GFS Vtable    <span class="hljs-comment"># 链接变量表（GFS 数据用 Vtable.GFS）</span><br>./ungrib.exe       <span class="hljs-comment"># 生成 FILE:YYYY-MM-DD_HH 中间文件</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>第 3 步：metgrid（水平插值到模式网格）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">vi namelist.wps    <span class="hljs-comment"># 确认 fg_name = &#x27;FILE&#x27;</span><br>./metgrid.exe      <span class="hljs-comment"># 生成 met_em.d01.YYYY-MM-DD_HH.nc</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>第 4 步：real（生成初始场与边界条件）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>/WRF-4.5.2/run<br><span class="hljs-built_in">ln</span> -sf /path/to/WPS/met_em.d01.* .<br>vi namelist.input  <span class="hljs-comment"># 修改与 namelist.wps 一致的模拟区域、时间</span><br>./real.exe         <span class="hljs-comment"># 生成 wrfinput_d01 和 wrfbdy_d01</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>第 5 步：wrf（运行模式主程序）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./wrf.exe<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>dmpar 版本用 mpirun 并行运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mpirun -np 8 ./real.exe<br>mpirun -np 8 ./wrf.exe<br></code></pre></td></tr></table></figure></blockquote>
+<h3 id="24-7-运行结果检查"><a href="#24-7-运行结果检查" class="headerlink" title="24.7 运行结果检查"></a>24.7 运行结果检查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 检查并行日志（dmpar 会生成 rsl.out.0000 等文件）</span><br><span class="hljs-built_in">tail</span> -20 rsl.out.0000<br><span class="hljs-built_in">tail</span> -20 rsl.error.0000<br><br><span class="hljs-comment"># 成功标志</span><br>grep <span class="hljs-string">&quot;SUCCESS&quot;</span> rsl.out.0000<br><span class="hljs-comment"># real 成功: SUCCESS COMPLETE REAL_EM INIT</span><br><span class="hljs-comment"># wrf 成功:   SUCCESS COMPLETE WRF</span><br><br><span class="hljs-comment"># 检查输出文件</span><br><span class="hljs-built_in">ls</span> wrfout_d01_*    <span class="hljs-comment"># 模式输出（每隔一定时间一个文件）</span><br>ncdump -h wrfout_d01_2026-09-01_00:00:00<br></code></pre></td></tr></table></figure>
+
+<h3 id="24-8-常见错误与排查"><a href="#24-8-常见错误与排查" class="headerlink" title="24.8 常见错误与排查"></a>24.8 常见错误与排查</h3><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>常见原因</th>
+<th>排查方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>real.exe</code> 找不到文件</td>
+<td>met_em 未链接或 namelist 不一致</td>
+<td>检查 run 目录下的 met_em 链接、时间设置</td>
+</tr>
+<tr>
+<td>CFL 错误 &#x2F; 计算崩溃</td>
+<td>时间步长太大</td>
+<td>减小 <code>time_step</code>（建议 dx&#x2F;（6×风速量级））</td>
+</tr>
+<tr>
+<td>编译缺库</td>
+<td>依赖库未安装或路径错</td>
+<td>检查 NETCDF&#x2F;HDF5&#x2F;JASPERLIB 环境变量</td>
+</tr>
+<tr>
+<td><code>configure</code> 找不到 Fortran</td>
+<td>gfortran 未装</td>
+<td><code>sudo apt install gfortran</code></td>
+</tr>
+<tr>
+<td>ungrib 报 GRIB2 错误</td>
+<td>Jasper&#x2F;libpng 缺失</td>
+<td>检查 JASPERLIB&#x2F;JASPERINC 与 Vtable 链接</td>
+</tr>
+<tr>
+<td>运行到一半 stopped</td>
+<td>磁盘满 &#x2F; 内存不足 &#x2F; 超过时限</td>
+<td><code>df -h</code>、<code>free -h</code>、查看 rsl.error.0000</td>
+</tr>
+</tbody></table>
+<h3 id="24-9-WRF-后处理"><a href="#24-9-WRF-后处理" class="headerlink" title="24.9 WRF 后处理"></a>24.9 WRF 后处理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 时间维度信息</span><br>ncdump -h wrfout_d01_* | <span class="hljs-built_in">head</span> -50<br><span class="hljs-comment"># 变量裁剪与计算（NCO）</span><br>ncks -v T2,PSFC,RAINC wrfout_d01_* out.nc<br><span class="hljs-comment"># 可视化</span><br>ncview wrfout_d01_2026-09-01_00:00:00<br><span class="hljs-comment"># Python 后处理</span><br>conda activate wrf<br>python plot_wrf.py<br></code></pre></td></tr></table></figure>
+
+<p><strong>超算上提交 WRF 的 SLURM 脚本模板</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment">#SBATCH --job-name=wrf</span><br><span class="hljs-comment">#SBATCH --partition=compute</span><br><span class="hljs-comment">#SBATCH --nodes=1</span><br><span class="hljs-comment">#SBATCH --ntasks-per-node=32</span><br><span class="hljs-comment">#SBATCH --time=48:00:00</span><br><span class="hljs-comment">#SBATCH --output=wrf_%j.out</span><br><span class="hljs-comment">#SBATCH --error=wrf_%j.err</span><br><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$SLURM_SUBMIT_DIR</span><br>module load intel mpich netcdf   <span class="hljs-comment"># 按平台环境修改</span><br>mpirun -np <span class="hljs-variable">$SLURM_NTASKS</span> ./wrf.exe<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="第五部分-求职与应试篇"><a href="#第五部分-求职与应试篇" class="headerlink" title="第五部分 求职与应试篇"></a>第五部分 求职与应试篇</h1><h2 id="25-高频面试考点"><a href="#25-高频面试考点" class="headerlink" title="25. 高频面试考点"></a>25. 高频面试考点</h2><h3 id="25-1-场景题（必会）"><a href="#25-1-场景题（必会）" class="headerlink" title="25.1 场景题（必会）"></a>25.1 场景题（必会）</h3><p><strong>Q1：服务器 CPU&#x2F;内存&#x2F;磁盘满，如何排查？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">top          <span class="hljs-comment"># CPU 占用，按 P 排序找占用最高进程</span><br>free -h      <span class="hljs-comment"># 内存</span><br><span class="hljs-built_in">df</span> -h        <span class="hljs-comment"># 磁盘空间</span><br><span class="hljs-built_in">du</span> -sh /*    <span class="hljs-comment"># 定位大目录</span><br>ps aux --<span class="hljs-built_in">sort</span>=-%mem | <span class="hljs-built_in">head</span>   <span class="hljs-comment"># 内存占用前几名</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>Q2：某端口被占用，如何定位进程？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ss -tulnp | grep 8080<br>lsof -i :8080<br></code></pre></td></tr></table></figure>
+
+<p><strong>Q3：如何查找某个文件？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -name <span class="hljs-string">&quot;wrfout*&quot;</span> 2&gt;/dev/null<br>locate wrfout<br></code></pre></td></tr></table></figure>
+
+<p><strong>Q4：如何实时查看日志？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">tail</span> -f /var/log/syslog<br>journalctl -f -u ssh<br></code></pre></td></tr></table></figure>
+
+<p><strong>Q5：如何找出并杀掉占用资源的进程？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ps aux | grep python<br><span class="hljs-built_in">kill</span> -9 &lt;PID&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="25-2-概念题"><a href="#25-2-概念题" class="headerlink" title="25.2 概念题"></a>25.2 概念题</h3><p><strong>1. 软链接 vs 硬链接</strong></p>
+<ul>
+<li>软链接：指向路径，可跨文件系统，可指目录，源删除则失效，有自己的 inode</li>
+<li>硬链接：指向 inode，不可跨文件系统，不可指目录，源删除不影响</li>
+</ul>
+<p><strong>2. 进程 vs 线程</strong></p>
+<ul>
+<li>进程是资源分配的基本单位，有独立地址空间</li>
+<li>线程是 CPU 调度的基本单位，共享进程地址空间</li>
+</ul>
+<p><strong>3. 管道 vs 重定向</strong></p>
+<ul>
+<li>管道 <code>|</code>：前命令输出作为后命令输入</li>
+<li>重定向：改变输入&#x2F;输出流向（文件等）</li>
+</ul>
+<p><strong>4. 僵尸进程 vs 孤儿进程</strong></p>
+<ul>
+<li>僵尸进程：子进程已退出但父进程未回收（wait），占用少量资源；用 <code>ps aux | grep Z</code> 查看</li>
+<li>孤儿进程：父进程先退出，被 init（PID 1）收养</li>
+</ul>
+<p><strong>5. inode 是什么</strong></p>
+<ul>
+<li>存储文件元信息（权限、属主、大小、数据块指针）的数据结构，<code>ls -i</code> 查看 inode 号；<code>df -i</code> 查看 inode 使用</li>
+</ul>
+<p><strong>6. 如何设置开机自启</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> service<br></code></pre></td></tr></table></figure>
+
+<p><strong>7. 绝对路径与相对路径</strong></p>
+<ul>
+<li>绝对路径从根 <code>/</code> 开始；相对路径相对当前目录</li>
+</ul>
+<p><strong>8. <code>&gt;</code> <code>&gt;&gt;</code> <code>2&gt;&amp;1</code> 区别</strong></p>
+<ul>
+<li><code>&gt;</code> 覆盖、<code>&gt;&gt;</code> 追加、<code>2&gt;&amp;1</code> 把标准错误并入标准输出</li>
+</ul>
+<p><strong>9. 如何彻底删除用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> userdel -r username<br></code></pre></td></tr></table></figure>
+
+<p><strong>10. 查看系统版本</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/os-release<br><span class="hljs-built_in">uname</span> -a<br></code></pre></td></tr></table></figure>
+
+<h3 id="25-3-高频命令问答"><a href="#25-3-高频命令问答" class="headerlink" title="25.3 高频命令问答"></a>25.3 高频命令问答</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查看端口监听</td>
+<td><code>ss -tulnp</code> &#x2F; <code>netstat -tulnp</code></td>
+</tr>
+<tr>
+<td>查看进程</td>
+<td><code>ps aux</code> &#x2F; <code>top</code></td>
+</tr>
+<tr>
+<td>查找文件</td>
+<td><code>find</code> &#x2F; <code>locate</code></td>
+</tr>
+<tr>
+<td>查看文件内容</td>
+<td><code>cat</code> &#x2F; <code>less</code> &#x2F; <code>tail</code></td>
+</tr>
+<tr>
+<td>文本查找</td>
+<td><code>grep</code></td>
+</tr>
+<tr>
+<td>文本替换</td>
+<td><code>sed &#39;s/old/new/g&#39;</code></td>
+</tr>
+<tr>
+<td>按列处理</td>
+<td><code>awk</code></td>
+</tr>
+<tr>
+<td>压缩解压</td>
+<td><code>tar -czvf</code> &#x2F; <code>tar -xzvf</code></td>
+</tr>
+<tr>
+<td>查看磁盘</td>
+<td><code>df -h</code></td>
+</tr>
+<tr>
+<td>查看目录大小</td>
+<td><code>du -sh</code></td>
+</tr>
+<tr>
+<td>远程拷贝</td>
+<td><code>scp</code> &#x2F; <code>rsync</code></td>
+</tr>
+<tr>
+<td>查看内存</td>
+<td><code>free -h</code></td>
+</tr>
+<tr>
+<td>修改权限</td>
+<td><code>chmod</code></td>
+</tr>
+<tr>
+<td>定时任务</td>
+<td><code>crontab -e</code></td>
+</tr>
+<tr>
+<td>查看历史</td>
+<td><code>history</code></td>
+</tr>
+<tr>
+<td>查看系统负载</td>
+<td><code>uptime</code> &#x2F; <code>top</code></td>
+</tr>
+</tbody></table>
+<h3 id="25-4-面试常问的-Linux-核心概念"><a href="#25-4-面试常问的-Linux-核心概念" class="headerlink" title="25.4 面试常问的 Linux 核心概念"></a>25.4 面试常问的 Linux 核心概念</h3><ul>
+<li><strong>发行版与内核</strong>的区别</li>
+<li><strong>Shell 环境变量</strong> PATH 的作用与修改</li>
+<li><strong>硬链接&#x2F;软链接</strong>区别（上文）</li>
+<li><strong>进程状态</strong>（R&#x2F;S&#x2F;D&#x2F;Z&#x2F;T）</li>
+<li><strong>信号</strong>（SIGTERM&#x3D;15、SIGKILL&#x3D;9）</li>
+<li><strong>文件系统挂载</strong> mount&#x2F;umount</li>
+<li><strong>swap 分区</strong>的作用</li>
+<li><strong>静态库(.a) vs 动态库(.so)</strong>：静态库链接进程序，动态库运行时加载（LD_LIBRARY_PATH）</li>
+<li><strong>DNS、DHCP 基本概念</strong></li>
+<li><strong>防火墙</strong> ufw（Ubuntu）：<code>sudo ufw status</code>、<code>sudo ufw allow 22</code></li>
+</ul>
+<hr>
+<h2 id="26-常用命令速查表"><a href="#26-常用命令速查表" class="headerlink" title="26. 常用命令速查表"></a>26. 常用命令速查表</h2><h3 id="26-1-文件与目录"><a href="#26-1-文件与目录" class="headerlink" title="26.1 文件与目录"></a>26.1 文件与目录</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ls</code> &#x2F; <code>ls -la</code></td>
+<td>列出 &#x2F; 详细列出</td>
+</tr>
+<tr>
+<td><code>cd</code> <code>pwd</code></td>
+<td>切换 &#x2F; 查看目录</td>
+</tr>
+<tr>
+<td><code>mkdir -p</code> &#x2F; <code>rmdir</code></td>
+<td>创建 &#x2F; 删除目录</td>
+</tr>
+<tr>
+<td><code>cp -r</code> &#x2F; <code>mv</code> &#x2F; <code>rm -rf</code></td>
+<td>复制 &#x2F; 移动 &#x2F; 删除</td>
+</tr>
+<tr>
+<td><code>touch</code></td>
+<td>创建空文件</td>
+</tr>
+<tr>
+<td><code>ln -s</code></td>
+<td>软链接</td>
+</tr>
+<tr>
+<td><code>file</code> <code>stat</code></td>
+<td>文件类型 &#x2F; 元信息</td>
+</tr>
+</tbody></table>
+<h3 id="26-2-文本查看与处理"><a href="#26-2-文本查看与处理" class="headerlink" title="26.2 文本查看与处理"></a>26.2 文本查看与处理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cat</code> <code>less</code> <code>more</code></td>
+<td>查看文件</td>
+</tr>
+<tr>
+<td><code>head</code> <code>tail</code></td>
+<td>首尾 N 行</td>
+</tr>
+<tr>
+<td><code>tail -f</code></td>
+<td>实时跟踪</td>
+</tr>
+<tr>
+<td><code>wc -l</code></td>
+<td>统计行数</td>
+</tr>
+<tr>
+<td><code>sort</code> <code>uniq</code></td>
+<td>排序 &#x2F; 去重</td>
+</tr>
+<tr>
+<td><code>cut</code> <code>paste</code></td>
+<td>列操作</td>
+</tr>
+<tr>
+<td><code>tr</code></td>
+<td>字符转换</td>
+</tr>
+<tr>
+<td><code>diff</code></td>
+<td>文件比较</td>
+</tr>
+</tbody></table>
+<h3 id="26-3-查找"><a href="#26-3-查找" class="headerlink" title="26.3 查找"></a>26.3 查找</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>find</code></td>
+<td>按条件查找</td>
+</tr>
+<tr>
+<td><code>grep</code></td>
+<td>内容查找</td>
+</tr>
+<tr>
+<td><code>which</code> <code>whereis</code> <code>locate</code></td>
+<td>定位命令 &#x2F; 文件</td>
+</tr>
+</tbody></table>
+<h3 id="26-4-权限与用户"><a href="#26-4-权限与用户" class="headerlink" title="26.4 权限与用户"></a>26.4 权限与用户</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>chmod</code> <code>chown</code> <code>chgrp</code></td>
+<td>权限 &#x2F; 属主 &#x2F; 属组</td>
+</tr>
+<tr>
+<td><code>useradd</code> <code>userdel</code> <code>usermod</code></td>
+<td>用户管理</td>
+</tr>
+<tr>
+<td><code>passwd</code></td>
+<td>改密码</td>
+</tr>
+<tr>
+<td><code>su</code> <code>sudo</code></td>
+<td>切换 &#x2F; 提权</td>
+</tr>
+<tr>
+<td><code>id</code> <code>whoami</code> <code>who</code></td>
+<td>身份查看</td>
+</tr>
+</tbody></table>
+<h3 id="26-5-进程与系统"><a href="#26-5-进程与系统" class="headerlink" title="26.5 进程与系统"></a>26.5 进程与系统</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ps</code> <code>top</code> <code>htop</code></td>
+<td>查看进程</td>
+</tr>
+<tr>
+<td><code>kill</code> <code>pkill</code> <code>killall</code></td>
+<td>终止进程</td>
+</tr>
+<tr>
+<td><code>free</code> <code>df</code> <code>du</code></td>
+<td>内存 &#x2F; 磁盘</td>
+</tr>
+<tr>
+<td><code>uptime</code> <code>uname</code> <code>lscpu</code></td>
+<td>系统信息</td>
+</tr>
+<tr>
+<td><code>nohup</code> <code>&amp;</code> <code>jobs</code> <code>fg</code> <code>bg</code></td>
+<td>后台任务</td>
+</tr>
+</tbody></table>
+<h3 id="26-6-网络"><a href="#26-6-网络" class="headerlink" title="26.6 网络"></a>26.6 网络</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ssh</code></td>
+<td>远程登录</td>
+</tr>
+<tr>
+<td><code>scp</code> <code>rsync</code> <code>sftp</code></td>
+<td>文件传输</td>
+</tr>
+<tr>
+<td><code>wget</code> <code>curl</code></td>
+<td>下载</td>
+</tr>
+<tr>
+<td><code>ping</code> <code>ip addr</code> <code>ss</code></td>
+<td>网络诊断</td>
+</tr>
+<tr>
+<td><code>hostname</code></td>
+<td>主机名</td>
+</tr>
+</tbody></table>
+<h3 id="26-7-软件与压缩"><a href="#26-7-软件与压缩" class="headerlink" title="26.7 软件与压缩"></a>26.7 软件与压缩</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>apt</code> <code>dpkg</code></td>
+<td>软件管理</td>
+</tr>
+<tr>
+<td><code>make</code> <code>make install</code></td>
+<td>源码编译</td>
+</tr>
+<tr>
+<td><code>conda</code> <code>pip</code></td>
+<td>Python 环境</td>
+</tr>
+<tr>
+<td><code>tar</code> <code>gzip</code> <code>zip</code></td>
+<td>压缩归档</td>
+</tr>
+</tbody></table>
+<h3 id="26-8-服务与任务"><a href="#26-8-服务与任务" class="headerlink" title="26.8 服务与任务"></a>26.8 服务与任务</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>systemctl</code></td>
+<td>服务管理</td>
+</tr>
+<tr>
+<td><code>journalctl</code></td>
+<td>日志查看</td>
+</tr>
+<tr>
+<td><code>crontab</code></td>
+<td>定时任务</td>
+</tr>
+<tr>
+<td><code>at</code></td>
+<td>一次性任务</td>
+</tr>
+</tbody></table>
+<h3 id="26-9-并行与科学计算"><a href="#26-9-并行与科学计算" class="headerlink" title="26.9 并行与科学计算"></a>26.9 并行与科学计算</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mpirun -np N</code></td>
+<td>MPI 并行运行</td>
+</tr>
+<tr>
+<td><code>sbatch</code> <code>squeue</code> <code>sinfo</code> <code>scancel</code> <code>sacct</code></td>
+<td>SLURM 作业管理</td>
+</tr>
+<tr>
+<td><code>module load</code></td>
+<td>环境模块</td>
+</tr>
+<tr>
+<td><code>ncdump</code> <code>ncview</code> <code>ncks</code> <code>cdo</code></td>
+<td>netCDF 数据处理</td>
+</tr>
+<tr>
+<td><code>gfortran</code> <code>gcc</code></td>
+<td>编译</td>
+</tr>
+<tr>
+<td><code>nproc</code> <code>lscpu</code></td>
+<td>查看核数</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这份指南覆盖了从基础命令到 WRF 实战的完整路径。建议学习路线：</p>
+<ol>
+<li><strong>打基础</strong>：掌握第一、二、三部分（命令、权限、系统管理、脚本）</li>
+<li><strong>并行能力</strong>：掌握第四部分 18-23 章（这是超算和科研求职的核心竞争力）</li>
+<li><strong>结合科研</strong>：按第 24 章完整走一遍 WRF 安装与运行流程</li>
+<li><strong>应试准备</strong>：用第 25-26 章做考前速查与自测</li>
+</ol>
+<p><strong>学习建议</strong>：任何命令都可以用 <code>man</code> 查询官方手册；多动手练习，多读日志，才是掌握 Linux 的最好方式。所有命令都建议先在本地 Ubuntu 虚拟机或实验机上验证后再用于生产环境。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/WRF/" class="print-no-link">#WRF</a>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux使用指南</div>
+      <div>https://e-golem.github.io/2026/09/07/Linux使用指南/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Pengwen Zhang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年9月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/31/server-Linux-installation/" title="【Linux】服务器Linux系统的安装和配置">
+                        <span class="hidden-mobile">【Linux】服务器Linux系统的安装和配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a ><span>我的学习博客| </span></a> Powered by <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'zh-cn'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/zh-cn.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
