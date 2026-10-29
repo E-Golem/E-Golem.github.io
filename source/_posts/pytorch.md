@@ -1,5 +1,5 @@
 ---
-title: 深度学习学习记录
+title: 【深度学习】深度学习学习记录
 tags: [python,Deep Learning]
 date: 2025-9-16
 excerpt: 深度学习学习记录1

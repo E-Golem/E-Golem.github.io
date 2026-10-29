@@ -1,5 +1,5 @@
 ---
-title: python环境下使用gee下载全国人口和GDP格网数据
+title: 【GEE】python环境下使用gee下载全国人口和GDP格网数据
 date: 2025-9-29
 tags: [python,GEE]
 categories:

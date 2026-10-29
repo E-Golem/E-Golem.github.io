@@ -1,5 +1,5 @@
 ---
-title: WRF在Linux系统下的安装教程（手动编译）
+title: 【WRF】WRF4.0安装教程
 tags: [WRF,Linux]
 date: 2025-11-10
 excerpt: WPS的运行
@@ -8,7 +8,7 @@ categories:
     - WRF
 ---
 
-### I、首先是获取安装WRF需要的相关的软件包
+### I、获取安装WRF需要的相关的软件包
 
 批量解压压缩包到特定文件夹中
 
@@ -28,9 +28,12 @@ for gz_file in *.gz; do
 done
 ```
 
-### II、首先安装编译器（intel系列或者gcc系列）
+如果已经有所有的离线安装包里可以直接解压安装，如果没有可以通过`wget`指令获取安装包。另外这里安装可以灵活一些，如果有sudo权限的可以使用`apt-get`或者`yum`指令安装某些依赖库，会省去很多麻烦。
 
-这里选择安装gcc编译器，注意一定要使用合适版本的编译器（WRF4.0对应大概是gcc-7.3.0），可以避免很多错误
+### II、安装编译器（intel系列或者gcc系列）
+
+这里选择安装gcc编译器，注意一定要使用合适版本的编译器（WRF4.0对应大概是gcc-7.3.0），可以避免很多错误（如果环境里已经有了gcc也建议重新装一个兼容性好的编译器，并在bashrc中指定编译器，这样能避免很多由于版本不兼容造成的编译错误）
+
 首先需要安装依赖，运行
 
 ```bash
@@ -70,9 +73,9 @@ LIBS 是一个专门用于编译和链接程序的便利贴（环境变量）。
 
 2、其次，conda环境下也会导致编译出现问题（需要c语言环境），因此需要退出conda环境，使用```conda deactivate```退出conda，首次退出当前环境会退回到base环境，需要再退出一次
 
-### III、按顺序安装其他软件
+### III、按顺序安装其他依赖
 
-这里可以专门创建一个目录用来存放所有软件的bin，lib，include，方便后续指定路径，比如在根目录下创建目录app，后续安装路径全都指定到这个目录下
+这里可以专门创建一个目录用来存放所有软件的bin，lib，include，方便后续指定路径，比如在根目录下创建目录app，后续安装路径全都指定到这个目录
 
 #### 1、安装zlib
 
@@ -103,6 +106,8 @@ export LDFLAGS="-L$CONDA_PREFIX/lib $LDFLAGS"
 export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 ```
 
+环境变量的配置很重要，注意不要写错
+
 注意这一步要在conda环境下进行，否则无法找到conda路径
 
 之后老套路安装，不过依然要加上动态库
@@ -126,7 +131,7 @@ conda install -c conda-forge m4
 #### 6、安装netcdf-fortran
 
 ```bash
-export LD_LIBRARY_PATH=/home/zhangpengwen/palwe/app/lib/:${LD_LIBARY_PATH}
+export LD_LIBRARY_PATH=/home/zhangpengwen/palwe/app/lib/:${LD_LIBRARY_PATH}
 ```
 
 首先设置环境变量，告诉系统找依赖的libary都去这个路径下去找
@@ -219,42 +224,7 @@ Compile for nesting? (1=basic, 2=preset moves, 3=vortex following) [default 1]:
 
 这里由于执行了 >& compile.log 因此输出和报错不会出现在屏幕上，而是被保存成日志文件，这是由于在编译大型文件时由于信息太快不易发现错误，因此保存日志方便查找error出现的位置
 
--------------以下是修正部分，仅供参考,不需要照做---------------------------------------------------------------------------------------------
-发现编译错误了，查找原因发现（grep -i "Fatal" compile.log）是找不到 mpif.h 文件，最后发现还是环境变量的问题,configure找到的是conda里的mpif90，然而conda没有安装编译器
-
-安装mpich时 configure出现错误，原因是gcc编译器版本太高，导致把一些旧写法识别为了错误导致configure报错
-解决办法：1）安装更新的mpich版本（可能会存在其他的依赖问题）2）告诉编译器忽略这个错误
-这里采用第二种办法
-
-```bash
-export CC=/home/zhangpengwen/palwe/app/gcc-13.3.0/bin/gcc
-export CXX=/home/zhangpengwen/palwe/app/gcc-13.3.0/bin/g++
-export FC=/home/zhangpengwen/palwe/app/gcc-13.3.0/bin/gfortran
-export F77=$FC
-export FFLAGS="-w -fallow-argument-mismatch -O2"
-export FCFLAGS="-w -fallow-argument-mismatch -O2"
-```
-
-make编译时又出错了，这里是由于高版本的gcc修改了默认选项从 -fcommon 变成了 -fno-common,使用下面指令修改
-
-```bash
-CFLAGS="-fcommon" CXXFLAGS="-fcommon" \
-    ./configure --prefix=/app/ --enable-shared
-make -j 8
-make install
-```
-
-成功安装，可以使用which指令看一下是否能在安装目录下找到mpif90
-
-export PATH=/home/zhangpengwen/palwe/app/bin:$PATH
-
-ln -s /home/zhangpengwen/palwe/app/include/mpif.h mpif.h
-
-然而最终没有解决
-
-------------------修正结束，一次失败的修正--------------------------------------------------------------------------------------------------
-
-最终解决方案：
+解决方案：
 1、退出conda环境，configure时会出现报错说找不到m4，这里是因为当初是把m4安装到了conda下，所以说在安装依赖时一定不要在多个环境下安装，而且不建议全部都在conda中安装
 使用wget下载m4源码包即可下载
 wget http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz
@@ -269,11 +239,13 @@ LIB_EXTERNAL    = \
 FCBASEOPTS_NO_G = -w $(FORMAT_FREE) $(BYTESWAPIO) -fallow-argument-mismatch -fallow-invalid-boz
 ```
 
-**注意，这里只代表我这里出现的问题可以这样解决，并且中间有部分其他修改步骤未作记录，因此只供参考，具体问题再去自行查找(另外进一步证明了gemini比gpt好用)**
+版本问题很容易遇到，这里可以在涉及到gcc，gfortran编译器的变量后面全部加上这个忽略语句，可以避免因为版本不兼容造成的编译失败
 
 最后出现
 Executables successfully built
 即说明安装成功
+
+可以打开run目录`ls`查看文件，如果是生成的exe是红色的仍代表编译失败，程序不可用，如果是蓝色的就说明编译成功了
 
 可以尝试运行生成的可执行程序来测试是否安装成功：
 
@@ -341,4 +313,4 @@ cd ../../../..
 
 之后重新编译即可，笔者这里是直接成功了，还是一样，可以看到WPS根目录下生成了三个exe程序就说明编译成功了，也可以尝试运行测试一下
 
-OK，到这里就完成了WRF的安装全流程，接下来就可以直接跑了。
+OK，到这里就完成了WRF的安装全流程。

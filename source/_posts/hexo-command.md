@@ -1,5 +1,5 @@
 ---
-title: hexo命令学习记录
+title: 【hexo】命令学习记录
 date: 2025-09-11 16:04:52
 tags: [hexo,command]
 excerpt: hexo命令学习记录

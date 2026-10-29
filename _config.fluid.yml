@@ -693,7 +693,7 @@ post:
   # 文章底部上一篇下一篇功能
   # Link to previous/next post
   prev_next:
-    enable: true
+    enable: truejjjds
 
   # 文章图片标题
   # Image caption

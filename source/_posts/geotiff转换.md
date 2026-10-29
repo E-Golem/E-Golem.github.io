@@ -1,5 +1,5 @@
 ---
-title: 在Linux环境中转换tif文件为二进制文件
+title: 【geotif】在Linux环境中转换tif文件为二进制文件
 tags: [Linux,geotiff]
 date: 2025-9-23
 excerpt: 在Linux环境中转换tif文件为二进制文件

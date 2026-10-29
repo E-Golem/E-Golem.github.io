@@ -1,5 +1,5 @@
 ---
-title: namelist.wps参数的修改与WPS运行
+title: 【WPS】namelist.wps参数的修改与WPS运行
 tags: [WRF,Linux]
 date: 2025-10-07
 excerpt: WPS的运行
